@@ -11,6 +11,7 @@ function Login (props){
 
     
     const LogM=async(user,password)=>{
+        /*
         const url="http://localhost:4000/api/Proyecto2/Usuario"
          let config={
             method:'GET',       //ELEMENTOS A ENVIAR
@@ -36,25 +37,36 @@ function Login (props){
         }
         if(x===0){
             alert("Contraseña o Usuario Incorrectos")
-        }   
+        }   */
+        navigate("/RegUser")
     }
 
     
     return(
         <React.Fragment>
-        <header align="center"><h1>Box Jump Burpees</h1></header>
-            <div className="container col-6 mx-auto text-center">
-            <form className="">
-                <label className="row">
-                    Nombre de Usuario: 
-                    <input  onChange={(e)=>{setUser(e.target.value)}}  className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Contraseña: 
-                    <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
-                </label>
-            </form>
-                <button className="btn btn-dark btnEffect" onClick={()=>{LogM(user,password)}}>Login</button>
+        <header align="center"><h1>Login Avicar</h1></header>
+            <div className="container mx-auto">
+                <div className="row">
+                <div className="col-7">
+                    
+                </div>
+                <div className="col-5">
+                    <div className="row my-5"></div>
+                    <div className="row my-5"></div>
+                    <div className="row my-5"></div>
+                    <form className="form-group">
+                        <label className="row">
+                            Nombre de Usuario: 
+                            <input  onChange={(e)=>{setUser(e.target.value)}}  className="text-dark"></input>
+                        </label>
+                        <label className="row mb-5">
+                            Contraseña: 
+                            <input type="password" onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
+                        </label>
+                    </form>
+                    <button className="btn btn-dark btnEffect" onClick={()=>{LogM(user,password)}}>Login</button>
+                </div>
+                </div>
             </div>
         </React.Fragment> 
             

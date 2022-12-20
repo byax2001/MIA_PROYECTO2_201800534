@@ -5,25 +5,25 @@ import {Route,BrowserRouter,Routes} from 'react-router-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.js';
 import Login from './components/Login';
-import regUsers from './components/registros/Reg_users';
-import regViajes from './components/registros/Reg_viajes';
-import regAutos from './components/registros/Reg_autos';
-import regRecep from './components/registros/Reg_recep';
-import rentaAutos from './components/rentas/rentaAuto';
-import rentaVuelos from './components/rentas/rentaVuelo';
+import RegUsers from './components/registros/Reg_users';
+import RegViajes from './components/registros/Reg_viajes';
+import RegAutos from './components/registros/Reg_autos';
+import RegRecep from './components/registros/Reg_recep';
+import RentaAutos from './components/rentas/rentaAuto';
+import RentaVuelos from './components/rentas/rentaVuelo';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
       <Route path="/" exact element={<Login/>}/>
-      <Route path="/regUser" exact element={<regUsers/>}/>
-      <Route path="/regViajes" exact element={<regViajes/>}/>
-      <Route path="/regAutos" exact element={<regAutos/>}/>
-      <Route path="/regRecep" exact element={<regRecep/>}/>
+      <Route path="/regUser" exact element={<RegUsers/>}/>
+      <Route path="/regViajes" exact element={<RegViajes/>}/>
+      <Route path="/regAutos" exact element={<RegAutos/>}/>
+      <Route path="/regRecep" exact element={<RegRecep/>}/>
 
-      <Route path="/rentaAutos" exact element={<rentaAutos/>}/>
-      <Route path="/rentaVuelos" exact element={<rentaVuelos/>}/>
+      <Route path="/rentaAutos" exact element={<RentaAutos/>}/>
+      <Route path="/rentaVuelos" exact element={<RentaVuelos/>}/>
       </Routes>
     </BrowserRouter>
   );

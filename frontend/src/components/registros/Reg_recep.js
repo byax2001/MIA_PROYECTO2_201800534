@@ -40,16 +40,32 @@ f. Confirmación de contraseña */
 
     return(
         <React.Fragment>
-        <header align="center"><h1>Registrar </h1></header>
+        <header align="center"><h1>Registrar Receptores</h1></header>
             <div className="container col-6 mx-auto text-center">
             <form className="">
-                <label className="row">
+            <label className="row">
                     Nombre de Usuario: 
                     <input  onChange={(e)=>{setUser(e.target.value)}}  className="text-dark"></input>
                 </label>
                 <label className="row mb-5">
-                    Contraseña: 
+                    User: 
+                    <input onChange={(e)=>{setUser(e.target.value)}} className="text-dark"></input>
+                </label>
+                <label className="row mb-5">
+                    Foto: 
+                    <input onChange={(e)=>{setFoto(e.target.value)}} className="text-dark"></input>
+                </label>
+                <label className="row mb-5">
+                    Email: 
+                    <input onChange={(e)=>{setEmail(e.target.value)}} className="text-dark"></input>
+                </label>
+                <label className="row mb-5">
+                    Contraseña:
                     <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
+                </label>
+                <label className="row mb-5">
+                    Confirmar Contraseña
+                    <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
                 </label>
             </form>
                 <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>

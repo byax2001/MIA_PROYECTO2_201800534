@@ -38,16 +38,32 @@ f. Ciudad en la que se encuentra el vehículo*/
 
     return(
         <React.Fragment>
-        <header align="center"><h1>Registrar </h1></header>
+        <header align="center"><h1>Registrar Autos</h1></header>
             <div className="container col-6 mx-auto text-center">
             <form className="">
                 <label className="row">
-                    Nombre de Usuario: 
-                    <input  onChange={(e)=>{setUser(e.target.value)}}  className="text-dark"></input>
+                    Nombre de la Agencia
+                    <input  onChange={(e)=>{setNameAgen(e.target.value)}}  className="text-dark"></input>
                 </label>
                 <label className="row mb-5">
-                    Contraseña: 
-                    <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
+                    Marca: 
+                    <input onChange={(e)=>{setMarca(e.target.value)}} className="text-dark"></input>
+                </label>
+                <label className="row mb-5">
+                    Placa: 
+                    <input onChange={(e)=>{setMarca(e.target.value)}} className="text-dark"></input>
+                </label>
+                <label className="row mb-5">
+                    Modelo: 
+                    <input onChange={(e)=>{setModelo(e.target.value)}} className="text-dark"></input>
+                </label>
+                <label className="row mb-5">
+                    Precio: 
+                    <input onChange={(e)=>{setPrecio(e.target.value)}} className="text-dark"></input>
+                </label>
+                <label className="row mb-5">
+                    Ciudad: 
+                    <input onChange={(e)=>{setCiudad(e.target.value)}} className="text-dark"></input>
                 </label>
             </form>
                 <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>

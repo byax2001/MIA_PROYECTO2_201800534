@@ -39,35 +39,45 @@ f. Ciudad en la que se encuentra el vehículo*/
     return(
         <React.Fragment>
         <header align="center"><h1>Registrar Autos</h1></header>
-            <div className="container col-6 mx-auto text-center">
-            <form className="">
-                <label className="row">
-                    Nombre de la Agencia
-                    <input  onChange={(e)=>{setNameAgen(e.target.value)}}  className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Marca: 
-                    <input onChange={(e)=>{setMarca(e.target.value)}} className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Placa: 
-                    <input onChange={(e)=>{setMarca(e.target.value)}} className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Modelo: 
-                    <input onChange={(e)=>{setModelo(e.target.value)}} className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Precio: 
-                    <input onChange={(e)=>{setPrecio(e.target.value)}} className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Ciudad: 
-                    <input onChange={(e)=>{setCiudad(e.target.value)}} className="text-dark"></input>
-                </label>
-            </form>
-                <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>
+        <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
+        <div className="container">
+            <div className="row">
+                <div className="col-7">
+                    <img src={require("./images/avion.png")} width="100%" height="100%" />
+                </div>
+                <div className="col-5">
+                    <div className="row my-2"></div>
+                    <form className="form-group">
+                        <label className="row">
+                            Nombre de la Agencia
+                            <input  onChange={(e)=>{setNameAgen(e.target.value)}}  className="text-dark"></input>
+                        </label>
+                        <label className="row mb-1">
+                            Marca
+                            <input onChange={(e)=>{setMarca(e.target.value)}} className="text-dark"></input>
+                        </label>
+                        <label className="row mb-1">
+                            Placa
+                            <input onChange={(e)=>{setPlaca(e.target.value)}} className="text-dark"></input>
+                        </label>
+                        <label className="row mb-1">
+                            Modelo
+                            <input onChange={(e)=>{setModelo(e.target.value)}} className="text-dark"></input>
+                        </label>
+                        <label className="row mb-1">
+                            Precio
+                            <input onChange={(e)=>{setPrecio(e.target.value)}} className="text-dark"></input>
+                        </label>
+                        <label className="row mb-4">
+                            Ciudad en la que se encuentra el vehiculo:
+                            <input onChange={(e)=>{setCiudad(e.target.value)}} className="text-dark"></input>
+                        </label>
+                    </form>
+                    <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>
+                </div>
             </div>
+            
+        </div>
         </React.Fragment> 
             
     );

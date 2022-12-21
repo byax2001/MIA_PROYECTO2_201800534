@@ -41,35 +41,45 @@ f. Confirmación de contraseña */
     return(
         <React.Fragment>
         <header align="center"><h1>Registrar Receptores</h1></header>
-            <div className="container col-6 mx-auto text-center">
-            <form className="">
-            <label className="row">
-                    Nombre de Usuario: 
-                    <input  onChange={(e)=>{setUser(e.target.value)}}  className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    User: 
-                    <input onChange={(e)=>{setUser(e.target.value)}} className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Foto: 
-                    <input onChange={(e)=>{setFoto(e.target.value)}} className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Email: 
-                    <input onChange={(e)=>{setEmail(e.target.value)}} className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Contraseña:
-                    <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
-                </label>
-                <label className="row mb-5">
-                    Confirmar Contraseña
-                    <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
-                </label>
-            </form>
-                <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>
+        <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
+        <div className="container">
+            <div className="row">
+                <div className="col-7">
+                    <img src={require("./images/avion.png")} width="100%" height="100%" />
+                </div>
+                <div className="col-5">
+                    <div className="row my-2"></div>
+                    <form className="form-group">
+                        <label className="row">
+                            Nombre de Usuario: 
+                            <input  onChange={(e)=>{setNameC(e.target.value)}}  className="text-dark"></input>
+                        </label>
+                        <label className="row mb-1">
+                            User: 
+                            <input onChange={(e)=>{setUser(e.target.value)}} className="text-dark"></input>
+                        </label>
+                        <label className="row mb-1">
+                            Foto: 
+                            <input onChange={(e)=>{setFoto(e.target.value)}} className="text-dark"></input>
+                        </label>
+                        <label className="row mb-1">
+                            Email: 
+                            <input onChange={(e)=>{setEmail(e.target.value)}} className="text-dark"></input>
+                        </label>
+                        <label className="row mb-1">
+                            Contraseña:
+                            <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
+                        </label>
+                        <label className="row mb-4">
+                            Confirmar Contraseña
+                            <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
+                        </label>
+                    </form>
+                    <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>
+                </div>
             </div>
+            
+        </div>
         </React.Fragment> 
             
     );

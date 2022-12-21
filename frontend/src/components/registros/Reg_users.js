@@ -45,13 +45,15 @@ f. Confirmación de contraseña */
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
         <div className="container">
             <div className="row">
-                <div className="col-7"></div>
+                <div className="col-7">
+                    <img src={require("./images/avion.png")} width="100%" height="100%" />
+                </div>
                 <div className="col-5">
                     <div className="row my-2"></div>
                     <form className="form-group">
                         <label className="row">
                             Nombre de Usuario: 
-                            <input  onChange={(e)=>{setUser(e.target.value)}}  className="text-dark"></input>
+                            <input  onChange={(e)=>{setNameC(e.target.value)}}  className="text-dark"></input>
                         </label>
                         <label className="row mb-1">
                             User: 
@@ -69,7 +71,7 @@ f. Confirmación de contraseña */
                             Contraseña:
                             <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
                         </label>
-                        <label className="row mb-5">
+                        <label className="row mb-4">
                             Confirmar Contraseña
                             <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
                         </label>

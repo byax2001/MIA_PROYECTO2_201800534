@@ -1,61 +1,69 @@
 import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
 import {Link,useNavigate} from 'react-router-dom'
+import DataTable from 'react-data-table-component'
 
 function Inicio_admin (props){
     const navigate=useNavigate()
-    const [user,setUser]=useState(0)
-    const [password,setPass]=useState(0)    
-
+    const colum_nameUser=[
+        {
+            name:'No',
+            selector: row => row.No,
+            sortable:true
+        },
+        {
+            name:'Descripcion',
+            selector: row => row.descripcion,
+            sortable:true,
+            grow:3
+        },{
+            name:'Ambito',
+            selector: row => row.ambito,
+            sortable:true
+        },{
+            name:'Linea',
+            selector: row => row.linea,
+            sortable:true
+        },{
+            name:'Columna',
+            selector: row => row.columna,
+            sortable:true
+        },{
+            name:'Fecha y Hora',
+            selector: row => row.tiempo,
+            sortable:true
+        }
+    ]
+    const [dataUser,setDatosUser] = useState([]);
 
     
-    const LogM=async(user,password)=>{
-         const url="http://localhost:4000/api/Proyecto2/Usuario"
-         let config={
-            method:'GET',       //ELEMENTOS A ENVIAR
-                headers : { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-        }
-        
-        navigate("/rentaAutos")
-    }
+    
 
     
     return(
         <React.Fragment>
         <header align="center"><h1>Login Avicar</h1></header>
-            <div className="container mx-auto">
-                <div className="row">
-                <div className="col-7">
-                    
-                </div>
-                <div className="col-5">
-                    <div className="row my-5"></div>
-                    <div className="row my-5"></div>
-                    <div className="row my-5"></div>
-                    <form className="form-group">
-                        <label className="row">
-                            Nombre de Usuario: 
-                            <input  onChange={(e)=>{setUser(e.target.value)}}  className="text-dark"></input>
-                        </label>
-                        <label className="row mb-5">
-                            Contraseña: 
-                            <input type="password" onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
-                        </label>
-                    </form>
-                    <div className="row">
-                        <div className="col-6">
-                            <button className="btn btn-dark btnEffect" onClick={()=>{LogM(user,password)}}>Login</button>
-                        </div>
-                        <div className="col-6">
-                        </div>
-                    </div>
-                </div>
-                </div>
+        <div className="dropdown-content">
+            <div className="row">
+            <Link to="/tsimbolos">Tabla de Simbolos</Link>
+            <Link to="/terrores">Reporte de Errores</Link>
+            <Link to="/tbdatos">Reporte Base de datos existentes</Link>
+            <Link to="/tt_bdatos">Reporte de tabla de base de datos</Link>
             </div>
+            <br/>
+            <div className="row">
+            <DataTable 
+            columns={colum_nameUser}
+            data={setDatosUser}
+            title="Tabla de Errores"
+            pagination
+            fixedHeader
+            fixedHeaderScrollHeight="600px"/> 
+            </div>
+        
+        </div>
         </React.Fragment>
+        
     );
     }
 export default Inicio_admin;

@@ -3,43 +3,11 @@ import React,{useState,useRef} from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 
-const datoprueba=[
-]
-
-const columnas=[
-    {
-        name:'No',
-        selector: row => row.No,
-        sortable:true
-    },
-    {
-        name:'Descripcion',
-        selector: row => row.descripcion,
-        sortable:true,
-        grow:3
-    },{
-        name:'Ambito',
-        selector: row => row.ambito,
-        sortable:true
-    },{
-        name:'Linea',
-        selector: row => row.linea,
-        sortable:true
-    },{
-        name:'Columna',
-        selector: row => row.columna,
-        sortable:true
-    },{
-        name:'Fecha y Hora',
-        selector: row => row.tiempo,
-        sortable:true
-    }
-]
 
 export const UpdateTabla=function(){
-    datoprueba.push({nombre:"Fernandojijo",tiposimbolo:"Variable",tipodato:"i64",ambito:"Local",fila:32,columna:71})
+    //datoprueba.push({nombre:"Fernandojijo",tiposimbolo:"Variable",tipodato:"i64",ambito:"Local",fila:32,columna:71})
     console.log("Xd")
-    return datoprueba
+    //return datoprueba
 }
 function Inicio_turista (props){
     const navigate=useNavigate()
@@ -72,6 +40,7 @@ function Inicio_turista (props){
             sortable:true
         }
     ]
+                                                //lo que esta adentro de este parentesis es su valor incial
     const [dataViajes,setDataViajes] = useState([]);
     
     //SE EJECUTA AL INICIO DE INICIAR LA PAGINA
@@ -90,8 +59,8 @@ function Inicio_turista (props){
         <React.Fragment>
         <header align="center"><h1>Usuario Turista:</h1></header>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Logout</Link>
-        <Link id="BtnHome" to="/rentaAutos" className="btn btn-dark btnEffect">Rentar Autos</Link>
-        <Link id="BtnHome" to="/rentaVuelos" className="btn btn-dark btnEffect">Rentar Vuelos</Link>
+        <Link id="BrAutos" to="/rentaAutos" className="btn btn-dark btnEffect">Rentar Autos</Link>
+        <Link id="BrVuelos" to="/rentaVuelos" className="btn btn-dark btnEffect">Rentar Vuelos</Link>
         <DataTable 
             columns={columnas}
             data={dataViajes}

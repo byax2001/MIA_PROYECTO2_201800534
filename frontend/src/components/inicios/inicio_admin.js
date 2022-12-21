@@ -2,7 +2,7 @@ import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 
-function Login (props){
+function Inicio_admin (props){
     const navigate=useNavigate()
     const [user,setUser]=useState(0)
     const [password,setPass]=useState(0)    
@@ -58,3 +58,4 @@ function Login (props){
         </React.Fragment>
     );
     }
+export default Inicio_admin;

@@ -9,8 +9,13 @@ import RegUsers from './components/registros/Reg_users';
 import RegViajes from './components/registros/Reg_viajes';
 import RegAutos from './components/registros/Reg_autos';
 import RegRecep from './components/registros/Reg_recep';
+
 import RentaAutos from './components/rentas/rentaAuto';
 import RentaVuelos from './components/rentas/rentaVuelo';
+
+import Inicio_turista from './components/inicios/Inicio_Turista';
+import Inicio_admin from './components/inicios/inicio_admin';
+import Inicio_recep from './components/inicios/Inicio_Recep'
 
 function App() {
   return (
@@ -24,6 +29,11 @@ function App() {
 
       <Route path="/rentaAutos" exact element={<RentaAutos/>}/>
       <Route path="/rentaVuelos" exact element={<RentaVuelos/>}/>
+
+      <Route path="/initT" exact element={<Inicio_turista/>}/>
+      <Route path="/initR" exact element={<Inicio_recep/>}/>
+      <Route path="/initA" exact element={<Inicio_admin/>}/>
+
       </Routes>
     </BrowserRouter>
   );

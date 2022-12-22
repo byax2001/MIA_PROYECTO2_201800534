@@ -3,40 +3,85 @@ import React,{useState,useRef} from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 
+const customStyles = {
+    noData: {
+		style: {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			backgroundColor: '#a2a2a2',
+		},
+	},
+    header: {
+        
+		style: {
+            justifyContent: 'center',
+			fontSize: '22px',
+			color: 'red',
+			backgroundColor:"#3a3a3a",
+			minHeight: '56px',
+			paddingLeft: '16px',
+			paddingRight: '8px',
+		},
+	},
+    rows: {
+        //para variar colores entre fila y fila 
+        //style fila 1
+        //stripedstyle fila2
+        style: {
+            backgroundColor:"#a3a3a3",
+        },
+        stripedStyle: {
+			backgroundColor: "#bbbbbb",
+		},
+    },
+    headCells: {
+        style: {
+            backgroundColor:"#3a3a3a",
+            
+        },
+    },
+   
+    pagination: {
+		style: {
+			fontSize: '13px',
+            color:'white',
+			minHeight: '56px',
+			backgroundColor: '#3a3a3a',
+			borderTopStyle: 'solid',
+			borderTopWidth: '4px',
+			borderTopColor: 'd2d2d2',
+		}}
+};
 
-export const UpdateTabla=function(){
-    //datoprueba.push({nombre:"Fernandojijo",tiposimbolo:"Variable",tipodato:"i64",ambito:"Local",fila:32,columna:71})
-    console.log("Xd")
-    //return datoprueba
-}
 function Inicio_turista (props){
     const navigate=useNavigate()
+    
     const columnas=[
         {
             name:'No',
-            selector: row => row.No,
-            sortable:true
+            selector: row => row.no,
+            sortable:true,
         },
         {
-            name:'Descripcion',
-            selector: row => row.descripcion,
+            name:'Nombre de Agencia',
+            selector: row => row.agencia,
             sortable:true,
-            grow:3
         },{
-            name:'Ambito',
-            selector: row => row.ambito,
+            name:'Ciudad de Origen',
+            selector: row => row.origen,
             sortable:true
         },{
-            name:'Linea',
-            selector: row => row.linea,
+            name:'Ciudad de Destino',
+            selector: row => row.destino,
             sortable:true
         },{
-            name:'Columna',
-            selector: row => row.columna,
+            name:'Dias de Vuelo',
+            selector: row => row.diasvuelo,
             sortable:true
         },{
-            name:'Fecha y Hora',
-            selector: row => row.tiempo,
+            name:'Precio de Vuelo',
+            selector: row => row.precio,
             sortable:true
         }
     ]
@@ -57,16 +102,19 @@ function Inicio_turista (props){
 
     return(
         <React.Fragment>
-        <header align="center"><h1>Usuario Turista:</h1></header>
+        <header align="center"><h1>Inicio de Turista:</h1></header>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Logout</Link>
         <Link id="BrAutos" to="/rentaAutos" className="btn btn-dark btnEffect">Rentar Autos</Link>
         <Link id="BrVuelos" to="/rentaVuelos" className="btn btn-dark btnEffect">Rentar Vuelos</Link>
+        <div className="mb-4"></div>
         <DataTable 
             columns={columnas}
             data={dataViajes}
-            title="Tabla de Errores"
+            title="Vuelos"
+            noDataComponent="No hay vuelos disponibles"
             pagination
             fixedHeader
+            customStyles={customStyles}
             fixedHeaderScrollHeight="600px"
             /> 
         </React.Fragment>

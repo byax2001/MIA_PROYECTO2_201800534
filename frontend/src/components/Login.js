@@ -38,7 +38,7 @@ function Login (props){
         if(x===0){
             alert("Contraseña o Usuario Incorrectos")
         }   */
-        navigate("/rentaAutos")
+        navigate("/initT")
     }
 
     

@@ -5,11 +5,15 @@
   box-sizing: border-box;
   color: white;
 }
+div{
+ 
+}
 
 body{
   background-image: url('./images/fondo.jpg');
   height: 100vh4;
   background-size: cover;
+ 
 }
 /*EFECTOS DE BOTONES*/
 .btnEffect{
@@ -33,14 +37,13 @@ body{
   box-shadow: 0 5px black;
   transform: translateY(4px);
 }
-.animacion{
-  height: 400px;
-  background-color: white;
-
-}
 
 #BtnHome{
   position: absolute;
   top: 5px;
   right: 5px;
+}
+#dataTable{
+  color: green;
+ 
 }

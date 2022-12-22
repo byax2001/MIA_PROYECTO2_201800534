@@ -37,7 +37,7 @@ e. Precio de vuelo*/
     return(
         <React.Fragment>
         <header align="center"><h1>Rentar Vuelos</h1></header>
-        <Link id="BtnHome" to="/initT" className="btn btn-dark btnEffect">Pagina Principal</Link>
+        <Link id="BtnHome" to="/initT" className="btn btn-dark btnEffect">Regresar</Link>
         <div className="container">
             <div className="row">
                 <div className="col-7">

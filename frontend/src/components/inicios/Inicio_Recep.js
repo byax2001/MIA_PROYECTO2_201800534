@@ -2,12 +2,64 @@ import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
+
+const customStyles = {
+    noData: {
+		style: {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			backgroundColor: '#a2a2a2',
+		},
+	},
+    header: {
+        
+		style: {
+            justifyContent: 'center',
+			fontSize: '22px',
+			color: 'red',
+			backgroundColor:"#3a3a3a",
+			minHeight: '56px',
+			paddingLeft: '16px',
+			paddingRight: '8px',
+		},
+	},
+    rows: {
+        //para variar colores entre fila y fila 
+        //style fila 1
+        //stripedstyle fila2
+        style: {
+            backgroundColor:"#a3a3a3",
+        },
+        stripedStyle: {
+			backgroundColor: "#bbbbbb",
+		},
+    },
+    headCells: {
+        style: {
+            backgroundColor:"#3a3a3a",
+            
+        },
+    },
+   
+    pagination: {
+		style: {
+			fontSize: '13px',
+            color:'white',
+			minHeight: '56px',
+			backgroundColor: '#3a3a3a',
+			borderTopStyle: 'solid',
+			borderTopWidth: '4px',
+			borderTopColor: 'd2d2d2',
+		}}
+};
+
+//A,R,NULL todavia no ha sido atendida esta peticion por lo que aparecera entre las opciones
 function Inicio_recep (props){  
     const navigate=useNavigate()
                                     //lo que esta adentro de este parentesis es su valor incial
     const [Id_pet,setId_pet]=useState(0)
     const [t_pet, setT_pet] = useState(0)
-    const [Accion_pet,setAccion_pet]=useState(false)
 
     const colum_vuelos=[
         {
@@ -16,28 +68,35 @@ function Inicio_recep (props){
             sortable:true
         },
         {
-            name:'Descripcion',
-            selector: row => row.descripcion,
+            name:'User',
+            selector: row => row.user,
+            sortable:true
+        },
+        {
+            name:'Nombre de Agencia',
+            selector: row => row.nameAgen,
+            sortable:true
+        },
+        {
+            name:'Origen',
+            selector: row => row.origen,
             sortable:true,
             grow:3
         },{
-            name:'Ambito',
-            selector: row => row.ambito,
+            name:'Destino',
+            selector: row => row.destino,
             sortable:true
         },{
-            name:'Linea',
-            selector: row => row.linea,
+            name:'Dias de vuelo',
+            selector: row => row.diasvuelo,
             sortable:true
         },{
-            name:'Columna',
+            name:'Precio',
             selector: row => row.columna,
-            sortable:true
-        },{
-            name:'Fecha y Hora',
-            selector: row => row.tiempo,
             sortable:true
         }
     ]
+
     const colum_autos=[
         {
             name:'No',
@@ -45,28 +104,29 @@ function Inicio_recep (props){
             sortable:true
         },
         {
-            name:'Descripcion',
-            selector: row => row.descripcion,
+            name:'Usuario',
+            selector: row => row.usuario,
             sortable:true,
             grow:3
         },{
-            name:'Ambito',
-            selector: row => row.ambito,
+            name:'Nombre Agencia',
+            selector: row => row.nameAgen,
             sortable:true
         },{
-            name:'Linea',
-            selector: row => row.linea,
+            name:'Marca',
+            selector: row => row.marca,
             sortable:true
         },{
-            name:'Columna',
-            selector: row => row.columna,
+            name:'Modelo',
+            selector: row => row.modelo,
             sortable:true
         },{
-            name:'Fecha y Hora',
-            selector: row => row.tiempo,
+            name:'Precio',
+            selector: row => row.precio,
             sortable:true
         }
     ]
+
     const [dataVuelos,setDataViajes] = useState([]);
     const [dataAutos,setDataAutos] = useState([]);
     //SE EJECUTA AL INICIO DE INICIAR LA PAGINA
@@ -76,26 +136,29 @@ function Inicio_recep (props){
     
     return(
         <React.Fragment>
-        <header align="center"><h1>Usuario Turista:</h1></header>
+        <header align="center"><h1>Inicio Recepcionista:</h1></header>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
-        <h1>Peticion de Renta de Vuelos</h1>
-        <br/>
+        <h4>Peticion de Renta de Vuelos</h4>
         <DataTable 
             columns={colum_vuelos}
             data={dataVuelos}
             title="Tabla de Errores"
+            noDataComponent="Sin Peticiones"
             pagination
+            customStyles={customStyles}
             fixedHeader
             fixedHeaderScrollHeight="600px"/> 
-        <h1>Peticion de Renta de Autos</h1>
-        <br/>
+        <div className="mb-4"></div>
+        <h4>Peticion de Renta de Autos</h4>
         <DataTable 
             columns={colum_autos}
             data={dataAutos}
             title="Tabla de Errores"
+            noDataComponent="Sin Peticiones"
             pagination
+            customStyles={customStyles}
             fixedHeader
             fixedHeaderScrollHeight="600px"/> 
         <br/>
@@ -103,7 +166,7 @@ function Inicio_recep (props){
             <div className="row">
                 {/*ID DE LA PETICION*/}                
                 <div className="col-4">
-                    <h3>Id Peticion:</h3>
+                    <h5>Id Peticion:</h5>
                 </div>
                 {/*TIPO DE PETICION*/}
                 <div className="col-4">
@@ -121,17 +184,19 @@ function Inicio_recep (props){
                 </div>
                  {/*TIPO DE PETICION*/}
                 <div className="col-2">
-                    <h5>Auto</h5>
+                <input type="radio" value="auto" checked={t_pet==="auto"} 
+                onChange={(e)=>{setT_pet(e.target.value)}}/> Auto
                 </div>
                 <div className="col-2">
-                    <h5>Vuelo</h5>
+                    <input type="radio" value="vuelo" checked={t_pet==="vuelo"}
+                    onChange={(e)=>{setT_pet(e.target.value)}}/> Vuelo
                 </div>
                 {/*ACEPTAR O RECHAZAR */}
                 <div className="col-2">
-                    <h5>Aceptar</h5>
+                    <button className="btn btn-dark btnEffect">Aceptar</button>
                 </div>
                 <div className="col-2">
-                    <h5>Rechazar</h5>
+                    <button className="btn btn-dark btnEffect">Rechazar</button>
                 </div>
             </div>
             

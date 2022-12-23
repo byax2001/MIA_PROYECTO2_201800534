@@ -53,31 +53,35 @@ const customStyles = {
 			borderTopColor: 'd2d2d2',
 		}}
 };
-const colum_nameUser=[
+const columnas=[
     {
         name:'No',
         selector: row => row.no,
         sortable:true,
     },
     {
-        name:'Nombre de Agencia',
-        selector: row => row.agencia,
+        name:'Nombre Completo',
+        selector: row => row.nombre,
         sortable:true,
     },{
-        name:'Ciudad de Origen',
-        selector: row => row.origen,
+        name:'Usuario',
+        selector: row => row.usuario,
         sortable:true
     },{
-        name:'Ciudad de Destino',
-        selector: row => row.destino,
+        name:'Tipo de Usuario',
+        selector: row => row.tipo_usuario,
         sortable:true
     },{
-        name:'Dias de Vuelo',
-        selector: row => row.diasvuelo,
+        name:'foto',
+        selector: row => row.foto,
         sortable:true
     },{
-        name:'Precio de Vuelo',
-        selector: row => row.precio,
+        name:'Email',
+        selector: row => row.email,
+        sortable:true
+    },{
+        name:'Verificado',
+        selector: row => String(row.verify),
         sortable:true
     }
 ]
@@ -101,7 +105,7 @@ f. Confirmación de contraseña */
     const [email, setEmail] = useState(0);
     const [password, setPass] = useState(0);
     const [conf_pass, setConf_pass] = useState(0);
-    
+    const [datosTabla,setDatosTabla] = useState([])
     
     const Registrar = async () => {
         const url = "";
@@ -117,9 +121,29 @@ f. Confirmación de contraseña */
         const data_res = await res.json();
         console.log(data_res);
     };
+    const RdatosTabla = async () => {
+        const url = "http://localhost:8080/usuarios/getUsers";
+        let config = {
+            method: "GET", //ELEMENTOS A ENVIAR
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        let DataT =[] 
+        DataT=data_res["contenido"]
+        for (let i = 0; i < DataT.length; i++) {
+            DataT[i]["no"]=i
+        }
+        console.log(DataT)
+        setDatosTabla(DataT)
+    };
     useEffect(() => {
-       
-    });
+       RdatosTabla()
+    },[]);
     return(
         <React.Fragment>
         <header align="center"><h1>Administrar Usuarios</h1></header>
@@ -127,7 +151,17 @@ f. Confirmación de contraseña */
         <div className="container">
             <div className="row">
                 <div className="col-7">
-                    <img src={require("./images/avion.png")} width="100%" height="100%" />
+                <DataTable 
+                    columns={columnas}
+                    data={datosTabla}
+                    customStyles={customStyles}
+                    title="Viajes"
+                    striped
+                    noDataComponent="No hay autos disponibles"
+                    pagination
+                    fixedHeader
+                    fixedHeaderScrollHeight="600px"
+                    /> 
                 </div>
                 <div className="col-5">
                     <div className="row my-2"></div>

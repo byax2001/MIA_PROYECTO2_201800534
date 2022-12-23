@@ -53,7 +53,7 @@ const customStyles = {
 			borderTopColor: 'd2d2d2',
 		}}
 };
-const colum_nameUser=[
+const columnas=[
     {
         name:'No',
         selector: row => row.no,
@@ -140,7 +140,7 @@ f. Ciudad en la que se encuentra el vehículo*/
             <div className="row">
                 <div className="col-7">
                 <DataTable 
-                    columns={colum_nameUser}
+                    columns={columnas}
                     data={datosTabla}
                     customStyles={customStyles}
                     title="Autos"

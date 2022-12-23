@@ -1,8 +1,88 @@
 import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
 import {Link,useNavigate} from 'react-router-dom'
+import DataTable from 'react-data-table-component'
 
 
+
+const customStyles = {
+    noData: {
+		style: {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			backgroundColor: '#a2a2a2',
+		},
+	},
+    header: {
+        
+		style: {
+            justifyContent: 'center',
+			fontSize: '22px',
+			color: 'red',
+			backgroundColor:"#3a3a3a",
+			minHeight: '56px',
+			paddingLeft: '16px',
+			paddingRight: '8px',
+		},
+	},
+    rows: {
+        //para variar colores entre fila y fila 
+        //style fila 1
+        //stripedstyle fila2
+        style: {
+            backgroundColor:"#a3a3a3",
+        },
+        stripedStyle: {
+			backgroundColor: "#bbbbbb",
+		},
+    },
+    headCells: {
+        style: {
+            backgroundColor:"#3a3a3a",
+            
+        },
+    },
+   
+    pagination: {
+		style: {
+			fontSize: '13px',
+            color:'white',
+			minHeight: '56px',
+			backgroundColor: '#3a3a3a',
+			borderTopStyle: 'solid',
+			borderTopWidth: '4px',
+			borderTopColor: 'd2d2d2',
+		}}
+};
+const columnas=[
+    {
+        name:'No',
+        selector: row => row.no,
+        sortable:true,
+    },
+    {
+        name:'Nombre de Agencia',
+        selector: row => row.nombre_agencia,
+        sortable:true,
+    },{
+        name:'Ciudad de Origen',
+        selector: row => row.ciudad_origen,
+        sortable:true
+    },{
+        name:'Ciudad de Destino',
+        selector: row => row.ciudad_destino,
+        sortable:true
+    },{
+        name:'Dias de Vuelo',
+        selector: row => row.dias_vuelo,
+        sortable:true
+    },{
+        name:'Precio de Vuelo',
+        selector: row => row.precio,
+        sortable:true
+    }
+]
 //las funciones deben de empezar por mayusculas
 function RentaVuelos(props) {
   /*
@@ -18,6 +98,7 @@ e. Precio de vuelo*/
     const [cityDestino, setCityDestino] = useState(0);
     const [diasvuelo, setDiasVuelo] = useState(0);
     const [precio, setPrecio] = useState(0);
+    const [datosTabla,setDatosTabla] = useState([])
 
     const Rentar = async () => {
         const url = "";
@@ -33,6 +114,30 @@ e. Precio de vuelo*/
         const data_res = await res.json();
         console.log(data_res);
     };
+    const RdatosTabla = async () => {
+        const url = "http://localhost:8080/usuarios/getViajes";
+        let config = {
+            method: "GET", //ELEMENTOS A ENVIAR
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        let DataT =[] 
+        DataT=data_res["contenido"]
+        for (let i = 0; i < DataT.length; i++) {
+            DataT[i]["no"]=i
+        }
+        console.log(DataT)
+        setDatosTabla(DataT)
+    };
+
+    useEffect(() => {
+        RdatosTabla()
+    },[]);
 
     return(
         <React.Fragment>
@@ -41,7 +146,17 @@ e. Precio de vuelo*/
         <div className="container">
             <div className="row">
                 <div className="col-7">
-                    <img src={require("./images/avion.png")} width="100%" height="100%" />
+                <DataTable 
+                    columns={columnas}
+                    data={datosTabla}
+                    customStyles={customStyles}
+                    title="Viajes"
+                    striped
+                    noDataComponent="No hay autos disponibles"
+                    pagination
+                    fixedHeader
+                    fixedHeaderScrollHeight="600px"
+                    /> 
                 </div>
                 <div className="col-5">
                     <div className="row my-2"></div>

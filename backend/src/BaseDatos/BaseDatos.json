@@ -8,6 +8,23 @@
       "email": "jose@gmail.com",
       "password": "admin",
       "verify":true
+    },{
+      "nombre": "Admin Pedro",
+      "usuario": "recep",
+      "tipo_usuario": "R",
+      "foto": "link",
+      "email": "jose@gmail.com",
+      "password": "recep",
+      "verify":true
+    },
+    {
+      "nombre": "Admin Luis",
+      "usuario": "user",
+      "tipo_usuario": "T",
+      "foto": "link",
+      "email": "jose@gmail.com",
+      "password": "user",
+      "verify":true
     }
   ],
   "autos": [
@@ -29,7 +46,14 @@
       "precio": 232
     }
   ],
-  "renta_vuelos": [],
+  "renta_vuelos": [{
+    "usuario": "user",
+    "nombre_agencia": "bam",
+    "ciudad_origen": "guatemala",
+    "ciudad_destino": "guatemala",
+    "dias_vuelo": 23,
+    "precio": 23
+  }],
   "renta_autos": [
     {
       "usuario": "user",

@@ -145,22 +145,22 @@ function Inicio_recep (props){
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
-        <h4>Peticion de Renta de Vuelos</h4>
+    
         <DataTable 
             columns={colum_vuelos}
             data={dataVuelos}
-            title="Tabla de Errores"
+            title="Peticiones de Renta de Vuelos"
             noDataComponent="Sin Peticiones"
             pagination
             customStyles={customStyles}
             fixedHeader
             fixedHeaderScrollHeight="600px"/> 
         <div className="mb-4"></div>
-        <h4>Peticion de Renta de Autos</h4>
+        
         <DataTable 
             columns={colum_autos}
             data={dataAutos}
-            title="Tabla de Errores"
+            title="Peticiones de Renta de Autos"
             noDataComponent="Sin Peticiones"
             pagination
             customStyles={customStyles}

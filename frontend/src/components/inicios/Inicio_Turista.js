@@ -53,58 +53,71 @@ const customStyles = {
 			borderTopColor: 'd2d2d2',
 		}}
 };
+const columnas=[
+    {
+        name:'No',
+        selector: row => row.no,
+        sortable:true,
+    },
+    {
+        name:'Nombre de Agencia',
+        selector: row => row.nombre_agencia,
+        sortable:true,
+    },{
+        name:'Ciudad de Origen',
+        selector: row => row.ciudad_origen,
+        sortable:true
+    },{
+        name:'Ciudad de Destino',
+        selector: row => row.ciudad_destino,
+        sortable:true
+    },{
+        name:'Dias de Vuelo',
+        selector: row => row.dias_vuelo,
+        sortable:true
+    },{
+        name:'Precio de Vuelo',
+        selector: row => row.precio,
+        sortable:true
+    }
+]
 
 function Inicio_turista (props){
     const navigate=useNavigate()
     const pLogin = useLocation().state
                                 //lo que esta adentro de este parentesis es su valor incial
     const [usuario,setUsuario]=useState("user")
-    
-    const columnas=[
-        {
-            name:'No',
-            selector: row => row.no,
-            sortable:true,
-        },
-        {
-            name:'Nombre de Agencia',
-            selector: row => row.agencia,
-            sortable:true,
-        },{
-            name:'Ciudad de Origen',
-            selector: row => row.origen,
-            sortable:true
-        },{
-            name:'Ciudad de Destino',
-            selector: row => row.destino,
-            sortable:true
-        },{
-            name:'Dias de Vuelo',
-            selector: row => row.diasvuelo,
-            sortable:true
-        },{
-            name:'Precio de Vuelo',
-            selector: row => row.precio,
-            sortable:true
-        }
-    ]
                                                 //lo que esta adentro de este parentesis es su valor incial
-    const [dataViajes,setDataViajes] = useState([]);
-    
+    const [datosTabla,setDatosTabla] = useState([])
+    const RdatosTabla = async () => {
+        const url = "http://localhost:8080/usuarios/getViajes";
+        let config = {
+            method: "GET", //ELEMENTOS A ENVIAR
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        let DataT =[] 
+        DataT=data_res["contenido"]
+        for (let i = 0; i < DataT.length; i++) {
+            DataT[i]["no"]=i
+        }
+        console.log(DataT)
+        setDatosTabla(DataT)
+    };
     //SE EJECUTA AL INICIO DE INICIAR LA PAGINA
     useEffect(() => {
-        if (pLogin.PageSol==="login"){
+        if (pLogin!=null){
             setUsuario(pLogin.user)
         }
-    });
+        RdatosTabla()
+    },[]);
     //modificar el array usestate
-    const push_DataViajes=function(newElement){
-        let array = []
-        array = dataViajes
-        array.push(newElement)
-        setDataViajes(dataViajes.concat(array))
-    };
-
+   
     return(
         <React.Fragment>
         <header align="center"><h1>Inicio de Turista:</h1></header>
@@ -114,7 +127,7 @@ function Inicio_turista (props){
         <div className="mb-4"></div>
         <DataTable 
             columns={columnas}
-            data={dataViajes}
+            data={datosTabla}
             title="Vuelos"
             noDataComponent="No hay vuelos disponibles"
             pagination

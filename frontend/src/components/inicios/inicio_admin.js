@@ -53,49 +53,67 @@ const customStyles = {
 			borderTopColor: 'd2d2d2',
 		}}
 };
-
+const colum_nameUser=[
+    {
+        name:'No',
+        selector: row => row.no,
+        sortable:true,
+    },{
+        name:'Usuario:',
+        selector: row => row.usuario,
+        sortable:true
+    },{
+        name:'Tipo de Renta',
+        selector: row => row.tipoRenta,
+        sortable:true,
+    },{
+        name:'Accion sobre Renta',
+        selector: row => row.AoR,
+        sortable:true
+    },{
+        name:'Fecha',
+        selector: row => row.fecha,
+        sortable:true
+    }
+];
 function Inicio_admin (props){
     const navigate=useNavigate()
     const pLogin = useLocation().state
     const [lista,setLista]=useState(0)
+    const [datosTabla,setDatosTabla] = useState([])
                                         //lo que esta adentro de este parentesis es su valor incial
     const [usuario,setUsuario]=useState("user")
 
-    const colum_nameUser=[
-        {
-            name:'No',
-            selector: row => row.no,
-            sortable:true,
-        },
-        {
-            name:'Nombre de Agencia',
-            selector: row => row.agencia,
-            sortable:true,
-        },{
-            name:'Ciudad de Origen',
-            selector: row => row.origen,
-            sortable:true
-        },{
-            name:'Ciudad de Destino',
-            selector: row => row.destino,
-            sortable:true
-        },{
-            name:'Dias de Vuelo',
-            selector: row => row.diasvuelo,
-            sortable:true
-        },{
-            name:'Precio de Vuelo',
-            selector: row => row.precio,
-            sortable:true
-        }
-    ]
+    
     const [dataVuelos,setDatoVuelos] = useState([]);
-
+    
+    const RdatosTabla = async () => {
+        const url = "http://localhost:8080/usuarios/getHistorial";
+        let config = {
+            method: "GET", //ELEMENTOS A ENVIAR
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        let DataT =[] 
+        DataT=data_res["contenido"]
+        for (let i = 0; i < DataT.length; i++) {
+            DataT[i]["no"]=i
+        }
+        console.log(DataT)
+        setDatosTabla(DataT)
+    };
     useEffect(() => {
         if (pLogin!==null){
             setUsuario(pLogin.user)
         }
-    });
+        RdatosTabla()
+        //EL CORCHETE HACE QUE ESTE COMANDO SE EJECUTE UNA SOLA VEZ AL INICIO DEL PROGRAMA
+    },[]);
     return(
         <React.Fragment>
         <header align="center" className="mb-3"><h1>Inicio Admin: {usuario}</h1></header>
@@ -111,12 +129,9 @@ function Inicio_admin (props){
             <div className="row">
                 <DataTable 
                     columns={colum_nameUser}
-                    data={[{no:"uno",agencia:"dos",origen:"tres",destino:"cuatro",diasvuelo:"cinco",precio:"seis"},
-                    {no:"uno",agencia:"dos",origen:"tres",destino:"cuatro",diasvuelo:"cinco",precio:"seis"},
-                    {no:"uno",agencia:"dos",origen:"tres",destino:"cuatro",diasvuelo:"cinco",precio:"seis"},
-                    {no:"uno",agencia:"dos",origen:"tres",destino:"cuatro",diasvuelo:"cinco",precio:"seis"}]}
+                    data={datosTabla}
                     customStyles={customStyles}
-                    title="Vuelos"
+                    title="Historial"
                     striped
                     pagination
                     fixedHeader

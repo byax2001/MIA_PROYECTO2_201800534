@@ -4,6 +4,7 @@
       "nombre": "Admin Jose",
       "usuario": "nickname200",
       "tipo_usuario": "A",
+      "foto": "link",
       "email": "jose@gmail.com",
       "password": "password"
     }
@@ -15,7 +16,7 @@
       "placa": "",
       "modelo": 1234,
       "precio": 5585,
-      "ciudad de hospedaje": "Amatitlan"
+      "ciudadH": "Amatitlan"
     }
   ],
   "viajes": [
@@ -27,17 +28,7 @@
       "precio": 232
     }
   ],
-  "renta_vuelos": [
-    {
-      "usuario": "user",
-      "nombre_agencia": "bam",
-      "ciudad_origen": "guatemala",
-      "ciudad_destino": "guatemala",
-      "dias_vuelo": 23,
-      "precio": 23,
-      "estado": "no_aprobado"
-    }
-  ],
+  "renta_vuelos": [],
   "renta_autos": [
     {
       "usuario": "user",
@@ -61,12 +52,18 @@
       "precio": 4500
     }
   ],
-  "RentasR":[
+  "RentasR": [
     {
-        "usuario":"Pedro",
-        "tipoRenta":"Vuelo",
-        "AoR":"Aceptado",
-        "fecha":"14/11/2015"
+      "usuario": "Pedro",
+      "tipoRenta": "Vuelo",
+      "AoR": "Aceptado",
+      "fecha": "14/11/2015"
+    },
+    {
+      "usuario": "breando",
+      "tipoRenta": "vuelo",
+      "AoR": "Aceptado",
+      "fecha": "Fri, 23 Dec 2022 15:45:02 GMT"
     }
   ]
 }

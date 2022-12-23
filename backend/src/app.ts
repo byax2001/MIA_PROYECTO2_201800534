@@ -15,5 +15,6 @@ _app.get('/',function(req:any,res:any){
 
 _app.use('/usuarios',require('./routes/usuarios.routes'))
 _app.use('/recep',require('./routes/recepcionista.routes'))
+_app.use('/admin',require('./routes/admin.routes'))
 
 module.exports=_app;

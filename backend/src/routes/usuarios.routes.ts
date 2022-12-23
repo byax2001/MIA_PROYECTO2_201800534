@@ -50,6 +50,9 @@ router.post('/vLog',function(req:any,res:any){
     res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto})
 })
 
+
+
+
 //RESERVAR AUTOS
 router.post("/rAutos",(req:any,res:any)=>{
     const user = req.body.usuario;
@@ -87,11 +90,12 @@ router.post("/rAutos",(req:any,res:any)=>{
 //RESERVAR  VUELOS
 router.post("/rVuelos",(req:any,res:any)=>{
     const user = req.body.usuario;
-    const nombre_agencia = req.body.nombre_agencia;
+    const nombre_agencia = req.body.nameAgen;
     const ciudad_origen = req.body.ciudad_origen
     const ciudad_destino = req.body.ciudad_origen
     const dias_vuelo = req.body.dias_vuelo;
     const precio = req.body.precio;
+    
     const estado:string = "sin resolver"
 
     //ELIMINO LA BASE DE DATOS ANTERIOR 

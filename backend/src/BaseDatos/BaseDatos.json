@@ -1,1 +1,72 @@
-{"usuarios":[{"nombre":"Admin Jose","usuario":"nickname200","tipo_usuario":"A","email":"jose@gmail.com","password":"password"}],"autos":[{"nombre_agencia":"bam","marca":"marca","placa":"","modelo":1234,"precio":5585,"ciudad de hospedaje":"Amatitlan"}],"viajes":[{"nombre_agencia":"BAM","ciudad_origen":"guatemala","ciudad_destino":"guatemala","dias_vuelo":"dias","precio":232}],"renta_vuelos":[{"usuario":"user","nombre_agencia":"bam","ciudad_origen":"guatemala","ciudad_destino":"guatemala","dias_vuelo":23,"precio":23,"estado":"no_aprobado"}],"renta_autos":[{"usuario":"user","nombre_agencia":"BAM","marca":"marca","modelo":1234,"precio":23,"estado":"no_aprobado"},{"usuario":"usuarios","nombre_agencia":"BANRURAR","marca":"Guatemala","modelo":5123,"precio":4500,"estado":"sin resolver"}]}
+{
+  "usuarios": [
+    {
+      "nombre": "Admin Jose",
+      "usuario": "nickname200",
+      "tipo_usuario": "A",
+      "email": "jose@gmail.com",
+      "password": "password"
+    }
+  ],
+  "autos": [
+    {
+      "nombre_agencia": "bam",
+      "marca": "marca",
+      "placa": "",
+      "modelo": 1234,
+      "precio": 5585,
+      "ciudad de hospedaje": "Amatitlan"
+    }
+  ],
+  "viajes": [
+    {
+      "nombre_agencia": "BAM",
+      "ciudad_origen": "guatemala",
+      "ciudad_destino": "guatemala",
+      "dias_vuelo": "dias",
+      "precio": 232
+    }
+  ],
+  "renta_vuelos": [
+    {
+      "usuario": "user",
+      "nombre_agencia": "bam",
+      "ciudad_origen": "guatemala",
+      "ciudad_destino": "guatemala",
+      "dias_vuelo": 23,
+      "precio": 23,
+      "estado": "no_aprobado"
+    }
+  ],
+  "renta_autos": [
+    {
+      "usuario": "user",
+      "nombre_agencia": "BAM",
+      "marca": "marca",
+      "modelo": 1234,
+      "precio": 23
+    },
+    {
+      "usuario": "usuarios",
+      "nombre_agencia": "BANRURAR",
+      "marca": "Guatemala",
+      "modelo": 5123,
+      "precio": 4500
+    },
+    {
+      "usuario": "usuarios",
+      "nombre_agencia": "BANRURAR",
+      "marca": "Guatemala",
+      "modelo": 5123,
+      "precio": 4500
+    }
+  ],
+  "RentasR":[
+    {
+        "usuario":"Pedro",
+        "tipoRenta":"Vuelo",
+        "AoR":"Aceptado",
+        "fecha":"14/11/2015"
+    }
+  ]
+}

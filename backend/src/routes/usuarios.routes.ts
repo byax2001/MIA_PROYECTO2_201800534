@@ -76,7 +76,6 @@ router.post("/rAutos",(req:any,res:any)=>{
         let newPetiton:object={usuario:user,nombre_agencia:nameAgen,marca:marca,modelo:modelo,precio:precio,estado:estado}
         Bdatos["renta_autos"].push(newPetiton)
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',"\t")
-        fs.close();
         //CONTROL + SHIFT + J PARA FORMATEAR ELEMENTOS EN FORMATO JSON
         exito_pet=true
     }catch(err){
@@ -86,7 +85,7 @@ router.post("/rAutos",(req:any,res:any)=>{
 })
 
 //RESERVAR  VUELOS
-router.post("/rVuelos1",(req:any,res:any)=>{
+router.post("/rVuelos",(req:any,res:any)=>{
     const user = req.body.usuario;
     const nombre_agencia = req.body.nombre_agencia;
     const ciudad_origen = req.body.ciudad_origen
@@ -111,7 +110,6 @@ router.post("/rVuelos1",(req:any,res:any)=>{
         let newPetiton:object={usuario:user,name_agencia:nombre_agencia,ciudad_origen:ciudad_origen,ciudad_destino:ciudad_destino,dias_vuelo:dias_vuelo,precio:precio,estado:estado}
         Bdatos["renta_vuelos"].push(newPetiton)
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-        fs.close();
         //CONTROL + SHIFT + J PARA FORMATEAR ELEMENTOS EN FORMATO JSON
         exito_pet=true
     }catch(err){
@@ -120,16 +118,7 @@ router.post("/rVuelos1",(req:any,res:any)=>{
     res.json({"accion_exitosa":exito_pet})    
 })
 
-/*
-44
 
-    const Reservar_autos=function(){
-
-}
-const Reservar_Aviones=()=>{
-
-}
-*/
 
 
 

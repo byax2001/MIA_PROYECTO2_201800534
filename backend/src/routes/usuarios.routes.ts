@@ -28,6 +28,7 @@ router.post('/vLog',function(req:any,res:any){
     const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
     let Bdatos = JSON.parse(texto);
     let tipoUser:string = "null"
+    let usuarioBD:string =""
     let login_correcto:boolean= false
 
     console.log(`usuario: ${usuario}  contra: ${password} pathFile: ${pathFile} texto:${texto}`)
@@ -39,6 +40,7 @@ router.post('/vLog',function(req:any,res:any){
                 if(user["password"]===password && user["verify"]===true){
                     login_correcto=true
                     tipoUser=user['tipo_usuario']
+                    usuarioBD = user['usuario']
                     return;
                 }
             }
@@ -47,8 +49,12 @@ router.post('/vLog',function(req:any,res:any){
         console.log(e)
     }
     
-    res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto})
+    res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD})
 })
+
+
+
+
 
 
 

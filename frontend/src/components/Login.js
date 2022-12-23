@@ -5,40 +5,38 @@ import {Link,useNavigate} from 'react-router-dom'
 
 //las funciones deben de empezar por mayusculas
 function Login (props){
+    //------------------------------------------
     const navigate=useNavigate()
     const [user,setUser]=useState(0)
     const [password,setPass]=useState(0)
+    //-------------------------------------------
 
-    
     const LogM=async(user,password)=>{
-        /*
-        const url="http://localhost:4000/api/Proyecto2/Usuario"
+        
+        const url="http://localhost:8080/usuarios/vLog"
          let config={
-            method:'GET',       //ELEMENTOS A ENVIAR
-                headers : { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
+            method:'POST', 
+            body:JSON.stringify({usuario:user,password:password}),      //ELEMENTOS A ENVIAR
+            headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }     
         }
         const res= await fetch(url,config)
         const data_res =await res.json()
-        console.log(data_res)
-        let x=0;
-        for(let i=0; i<data_res.length;i++){
-            if(data_res[i].nombreUsu==user && data_res[i].pass==password){    
-                navigate("/pAux",{state:{id:data_res[i].id,Nombre:user,PageSol:"login"}})
-                x=1
-                break;
-            }else if(data_res[i].email==user && data_res[i].pass==password){    
-                navigate("/pAux",{state:{id:data_res[i].id,Nombre:user,PageSol:"login"}})
-                x=1
-                break;
-            }
-        }
-        if(x===0){
-            alert("Contraseña o Usuario Incorrectos")
-        }   */
-        navigate("/initT")
+        
+        const loginC = data_res["login_correcto"]
+        if(loginC){
+            const tipo_user = data_res["tipo_usuario"]
+            const usuarioBD=data_res["usuario"]
+            if(tipo_user=="A"){
+                navigate("/initA",{state:{user:usuarioBD,PageSol:"login"}})
+            }else if (tipo_user=="R"){
+                navigate("/initR",{state:{user:usuarioBD,PageSol:"login"}})
+            }else{
+                navigate("/initT",{state:{user:usuarioBD,PageSol:"login"}})
+            }   
+        }  
     }
 
     

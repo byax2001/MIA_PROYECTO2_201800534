@@ -56,6 +56,9 @@ const customStyles = {
 
 function Inicio_admin (props){
     const navigate=useNavigate()
+                                        //lo que esta adentro de este parentesis es su valor incial
+    const [usuario,setUsuario]=useState("user")
+
     const colum_nameUser=[
         {
             name:'No',

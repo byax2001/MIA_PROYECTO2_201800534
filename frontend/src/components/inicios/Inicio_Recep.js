@@ -58,6 +58,7 @@ const customStyles = {
 function Inicio_recep (props){  
     const navigate=useNavigate()
                                     //lo que esta adentro de este parentesis es su valor incial
+    const [usuario,setUsuario]=useState("user")
     const [Id_pet,setId_pet]=useState(0)
     const [t_pet, setT_pet] = useState(0)
 

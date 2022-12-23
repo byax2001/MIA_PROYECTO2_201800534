@@ -1,5 +1,6 @@
 // @ts-ignore    Se escribe esta linea pues ts-ignore esta dando unos problemas de duplicacion
 import Router from 'express';
+import { lutimes } from 'fs';
 const fs = require('fs')
 const path = require('path')
 const readline = require('readline')
@@ -29,10 +30,22 @@ router.post("/addUsers",function(req:any,res:any){
         console.error('Error al eliminar', err)
     }
     try {
-        let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
-        Bdatos["usuarios"].push(newUser)
-        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-        exito_pet=true  
+        const lUsers:any[] = Bdatos["usuarios"]
+        let existe = false
+        lUsers.forEach((lUsers)=>{
+            if(lUsers["usuario"]==user || lUsers["email"]==email){
+                existe=true;
+            }
+        })
+        if (existe===false){
+            let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+            Bdatos["usuarios"].push(newUser)
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+            exito_pet=true  
+        }else{
+            alert("Usuario o Email ya registrado")
+        }
+        
     } catch (error) {
         console.error('Error al eliminar', error)
     }
@@ -192,7 +205,20 @@ router.post("/delAutos",function(req:any,res:any){
     }
     res.json({"accion_exitosa":exito_pet})    
 })
+//FORMATEAR BASE DE DATOS 
+router.post("/FDB",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    try {
+        fs.unlinkSync(pathFile)
+        alert("Base de Datos Formateada")
+    } catch(err) {}
 
+    const admin:object = {nombre:"admin",usuario:"admin",tipo_usuario:"A",foto:"",email:"admin",password:"admin",verify:true}
+    const Bdatos:Object = {usuarios:[admin],autos:[],viajes:[],renta_vuelos:[],renta_autos:[],RentasR:[]}
+    fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+    const exito_pet=true
+    res.json({"accion_exitosa":exito_pet})    
+})
 
 
 

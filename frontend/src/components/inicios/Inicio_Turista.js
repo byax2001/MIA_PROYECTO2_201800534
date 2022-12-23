@@ -56,6 +56,8 @@ const customStyles = {
 
 function Inicio_turista (props){
     const navigate=useNavigate()
+                                //lo que esta adentro de este parentesis es su valor incial
+    const [usuario,setUsuario]=useState("user")
     
     const columnas=[
         {

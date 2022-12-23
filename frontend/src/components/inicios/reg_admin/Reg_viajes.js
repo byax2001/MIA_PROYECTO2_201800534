@@ -1,8 +1,86 @@
 import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
 import {Link,useNavigate} from 'react-router-dom'
+import DataTable from 'react-data-table-component'
 
-
+const customStyles = {
+    noData: {
+		style: {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			backgroundColor: '#a2a2a2',
+		},
+	},
+    header: {
+        
+		style: {
+            justifyContent: 'center',
+			fontSize: '22px',
+			color: 'red',
+			backgroundColor:"#3a3a3a",
+			minHeight: '56px',
+			paddingLeft: '16px',
+			paddingRight: '8px',
+		},
+	},
+    rows: {
+        //para variar colores entre fila y fila 
+        //style fila 1
+        //stripedstyle fila2
+        style: {
+            backgroundColor:"#a3a3a3",
+        },
+        stripedStyle: {
+			backgroundColor: "#bbbbbb",
+		},
+    },
+    headCells: {
+        style: {
+            backgroundColor:"#3a3a3a",
+            
+        },
+    },
+   
+    pagination: {
+		style: {
+			fontSize: '13px',
+            color:'white',
+			minHeight: '56px',
+			backgroundColor: '#3a3a3a',
+			borderTopStyle: 'solid',
+			borderTopWidth: '4px',
+			borderTopColor: 'd2d2d2',
+		}}
+};
+const colum_nameUser=[
+    {
+        name:'No',
+        selector: row => row.no,
+        sortable:true,
+    },
+    {
+        name:'Nombre de Agencia',
+        selector: row => row.agencia,
+        sortable:true,
+    },{
+        name:'Ciudad de Origen',
+        selector: row => row.origen,
+        sortable:true
+    },{
+        name:'Ciudad de Destino',
+        selector: row => row.destino,
+        sortable:true
+    },{
+        name:'Dias de Vuelo',
+        selector: row => row.diasvuelo,
+        sortable:true
+    },{
+        name:'Precio de Vuelo',
+        selector: row => row.precio,
+        sortable:true
+    }
+]
 //las funciones deben de empezar por mayusculas
 function Reg_viajes (props){
     /*
@@ -19,7 +97,6 @@ e. Precio de vuelo*/
     const [diasvuelo, setDiasVuelo] = useState(0);
     const [precio, setPrecio] = useState(0);
     
-    
     const Registrar = async () => {
         const url = "";
         let config = {
@@ -34,11 +111,46 @@ e. Precio de vuelo*/
         const data_res = await res.json();
         console.log(data_res);
     };
+    useEffect(() => {
+        
+    });
+
+    const LogM=async(user,password)=>{
+        
+        const url="http://localhost:8080/usuarios/vLog"
+         let config={
+            method:'GET', 
+            headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }     
+        }
+        const res= await fetch(url,config)
+        const data_res =await res.json()
+        
+        const loginC = data_res["login_correcto"]
+        if(loginC){
+            const tipo_user = data_res["tipo_usuario"]
+            const usuarioBD=data_res["usuario"]
+            if(tipo_user=="A"){
+                navigate("/initA",{state:{user:usuarioBD,PageSol:"login"}})
+            }else if (tipo_user=="R"){
+                navigate("/initR",{state:{user:usuarioBD,PageSol:"login"}})
+            }else{
+                navigate("/initT",{state:{user:usuarioBD,PageSol:"login"}})
+            }   
+        } else{
+            let error = "Contraseña o Usuario Incorrectos o Usuario no verificado"
+            alert(error)
+        }
+    }
+
+
 
     return(
         <React.Fragment>
-        <header align="center"><h1>Registrar Viajes</h1></header>
-        <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
+        <header align="center"><h1>Administrar Viajes</h1></header>
+        <Link id="BtnHome" to="/initA" className="btn btn-dark btnEffect">Regresar</Link>
         <div className="container">
             <div className="row">
                 <div className="col-7">

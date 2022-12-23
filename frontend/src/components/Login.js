@@ -7,8 +7,8 @@ import {Link,useNavigate} from 'react-router-dom'
 function Login (props){
     //------------------------------------------
     const navigate=useNavigate()
-    const [user,setUser]=useState(0)
-    const [password,setPass]=useState(0)
+    const [user,setUser]=useState("default")
+    const [password,setPass]=useState("default")
     //-------------------------------------------
 
     const LogM=async(user,password)=>{
@@ -36,13 +36,17 @@ function Login (props){
             }else{
                 navigate("/initT",{state:{user:usuarioBD,PageSol:"login"}})
             }   
-        }  
+        } else{
+            let error = "Contraseña o Usuario Incorrectos o Usuario no verificado"
+            alert(error)
+        }
     }
 
     
     return(
         <React.Fragment>
-        <header align="center"><h1>Login Avicar</h1></header>
+
+        <header align="center"><div class="d-flex justify-content-center"><h1>Login</h1></div></header>
             <div className="container mx-auto">
                 <div className="row">
                 <div className="col-7">

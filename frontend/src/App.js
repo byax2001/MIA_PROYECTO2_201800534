@@ -20,7 +20,7 @@ import Inicio_recep from './components/inicios/Inicio_Recep'
 import RegUsersA from './components/inicios/reg_admin/Reg_users';
 import RegViajesA from './components/inicios/reg_admin/Reg_viajes';
 import RegAutosA from './components/inicios/reg_admin/Reg_autos';
-import RegRecepA from './components/inicios/reg_admin/Reg_recep';
+
 
 //IMPORTANTE COLOCAR LAS COMPONENTES DE LAS PAGINAS EN MAYUSCULAS AL INICIO O CAUSARA CONFLICTOS 
 function App() {
@@ -43,8 +43,6 @@ function App() {
       <Route path="/regUserA" exact element={<RegUsersA/>}/>
       <Route path="/regViajesA" exact element={<RegViajesA/>}/>
       <Route path="/regAutosA" exact element={<RegAutosA/>}/>
-      <Route path="/regRecepA" exact element={<RegRecepA/>}/>
-
 
       </Routes>
     </BrowserRouter>

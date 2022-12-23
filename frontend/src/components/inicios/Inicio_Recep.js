@@ -1,6 +1,6 @@
 import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
-import {Link,useNavigate} from 'react-router-dom'
+import {Link,useLocation,useNavigate} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 
 const customStyles = {
@@ -57,6 +57,8 @@ const customStyles = {
 //A,R,NULL todavia no ha sido atendida esta peticion por lo que aparecera entre las opciones
 function Inicio_recep (props){  
     const navigate=useNavigate()
+    //PARA RECIBIR PARAMETROS DESDE EL LOGIN 
+    const pLogin = useLocation().state
                                     //lo que esta adentro de este parentesis es su valor incial
     const [usuario,setUsuario]=useState("user")
     const [Id_pet,setId_pet]=useState(0)
@@ -132,7 +134,9 @@ function Inicio_recep (props){
     const [dataAutos,setDataAutos] = useState([]);
     //SE EJECUTA AL INICIO DE INICIAR LA PAGINA
     useEffect(() => {
-        
+        if (pLogin.PageSol==="login"){
+            setUsuario(pLogin.user)
+        }
     });
     
     return(

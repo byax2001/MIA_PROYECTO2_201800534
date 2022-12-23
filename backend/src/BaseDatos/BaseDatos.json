@@ -2,18 +2,19 @@
   "usuarios": [
     {
       "nombre": "Admin Jose",
-      "usuario": "nickname200",
+      "usuario": "admin",
       "tipo_usuario": "A",
       "foto": "link",
       "email": "jose@gmail.com",
-      "password": "password"
+      "password": "admin",
+      "verify":true
     }
   ],
   "autos": [
     {
       "nombre_agencia": "bam",
       "marca": "marca",
-      "placa": "",
+      "placa": "XIDFS",
       "modelo": 1234,
       "precio": 5585,
       "ciudadH": "Amatitlan"

@@ -1,6 +1,6 @@
 import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
-import {Link,useNavigate} from 'react-router-dom'
+import {Link,useLocation,useNavigate} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 
 const customStyles = {
@@ -56,6 +56,7 @@ const customStyles = {
 
 function Inicio_turista (props){
     const navigate=useNavigate()
+    const pLogin = useLocation().state
                                 //lo que esta adentro de este parentesis es su valor incial
     const [usuario,setUsuario]=useState("user")
     
@@ -92,7 +93,9 @@ function Inicio_turista (props){
     
     //SE EJECUTA AL INICIO DE INICIAR LA PAGINA
     useEffect(() => {
-        
+        if (pLogin.PageSol==="login"){
+            setUsuario(pLogin.user)
+        }
     });
     //modificar el array usestate
     const push_DataViajes=function(newElement){

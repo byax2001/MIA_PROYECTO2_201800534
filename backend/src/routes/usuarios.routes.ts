@@ -11,13 +11,10 @@ const usuariosController = require('../controllers/usuarios.controllers.ts')
 
 
 router.get('/',(req:any,res:any)=>{
-    res.json({holaaa: "hijooo"})
+    res.json({holaaa: "wprld"})
 })
-const a = 2232323;
 //localhost:8080/usuarios/getUsers sera el link de esto por la estructura del proyecto
-router.get('/getUsers',(req:any,res:any)=>{
-    res.json({sdfsdf: a})
-})
+
 
 //Verificar login correcto
 router.post('/vLog',function(req:any,res:any){
@@ -30,7 +27,7 @@ router.post('/vLog',function(req:any,res:any){
     let tipoUser:string = "null"
     let usuarioBD:string =""
     let login_correcto:boolean= false
-
+    let verify:boolean=false
     console.log(`usuario: ${usuario}  contra: ${password} pathFile: ${pathFile} texto:${texto}`)
     console.log(`Bdatos: ${Bdatos}`)
     try{
@@ -41,6 +38,7 @@ router.post('/vLog',function(req:any,res:any){
                     login_correcto=true
                     tipoUser=user['tipo_usuario']
                     usuarioBD = user['usuario']
+                    verify = user["verify"]
                     return;
                 }
             }
@@ -49,10 +47,27 @@ router.post('/vLog',function(req:any,res:any){
         console.log(e)
     }
     
-    res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD})
+    res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD,"verify":verify})
 })
 
-
+router.get("/getUsers",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["usuarios"]})
+})
+router.get("/getViajes",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["viajes"]})
+})
+router.get("/getAutos",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["autos"]})
+})
 
 
 

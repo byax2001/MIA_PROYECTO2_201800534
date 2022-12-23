@@ -1,6 +1,6 @@
-import { Component, useEffect } from "react"
+import { Component, useEffect} from "react"
 import React,{useState,useRef} from 'react';
-import {Link,Navigate,useNavigate} from 'react-router-dom'
+import {Link,useLocation,Navigate,useNavigate} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 
 const customStyles = {
@@ -56,6 +56,8 @@ const customStyles = {
 
 function Inicio_admin (props){
     const navigate=useNavigate()
+    const pLogin = useLocation().state
+    const [lista,setLista]=useState(0)
                                         //lo que esta adentro de este parentesis es su valor incial
     const [usuario,setUsuario]=useState("user")
 
@@ -89,20 +91,21 @@ function Inicio_admin (props){
     ]
     const [dataVuelos,setDatoVuelos] = useState([]);
 
-    
+    useEffect(() => {
+        if (pLogin!==null){
+            setUsuario(pLogin.user)
+        }
+    });
     return(
         <React.Fragment>
-        <header align="center" className="mb-3"><h1>Inicio Admin</h1></header>
+        <header align="center" className="mb-3"><h1>Inicio Admin: {usuario}</h1></header>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
         <div className="content">
             <div className="row mb-2">
                 <div className="dropdown-content" id="BtnsAdmin">
-                    <Link className="btn btn-dark" to="/tsimbolos">Agregar Turista</Link>
-                    <Link className="btn btn-dark" to="/terrores">Eliminar Turista</Link>
-                    <Link className="btn btn-dark" to="/tbdatos">Agregar Autos</Link>
-                    <Link className="btn btn-dark" to="/tt_bdatos">Eliminar Autos</Link>
-                    <Link className="btn btn-dark" to="/tbdatos">Agregar Vuelos</Link>
-                    <Link className="btn btn-dark" to="/tt_bdatos">Eliminar Vuelos</Link>
+                    <Link className="btn btn-dark" to="/regUserA">Administrar Turistas</Link>
+                    <Link className="btn btn-dark" to="/regAutosA">Administrar Autos</Link>
+                    <Link className="btn btn-dark" to="/regViajesA">Administrar Vuelos</Link>
                 </div>
             </div>  
             <div className="row">

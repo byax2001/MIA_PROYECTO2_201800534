@@ -107,12 +107,18 @@ f. Confirmación de contraseña */
     const [conf_pass, setConf_pass] = useState(0);
     const [datosTabla,setDatosTabla] = useState([])
     const [id_del,setId_del] = useState("");
+    const [tipo_usuario,setTipo_usuario] = useState("T")
 
-    const Registrar = async () => {
-        const url = "";
+    const RegistrarU = async () => {
+        let newUser ={nombre:nameC,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+        if(password!==conf_pass){
+            alert("Las contraseñas deben de ser iguales")
+            return
+        }
+        const url = "http://localhost:8080/admin/addUsers";
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
-            body: JSON.stringify([{ nameC: nameC }]),
+            body: JSON.stringify(newUser),
             headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -121,7 +127,11 @@ f. Confirmación de contraseña */
         const res = await fetch(url, config);
         const data_res = await res.json();
         console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Registro de Usuario Exitoso")
+        }
     };
+
     const RdatosTabla = async () => {
         const url = "http://localhost:8080/usuarios/getUsers";
         let config = {
@@ -142,6 +152,8 @@ f. Confirmación de contraseña */
         console.log(DataT)
         setDatosTabla(DataT)
     };
+
+
     useEffect(() => {
        RdatosTabla()
     },[]);
@@ -156,7 +168,7 @@ f. Confirmación de contraseña */
                     columns={columnas}
                     data={datosTabla}
                     customStyles={customStyles}
-                    title="Viajes"
+                    title="Usuarios"
                     striped
                     noDataComponent="No hay autos disponibles"
                     pagination
@@ -192,7 +204,19 @@ f. Confirmación de contraseña */
                             <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
-                    <button className="btn btn-dark btnEffect mb-2" onClick={()=>{Registrar()}}>Registrar</button>
+                       <div className="row">
+                        <div className="col-4">
+                            <button className="btn btn-dark btnEffect mb-2" onClick={()=>{RegistrarU()}}>Registrar</button>
+                        </div>
+                        <div className="col-4">
+                            <input type="radio" value="turista" checked={tipo_usuario=== "turista"}
+                            onChange={(e) => { setTipo_usuario(e.target.value) }} /> Turista
+                        </div>
+                        <div className="col-4">
+                            <input type="radio" value="recep" checked={tipo_usuario=== "recep"}
+                            onChange={(e) => { setTipo_usuario(e.target.value) }} /> Recepcionista
+                        </div>
+                    </div>
                     <div className="row">
                     <input onChange={(e)=>{setId_del(e.target.value)}} placeholder="INGRESE AQUI ID A ELIMINAR" className="text-dark mb-1"/>
                     <button className="col-2 btn btn-dark btnEffect" onClick={()=>{}}>Eliminar</button>  

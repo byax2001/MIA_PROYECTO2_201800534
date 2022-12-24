@@ -121,7 +121,7 @@ function Inicio_admin (props){
         <div className="content">
             <div className="row mb-2">
                 <div className="dropdown-content" id="BtnsAdmin">
-                    <Link className="btn btn-dark" to="/regUserA">Administrar Turistas</Link>
+                    <Link className="btn btn-dark" to="/regUserA">Administrar Usuarios</Link>
                     <Link className="btn btn-dark" to="/regAutosA">Administrar Autos</Link>
                     <Link className="btn btn-dark" to="/regViajesA">Administrar Vuelos</Link>
                 </div>

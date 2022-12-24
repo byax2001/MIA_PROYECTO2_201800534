@@ -99,20 +99,7 @@ e. Precio de vuelo*/
     const [datosTabla,setDatosTabla] = useState([])
     const [id_del,setId_del] = useState("");
 
-    const Registrar = async () => {
-        const url = "";
-        let config = {
-            method: "POST", //ELEMENTOS A ENVIAR
-            body: JSON.stringify([{ nameC: nameAgen }]),
-            headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            },
-        };
-        const res = await fetch(url, config);
-        const data_res = await res.json();
-        console.log(data_res);
-    };
+    
 
     const RdatosTabla = async () => {
         const url = "http://localhost:8080/usuarios/getViajes";
@@ -139,35 +126,45 @@ e. Precio de vuelo*/
         RdatosTabla()
     },[]);
 
-    const LogM=async(user,password)=>{
-        
-        const url="http://localhost:8080/usuarios/vLog"
-         let config={
-            method:'GET', 
-            headers : { 
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }     
+    const RegViaje = async () => {
+        let newUser ={nameAgen:nameAgen,ciudad_origen:cityOrigen,ciudad_destino:cityDestino,dias_vuelo:diasvuelo,precio:precio}
+    
+        const url = "http://localhost:8080/admin/addVuelos";
+        let config = {
+            method: "POST", //ELEMENTOS A ENVIAR
+            body: JSON.stringify(newUser),
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Registro de Usuario Exitoso")
         }
-        const res= await fetch(url,config)
-        const data_res =await res.json()
-        
-        const loginC = data_res["login_correcto"]
-        if(loginC){
-            const tipo_user = data_res["tipo_usuario"]
-            const usuarioBD=data_res["usuario"]
-            if(tipo_user=="A"){
-                navigate("/initA",{state:{user:usuarioBD,PageSol:"login"}})
-            }else if (tipo_user=="R"){
-                navigate("/initR",{state:{user:usuarioBD,PageSol:"login"}})
-            }else{
-                navigate("/initT",{state:{user:usuarioBD,PageSol:"login"}})
-            }   
-        } else{
-            let error = "Contraseña o Usuario Incorrectos o Usuario no verificado"
-            alert(error)
+    };
+    const DelViaje = async () => {
+        let AutoId ={id:id_del}
+        const url = "http://localhost:8080/admin/delVuelos";
+        let config = {
+            method: "POST", //ELEMENTOS A ENVIAR
+            body: JSON.stringify(AutoId),
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Eliminacion de Vuelos Exitosa")
+        }else{
+            alert("Fallo al Eliminar Vuelos")
         }
-    }
+    };
 
 
 
@@ -184,7 +181,7 @@ e. Precio de vuelo*/
                     customStyles={customStyles}
                     title="Viajes"
                     striped
-                    noDataComponent="No hay autos disponibles"
+                    noDataComponent="No hay vuelos disponibles"
                     pagination
                     fixedHeader
                     fixedHeaderScrollHeight="600px"
@@ -214,10 +211,10 @@ e. Precio de vuelo*/
                             <input onChange={(e)=>{setPrecio(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
-                    <button className="btn btn-dark btnEffect mb-2" onClick={()=>{Registrar()}}>Registrar</button>
+                    <button className="btn btn-dark btnEffect mb-2" onClick={()=>{RegViaje()}}>Registrar</button>
                     <div className="row">
                         <input onChange={(e)=>{setId_del(e.target.value)}} placeholder="INGRESE AQUI ID A ELIMINAR" className="text-dark mb-1"/>
-                        <button className="col-2 btn btn-dark btnEffect" onClick={()=>{}}>Eliminar</button>  
+                        <button className="col-2 btn btn-dark btnEffect" onClick={()=>{DelViaje()}}>Eliminar</button>  
                     </div>
                 </div>
             </div>

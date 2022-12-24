@@ -39,6 +39,7 @@ router.post("/AoR",function(req:any,res:any){
         if(rVuelos.length!=0){
             if(id<0 || id >rVuelos.length){
                 console.log("Id invalido para identificar Vuelo")
+                fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             }else{
                 //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
                 //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
@@ -61,6 +62,7 @@ router.post("/AoR",function(req:any,res:any){
         if(rAutos.length!=0){
             if(id<0 || id >rAutos.length){
                 console.log("Id invalido para identificar Auto")
+                fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             }else{
                 //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
                 //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL

@@ -80,6 +80,7 @@ router.post("/rAutos",(req:any,res:any)=>{
         exito_pet=true
     }catch(err){
         console.log(err)
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4) ///si truena hay que reescribir la BD sin cambios
     }
     res.json({"accion_exitosa":exito_pet})    
 })
@@ -115,6 +116,7 @@ router.post("/rVuelos",(req:any,res:any)=>{
         exito_pet=true
     }catch(err){
         console.error('Error al Escribir', err)
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4) ///si truena hay que reescribir la BD sin cambios
     }
     res.json({"accion_exitosa":exito_pet})    
 })

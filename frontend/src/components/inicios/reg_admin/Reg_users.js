@@ -129,8 +129,31 @@ f. Confirmación de contraseña */
         console.log(data_res);
         if(data_res["accion_exitosa"]){
             alert("Registro de Usuario Exitoso")
+        }else{
+            alert("Fallo al Registrar Usuario")
         }
     };
+    const DelUser = async () => {
+        let newUser ={id:id_del}
+        const url = "http://localhost:8080/admin/delUsers";
+        let config = {
+            method: "POST", //ELEMENTOS A ENVIAR
+            body: JSON.stringify(newUser),
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Eliminacion de Usuario Exitosa")
+        }else{
+            alert("Fallo al Eliminar Usuarios")
+        }
+    };
+    
 
     const RdatosTabla = async () => {
         const url = "http://localhost:8080/usuarios/getUsers";
@@ -197,11 +220,11 @@ f. Confirmación de contraseña */
                         </label>
                         <label className="row mb-1">
                             Contraseña:
-                            <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
+                            <input type="password" onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
                         </label>
                         <label className="row mb-2">
                             Confirmar Contraseña
-                            <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
+                            <input type="password" onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
                        <div className="row">
@@ -209,17 +232,17 @@ f. Confirmación de contraseña */
                             <button className="btn btn-dark btnEffect mb-2" onClick={()=>{RegistrarU()}}>Registrar</button>
                         </div>
                         <div className="col-4">
-                            <input type="radio" value="turista" checked={tipo_usuario=== "turista"}
+                            <input type="radio" value="T" checked={tipo_usuario=== "T"}
                             onChange={(e) => { setTipo_usuario(e.target.value) }} /> Turista
                         </div>
                         <div className="col-4">
-                            <input type="radio" value="recep" checked={tipo_usuario=== "recep"}
+                            <input type="radio" value="R" checked={tipo_usuario=== "R"}
                             onChange={(e) => { setTipo_usuario(e.target.value) }} /> Recepcionista
                         </div>
                     </div>
                     <div className="row">
                     <input onChange={(e)=>{setId_del(e.target.value)}} placeholder="INGRESE AQUI ID A ELIMINAR" className="text-dark mb-1"/>
-                    <button className="col-2 btn btn-dark btnEffect" onClick={()=>{}}>Eliminar</button>  
+                    <button className="col-2 btn btn-dark btnEffect" onClick={()=>{DelUser()}}>Eliminar</button>  
                     </div>
                 </div>
 

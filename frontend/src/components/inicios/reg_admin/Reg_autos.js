@@ -126,11 +126,50 @@ f. Ciudad en la que se encuentra el vehículo*/
         console.log(DataT)
         setDatosTabla(DataT)
     };
-    const Registrar = function(){
-
-    }
+    const RegAuto = async () => {
+        let newUser ={nameAgen:nameAgen,marca:marca,placa:placa,modelo:modelo,precio:precio,ciudadH:ciudad}
+    
+        const url = "http://localhost:8080/admin/addAutos";
+        let config = {
+            method: "POST", //ELEMENTOS A ENVIAR
+            body: JSON.stringify(newUser),
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Registro de Auto Exitoso")
+        }else{
+            alert("Fallo al Eliminar Auto")
+        }
+    };
+    const DelAuto = async () => {
+        let AutoId ={id:id_del}
+        const url = "http://localhost:8080/admin/delAutos";
+        let config = {
+            method: "POST", //ELEMENTOS A ENVIAR
+            body: JSON.stringify(AutoId),
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Eliminacion de Autos Exitosa")
+        }else{
+            alert("Fallo al Eliminar Autos")
+        }
+    };
     useEffect(() => {
         RdatosTabla()
+      //para que el use effect se ejecute una sola vez colocar una coma y el corchete al final
     },[]);
 
 
@@ -181,10 +220,10 @@ f. Ciudad en la que se encuentra el vehículo*/
                             <input onChange={(e)=>{setCiudad(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
-                <button className="btn btn-dark btnEffect mb-3" onClick={()=>{Registrar()}}>Registrar</button>
+                <button className="btn btn-dark btnEffect mb-3" onClick={()=>{RegAuto()}}>Registrar</button>
                 <div className="row">
                     <input onChange={(e)=>{setId_del(e.target.value)}} placeholder="INGRESE AQUI ID A ELIMINAR" className="text-dark mb-1"/>
-                    <button className="col-2 btn btn-dark btnEffect" onClick={()=>{}}>Eliminar</button>  
+                    <button className="col-2 btn btn-dark btnEffect" onClick={()=>{DelAuto()}}>Eliminar</button>  
                 </div>
                 </div>
             </div>

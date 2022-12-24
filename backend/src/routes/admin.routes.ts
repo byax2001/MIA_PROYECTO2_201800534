@@ -14,7 +14,7 @@ router.post("/addUsers",function(req:any,res:any){
     const nombre = req.body.nombre
     const user = req.body.usuario
     const tipo_usuario = req.body.tipo_usuario
-    const foto = req.body.photo
+    const foto = "safdsdf"
     const email = req.body.email
     const password = req.body.password
 
@@ -35,7 +35,7 @@ router.post("/addUsers",function(req:any,res:any){
         lUsers.forEach((lUsers)=>{
             if(lUsers["usuario"]==user || lUsers["email"]==email){
                 existe=true;
-            }
+        }
         })
         if (existe===false){
             let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
@@ -44,9 +44,11 @@ router.post("/addUsers",function(req:any,res:any){
             exito_pet=true  
         }else{
             console.log("Usuario o Email ya registrado")
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         }
         
     } catch (error) {
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4) ///si truena hay que reescribir la BD sin cambios
         console.error('Error al eliminar', error)
     }
     res.json({"accion_exitosa":exito_pet})
@@ -70,6 +72,7 @@ router.post("/delUsers",function(req:any,res:any){
     if(lUsers.length!=0){
         if(id<0 || id >lUsers.length){
             console.log("Id invalido para identificar Usuario")
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         }else{
             //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
             //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
@@ -108,7 +111,8 @@ router.post("/addVuelos",function(req:any,res:any){
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         exito_pet=true  
     } catch (error) {
-        console.error('Error al eliminar', error)
+        console.error('Error al eliminar Viaje', error)
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4) ///si truena hay que reescribir la BD sin cambios
     }
     res.json({"accion_exitosa":exito_pet})
 })
@@ -132,6 +136,7 @@ router.post("/delVuelos",function(req:any,res:any){
     if(lviajes.length!=0){
         if(id<0 || id >lviajes.length){
             console.log("Id invalido para identificar Viaje")
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         }else{
             //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
             //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
@@ -169,7 +174,8 @@ router.post("/addAutos",function(req:any,res:any){
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         exito_pet=true  
     } catch (error) {
-        console.error('Error al eliminar', error)
+        console.error('Error al eliminar Auto', error)
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4) ///si truena hay que reescribir la BD sin cambios
     }
     res.json({"accion_exitosa":exito_pet})
 })
@@ -194,6 +200,7 @@ router.post("/delAutos",function(req:any,res:any){
     if(lAutos.length!=0){
         if(id<0 || id >lAutos.length){
             console.log("Id invalido para identificar Usuario")
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         }else{
             //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
             //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL

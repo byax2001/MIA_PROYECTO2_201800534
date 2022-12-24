@@ -108,7 +108,7 @@ router.post("/rVuelos",(req:any,res:any)=>{
     }
       
     try{
-        let newPetiton:object={usuario:user,name_agencia:nombre_agencia,ciudad_origen:ciudad_origen,ciudad_destino:ciudad_destino,dias_vuelo:dias_vuelo,precio:precio,estado:estado}
+        let newPetiton:object={usuario:user,nombre_agencia:nombre_agencia,ciudad_origen:ciudad_origen,ciudad_destino:ciudad_destino,dias_vuelo:dias_vuelo,precio:precio,estado:estado}
         Bdatos["renta_vuelos"].push(newPetiton)
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         //CONTROL + SHIFT + J PARA FORMATEAR ELEMENTOS EN FORMATO JSON

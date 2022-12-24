@@ -43,7 +43,7 @@ router.post("/addUsers",function(req:any,res:any){
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             exito_pet=true  
         }else{
-            alert("Usuario o Email ya registrado")
+            console.log("Usuario o Email ya registrado")
         }
         
     } catch (error) {
@@ -69,7 +69,7 @@ router.post("/delUsers",function(req:any,res:any){
     let lUsers=Bdatos["usuarios"]
     if(lUsers.length!=0){
         if(id<0 || id >lUsers.length){
-            alert("Id invalido para identificar Usuario")
+            console.log("Id invalido para identificar Usuario")
         }else{
             //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
             //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
@@ -131,7 +131,7 @@ router.post("/delVuelos",function(req:any,res:any){
     let lviajes=Bdatos["viajes"]
     if(lviajes.length!=0){
         if(id<0 || id >lviajes.length){
-            alert("Id invalido para identificar Viaje")
+            console.log("Id invalido para identificar Viaje")
         }else{
             //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
             //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
@@ -193,7 +193,7 @@ router.post("/delAutos",function(req:any,res:any){
     let lAutos=Bdatos["autos"]
     if(lAutos.length!=0){
         if(id<0 || id >lAutos.length){
-            alert("Id invalido para identificar Usuario")
+            console.log("Id invalido para identificar Usuario")
         }else{
             //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
             //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
@@ -210,7 +210,7 @@ router.post("/FDB",function(req:any,res:any){
     const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
     try {
         fs.unlinkSync(pathFile)
-        alert("Base de Datos Formateada")
+        console.log("Base de Datos Formateada")
     } catch(err) {}
 
     const admin:object = {nombre:"admin",usuario:"admin",tipo_usuario:"A",foto:"",email:"admin",password:"admin",verify:true}

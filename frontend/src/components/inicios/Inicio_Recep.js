@@ -120,7 +120,7 @@ function Inicio_recep (props){
                                     //lo que esta adentro de este parentesis es su valor incial
     const [usuario,setUsuario]=useState("user")
     const [Id_pet,setId_pet]=useState(0)
-    const [t_pet, setT_pet] = useState(0)
+    const [t_pet, setT_pet] = useState("")
 
     
 
@@ -129,7 +129,7 @@ function Inicio_recep (props){
     //SE EJECUTA AL INICIO DE INICIAR LA PAGINA
     
     const RdatosTabla = async () => {
-        const url = "http://localhost:8080/usuarios/getViajes";
+        const url = "http://localhost:8080/usuarios/Pr_vuelos";
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {
@@ -161,9 +161,55 @@ function Inicio_recep (props){
         console.log(DataT2)
         setDataAutos(DataT2)
 
-
-
     };
+    //ACEPTAR PETICION
+    const A_peticion=async()=>{
+        const url = "http://localhost:8080/recep/AoR";
+        if(isNaN(Id_pet)|| t_pet==""){//si es true id_pet es un string que no se puede pasar a int
+            alert("ID incorrecto o no se ha seleccionado el tipo de peticion que es" )
+            return
+        }
+        setId_pet(Number(Id_pet))
+        let AoR={usuario:usuario,id:Id_pet,tipoRenta:t_pet,AoR:"Aceptado"}
+        let config = {
+        method: "POST", //ELEMENTOS A ENVIAR
+        body: JSON.stringify(AoR),
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Peticion de Renta de Vuelo con Exito")
+        }
+    }
+    //RECHAZAR PETICION
+    const R_peticion=async()=>{
+        const url = "http://localhost:8080/recep/AoR";
+        if(isNaN(Id_pet) || t_pet==""){//si es true id_pet es un string que no se puede pasar a int
+            alert("ID incorrecto o no se ha selecciondo tipo de peticion")
+            return
+        }
+        setId_pet(Number(Id_pet))
+        let AoR={usuario:usuario,id:Id_pet,tipoRenta:t_pet,AoR:"Rechazado"}
+        let config = {
+        method: "POST", //ELEMENTOS A ENVIAR
+        body: JSON.stringify(AoR),
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+        },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Peticion de Renta de Vuelo con Exito")
+        }
+    }
 
     useEffect(() => {
         if (pLogin!=null){
@@ -195,7 +241,7 @@ function Inicio_recep (props){
                 <div className="row">
                     {/*ID DE LA PETICION*/}
                     <div className="col-4">
-                        <input onChange={(e) => { setId_pet(e.target.value) }} />
+                        <input onChange={(e) => { setId_pet(e.target.value) }}  className="text-dark" />
                     </div>
                     {/*TIPO DE PETICION*/}
                     <div className="col-2">
@@ -208,15 +254,17 @@ function Inicio_recep (props){
                     </div>
                     {/*ACEPTAR O RECHAZAR */}
                     <div className="col-2">
-                        <button className="btn btn-dark btnEffect">Aceptar</button>
+                        <button className="btn btn-dark btnEffect" onClick={(e)=>{A_peticion()}}>Aceptar</button>
                     </div>
                     <div className="col-2">
-                        <button className="btn btn-dark btnEffect">Rechazar</button>
+                        <button className="btn btn-dark btnEffect" onClick={(e)=>{R_peticion()}}>Rechazar</button>
                     </div>
                 </div>
             </div>
             <div className="mb-2"></div>
-            <div className="row">
+        </div>
+        <div className="container">
+        <div className="row">
                 <DataTable 
                 columns={colum_vuelos}
                 data={dataVuelos}
@@ -240,13 +288,7 @@ function Inicio_recep (props){
                 fixedHeaderScrollHeight="600px"/> 
             </div>
         </div>
-        
-        
-        
-        
-
-        
         </React.Fragment>
     );
-    }
+}
 export default Inicio_recep;

@@ -1,6 +1,6 @@
 import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
-import {Link,useLocation,useNavigate} from 'react-router-dom'
+import {Link,Navigate,useLocation,useNavigate} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 
 const customStyles = {
@@ -89,6 +89,7 @@ function Inicio_turista (props){
     const [usuario,setUsuario]=useState("user")
                                                 //lo que esta adentro de este parentesis es su valor incial
     const [datosTabla,setDatosTabla] = useState([])
+
     const RdatosTabla = async () => {
         const url = "http://localhost:8080/usuarios/getViajes";
         let config = {
@@ -117,13 +118,18 @@ function Inicio_turista (props){
         RdatosTabla()
     },[]);
     //modificar el array usestate
-   
+    const goRautos= ()=>{
+        navigate("/rentaAutos",{state:{user:usuario}})
+    }
+    const goRvuelos= ()=>{
+        navigate("/rentaVuelos",{state:{user:usuario}})
+    }
     return(
         <React.Fragment>
         <header align="center"><h1>Inicio de Turista:</h1></header>
-        <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Logout</Link>
-        <Link id="BrAutos" to="/rentaAutos" className="btn btn-dark btnEffect">Rentar Autos</Link>
-        <Link id="BrVuelos" to="/rentaVuelos" className="btn btn-dark btnEffect">Rentar Vuelos</Link>
+        <Link  id="BtnHome" to="/" className="btn btn-dark btnEffect">Logout</Link>
+        <button id="BrAutos" className="btn btn-dark btnEffect" onClick={()=>{goRautos()}}>Rentar Autos</button>
+        <button id="BrVuelos" className="btn btn-dark btnEffect" onClick={()=>{goRvuelos()}}>Rentar Vuelos</button>
         <div className="mb-4"></div>
         <DataTable 
             columns={columnas}

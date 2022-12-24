@@ -12,7 +12,7 @@ const router = Router()
 router.post("/AoR",function(req:any,res:any){
     
     const id:number= req.body.id;
-    const user = req.body.usuario
+    let user = req.body.usuario
     const tipoRenta = req.body.tipoRenta
     //Aceptado o Rechazado
     const AoR = req.body.AoR
@@ -38,38 +38,43 @@ router.post("/AoR",function(req:any,res:any){
         let rVuelos=Bdatos["renta_vuelos"]
         if(rVuelos.length!=0){
             if(id<0 || id >rVuelos.length){
-                alert("Id invalido para identificar Vuelo")
+                console.log("Id invalido para identificar Vuelo")
             }else{
                 //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
                 //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
+                user = rVuelos[id]["usuario"]
                 rVuelos.splice(id,1)
                 console.log("remove Vuelos exitoso")  
                 //INGRESAR AL ARRAY DE PETICIONES ATENDIDAS
+                
                 const petition:object ={usuario:user,tipoRenta:tipoRenta,AoR:AoR,fecha:fecha}  
                 Bdatos["RentasR"].push(petition)
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
                 exito_pet=true
             }
         }else{
-            alert("Sin peticiones de renta de Vuelos")
+            console.log("Sin peticiones de renta de Vuelos")
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         }
     }else{
         let rAutos=Bdatos["renta_autos"]
         if(rAutos.length!=0){
             if(id<0 || id >rAutos.length){
-                alert("Id invalido para identificar Auto")
+                console.log("Id invalido para identificar Auto")
             }else{
                 //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
                 //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
                 rAutos.splice(id,1)
                 console.log("remove Autos exitoso")  
+                user = rAutos[id]["usuario"]
                 const petition:object ={usuario:user,tipoRenta:tipoRenta,AoR:AoR,fecha:fecha}  
                 Bdatos["RentasR"].push(petition)
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
                 exito_pet=true  
             }
         }else{
-            alert("Sin peticiones de renta de Autos")
+            console.log("Sin peticiones de renta de Autos")
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
         }
     }
     res.json({"accion_exitosa":exito_pet})    

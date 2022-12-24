@@ -1,6 +1,6 @@
 import { Component, useEffect } from "react"
 import React,{useState,useRef} from 'react';
-import {Link,useNavigate} from 'react-router-dom'
+import {Link,useNavigate,useLocation} from 'react-router-dom'
 import DataTable from 'react-data-table-component'
 
 
@@ -99,12 +99,17 @@ e. Precio de vuelo*/
     const [diasvuelo, setDiasVuelo] = useState(0);
     const [precio, setPrecio] = useState(0);
     const [datosTabla,setDatosTabla] = useState([])
+    const [user,setUser] = useState(0)
+
+    const userR=useLocation().state
+
 
     const Rentar = async () => {
-        const url = "";
+        const url = "http://localhost:8080/usuarios/rVuelos";
+        let renta={usuario:user,nameAgen:nameAgen,ciudad_origen:cityOrigen,ciudad_destino:cityDestino,dias_vuelo:diasvuelo,precio:precio}
         let config = {
         method: "POST", //ELEMENTOS A ENVIAR
-        body: JSON.stringify([{ nameAgen: nameAgen }]),
+        body: JSON.stringify(renta),
         headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -113,6 +118,9 @@ e. Precio de vuelo*/
         const res = await fetch(url, config);
         const data_res = await res.json();
         console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Peticion de Renta de Vuelo con Exito")
+        }
     };
     const RdatosTabla = async () => {
         const url = "http://localhost:8080/usuarios/getViajes";
@@ -137,6 +145,9 @@ e. Precio de vuelo*/
 
     useEffect(() => {
         RdatosTabla()
+        if(userR!=null){
+            setUser(userR.user)
+        }
     },[]);
 
     return(

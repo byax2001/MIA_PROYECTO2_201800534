@@ -50,49 +50,6 @@ router.post('/vLog',function(req:any,res:any){
     res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD,"verify":verify})
 })
 
-router.get("/getUsers",function(req:any,res:any){
-    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
-    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
-    let Bdatos = JSON.parse(texto);
-    res.json({contenido:Bdatos["usuarios"]})
-})
-router.get("/getViajes",function(req:any,res:any){
-    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
-    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
-    let Bdatos = JSON.parse(texto);
-    res.json({contenido:Bdatos["viajes"]})
-})
-router.get("/getAutos",function(req:any,res:any){
-    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
-    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
-    let Bdatos = JSON.parse(texto);
-    res.json({contenido:Bdatos["autos"]})
-})
-router.get("/getHistorial",function(req:any,res:any){
-    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
-    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
-    let Bdatos = JSON.parse(texto);
-    res.json({contenido:Bdatos["RentasR"]})
-})
-
-router.get("/Pr_vuelos",function(req:any,res:any){
-    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
-    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
-    let Bdatos = JSON.parse(texto);
-    res.json({contenido:Bdatos["renta_vuelos"]})
-})
-router.get("/Pr_autos",function(req:any,res:any){
-    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
-    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
-    let Bdatos = JSON.parse(texto);
-    res.json({contenido:Bdatos["renta_autos"]})
-})
-
-
-
-
-
-
 //RESERVAR AUTOS
 router.post("/rAutos",(req:any,res:any)=>{
     const user = req.body.usuario;
@@ -162,6 +119,45 @@ router.post("/rVuelos",(req:any,res:any)=>{
     res.json({"accion_exitosa":exito_pet})    
 })
 
+
+//---------------------------------------------GETS--------------------------
+router.get("/getUsers",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["usuarios"]})
+})
+router.get("/getViajes",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["viajes"]})
+})
+router.get("/getAutos",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["autos"]})
+})
+router.get("/getHistorial",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["RentasR"]})
+})
+
+router.get("/Pr_vuelos",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["renta_vuelos"]})
+})
+router.get("/Pr_autos",function(req:any,res:any){
+    const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
+    const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
+    let Bdatos = JSON.parse(texto);
+    res.json({contenido:Bdatos["renta_autos"]})
+})
 
 
 

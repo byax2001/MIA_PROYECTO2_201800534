@@ -103,9 +103,10 @@ f. Ciudad en la que se encuentra el vehículo*/
     const [precio, setPrecio] = useState(0);
     const [ciudad, setCiudad] = useState(0);
     const [datosTabla,setDatosTabla] = useState([])
-    const [x,setX]=useState(0)
+  
+
     const RdatosTabla = async () => {
-        const url = "http://localhost:8080/usuarios/getAutos";
+        const url = "http://localhost:8080/usuarios/Pr_vuelos";
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {

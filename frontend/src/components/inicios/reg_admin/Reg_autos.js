@@ -55,7 +55,7 @@ const customStyles = {
 };
 const columnas=[
     {
-        name:'No',
+        name:'ID',
         selector: row => row.no,
         sortable:true,
     },
@@ -102,11 +102,12 @@ f. Ciudad en la que se encuentra el vehículo*/
     const [modelo, setModelo] = useState(0);
     const [precio, setPrecio] = useState(0);
     const [ciudad, setCiudad] = useState(0);
+    const [id_del,setId_del] = useState("");
     const [datosTabla,setDatosTabla] = useState([])
   
 
     const RdatosTabla = async () => {
-        const url = "http://localhost:8080/usuarios/Pr_vuelos";
+        const url = "http://localhost:8080/usuarios/getAutos";
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {
@@ -175,12 +176,16 @@ f. Ciudad en la que se encuentra el vehículo*/
                             Precio
                             <input onChange={(e)=>{setPrecio(e.target.value)}} className="text-dark"></input>
                         </label>
-                        <label className="row mb-4">
+                        <label className="row mb-1">
                             Ciudad en la que se encuentra el vehiculo:
                             <input onChange={(e)=>{setCiudad(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
-                    <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>
+                <button className="btn btn-dark btnEffect mb-3" onClick={()=>{Registrar()}}>Registrar</button>
+                <div className="row">
+                    <input onChange={(e)=>{setId_del(e.target.value)}} placeholder="INGRESE AQUI ID A ELIMINAR" className="text-dark mb-1"/>
+                    <button className="col-2 btn btn-dark btnEffect" onClick={()=>{}}>Eliminar</button>  
+                </div>
                 </div>
             </div>
             

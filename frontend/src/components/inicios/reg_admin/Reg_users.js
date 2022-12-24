@@ -106,7 +106,8 @@ f. Confirmación de contraseña */
     const [password, setPass] = useState(0);
     const [conf_pass, setConf_pass] = useState(0);
     const [datosTabla,setDatosTabla] = useState([])
-    
+    const [id_del,setId_del] = useState("");
+
     const Registrar = async () => {
         const url = "";
         let config = {
@@ -186,13 +187,18 @@ f. Confirmación de contraseña */
                             Contraseña:
                             <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
                         </label>
-                        <label className="row mb-4">
+                        <label className="row mb-2">
                             Confirmar Contraseña
                             <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
-                    <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>
+                    <button className="btn btn-dark btnEffect mb-2" onClick={()=>{Registrar()}}>Registrar</button>
+                    <div className="row">
+                    <input onChange={(e)=>{setId_del(e.target.value)}} placeholder="INGRESE AQUI ID A ELIMINAR" className="text-dark mb-1"/>
+                    <button className="col-2 btn btn-dark btnEffect" onClick={()=>{}}>Eliminar</button>  
+                    </div>
                 </div>
+
             </div>
             
         </div>

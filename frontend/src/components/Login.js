@@ -46,7 +46,7 @@ function Login (props){
     return(
         <React.Fragment>
 
-        <header align="center"><div class="d-flex justify-content-center"><h1>Login</h1></div></header>
+        <header align="center"><div className="d-flex justify-content-center"><h1>Login</h1></div></header>
             <div className="container mx-auto">
                 <div className="row">
                 <div className="col-7">

@@ -9,24 +9,36 @@ const cognito = {
 }
 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(cognito);
-
+//REGISTRAR USUARIOS
 const signUpCognito = async(req:any, res:any) => {
-    const { usuario, password, email } = req.body;
+    const usuario =req.body.usuario;
+    const password = req.body.password
+    const email = req.body.email;
+    console.log("UASUSUSUSUUSUSSU")
+    //const { usuario, password, email } = req.body;
     // aqui pueden encriptar la contrasenia con bcrypt o algo similar
     const attributeList = [];
     // attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({'': username}));
     attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({'Name': 'email', 'Value': email}));
     const username=usuario;
+    console.log(`usuario: ${username}  password: ${password}   attributeList: ${attributeList}`)
     userPool.signUp(username, password, attributeList, null, async(err:any, data:any)=>{
+        console.log("DDDDDDDDDDDDDDDDDDDDDDD----")
         if(err){
+           
             console.log(err);
             res.status(500).send
         }else{
+            console.log("------------------------------")
             console.log(data)
+            console.log("------------------------------")
             // res.status(200).send(data);
         }
     });
+    console.log("------------------------------")
 }
+
+
 const deleteUserCognitoA = async (req:any, res:any) => {
     const username = req.body.us
     const password = req.body.contranueva
@@ -69,9 +81,10 @@ const deleteUserCognitoA = async (req:any, res:any) => {
         }
     });
 }
+//VERIFICAR QUE LOS USUARIOS HALLAN VERIFICADO SU CORREO
 const signInCognito = async(req:any, res:any) => {
     const {usuario, password} = req.body;
-    
+    console.log(`usuario:${usuario}, password: ${password}`)
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
         Username: usuario,
         Password: password
@@ -83,25 +96,13 @@ const signInCognito = async(req:any, res:any) => {
     };
 
     const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
-
-    cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: function (result:any) {
-            const verified = result;
-            console.log(verified);
-            res.status(200).json({
-                'status': true,
-                'msg':result
-            });
-        },
-        onFailure: function (err:any) {
-            console.log('Entra aqui con error: ' + err);
-            res.status(500).json({
-                'status': false,
-                'msg':err
-                });
-        }
-    });
-
+    let prueba;
+    return new Promise(function(resolve, reject) {
+        cognitoUser.authenticateUser(authenticationDetails, {
+            onSuccess:resolve,
+            onFailure: reject,
+        })
+    })
 }
 
 

@@ -24,11 +24,16 @@ f. Confirmación de contraseña */
     const [password, setPass] = useState(0);
     const [conf_pass, setConf_pass] = useState(0);
     
-    const Registrar = async () => {
-        const url = "";
+    const RegistrarU = async () => {
+        let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:foto,password:password,verify:false}
+        if(password!==conf_pass){
+            alert("Las contraseñas deben de ser iguales")
+            return
+        }
+        const url = "http://localhost:8080/admin/addUsers";
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
-            body: JSON.stringify([{ nameC: nameC }]),
+            body: JSON.stringify(newUser),
             headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -37,6 +42,11 @@ f. Confirmación de contraseña */
         const res = await fetch(url, config);
         const data_res = await res.json();
         console.log(data_res);
+        if(data_res["accion_exitosa"]){
+            alert("Registro de Usuario Exitoso")
+        }else{
+            alert("Fallo al Registrar Usuario")
+        }
     };
 
     return(
@@ -76,7 +86,7 @@ f. Confirmación de contraseña */
                             <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
-                    <button className="btn btn-dark btnEffect" onClick={()=>{Registrar()}}>Registrar</button>
+                    <button className="btn btn-dark btnEffect" onClick={()=>{RegistrarU()}}>Registrar</button>
                 </div>
             </div>
             

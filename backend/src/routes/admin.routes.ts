@@ -3,7 +3,6 @@ import Router from 'express';
 const {signUpCognito} = require('../middleware/Cognito.ts');
 const fs = require('fs')
 const path = require('path')
-const readline = require('readline')
 const {check} = require('express-validator')
 const _cognito= require('../middleware/Cognito');
 require('dotenv').config()
@@ -24,12 +23,6 @@ router.post("/addUsers",function(req:any,res:any){
     let Bdatos = JSON.parse(texto);
     let exito_pet = false;
     try {
-        fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-    }
-    try {
         const lUsers:any[] = Bdatos["usuarios"]
         let existe = false
         lUsers.forEach((lUsers)=>{
@@ -38,14 +31,9 @@ router.post("/addUsers",function(req:any,res:any){
         }
         })
         if (existe===false){
-            //REGISTRO DE USUARIOS
-            let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
-            
-            singUpUser(req,res);
-
-            Bdatos["usuarios"].push(newUser)
-            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-            exito_pet=true  
+            singUpUser(req,res,pathFile,nombre,user,tipo_usuario,email,foto,password,Bdatos);
+            //ELIMINACION DE LA BASE DE DATOS ANTERIOR
+            exito_pet=true 
         }else{
             console.log("Usuario o Email ya registrado")
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -57,8 +45,13 @@ router.post("/addUsers",function(req:any,res:any){
     }
     res.json({"accion_exitosa":exito_pet})
 })
-const singUpUser =async (req:any, res:any)=>{
-    await _cognito.signUpCognito(req,res);
+const singUpUser =async (req:any, res:any,pathFile:string,nombre:string,user:string,tipo_usuario:string,email:string,foto:any,password:any,Bdatos:any)=>{
+    fs.unlinkSync(pathFile)
+    //REGISTRO DE USUARIOS
+    let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+    Bdatos["usuarios"].push(newUser)
+    fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+    _cognito.signUpCognito(req,res);
 }
 
 //ELIMINAR USUARIOS 

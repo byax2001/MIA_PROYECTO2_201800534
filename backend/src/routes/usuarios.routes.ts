@@ -28,18 +28,30 @@ router.post('/vLog',function(req:any,res:any){
     let usuarioBD:string =""
     let login_correcto:boolean= false
     let verify:boolean=false
-    console.log(`usuario: ${usuario}  contra: ${password} pathFile: ${pathFile} texto:${texto}`)
+    console.log(`usuario: ${usuario}  contra: ${password} pathFile: ${pathFile}`)
     console.log(`Bdatos: ${Bdatos}`)
     try{
         let usuarios:[] = Bdatos["usuarios"];
-        usuarios.forEach((user)=>{
+        usuarios.forEach(async (user)=>{
             if(user["usuario"] == usuario || user["email"]==usuario){
-                if(user["password"]===password && user["verify"]===true){
-                    login_correcto=true
-                    tipoUser=user['tipo_usuario']
-                    usuarioBD = user['usuario']
-                    verify = user["verify"]
-                    return;
+                if(user["password"]===password){
+                    if(user["verify"]===true){
+                        login_correcto=true
+                        tipoUser=user['tipo_usuario']
+                        usuarioBD = user['usuario']
+                        verify = user["verify"]
+                        return;
+                    }else{
+                        await singInUser(req,res,Bdatos["usuarios"],user["usuario"]);
+                        if(user["verify"]===true){
+                            login_correcto=true
+                            tipoUser=user['tipo_usuario']
+                            usuarioBD = user['usuario']
+                            verify = user["verify"]
+                            return;
+                        }
+                    }   
+                    
                 }
             }
         })
@@ -51,8 +63,30 @@ router.post('/vLog',function(req:any,res:any){
 })
 
 //----------------------------------------------------------------
-const singInUser =async (req:any, res:any)=>{
-    await _cognito.signInCognito(req,res);
+const singInUser =async (req:any, res:any, users:any[],usuario:string)=>{
+    const resp = await _cognito.signInCognito(req,res)
+            //{status:true message: lorem}
+      
+    console.log(`RESP:   ${resp}`)
+    const data_res=Promise.resolve(resp)
+    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+    console.log()
+    data_res.then((value)=>{
+        console.log("JIJOJOOOO")
+        console.log(value["idToken"]["payload"]["email_verified"])
+    })
+    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+           //true 
+    if(false){
+        console.log("AAAAAAAAAAAAAAA")
+        users.forEach((user)=>{
+            if(user["usuario"]===usuario){
+                console.log("CONSOLE LOG VERIFICADO")
+                user["verify"] = true
+                return;
+            }
+        })
+    }
 }
 //-----------------------------------------------------------------
 //RESERVAR AUTOS

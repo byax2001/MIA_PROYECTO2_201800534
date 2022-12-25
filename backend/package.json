@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amazon-cognito-identity-js": "^6.1.1",
     "amazon-cognito-identity-js-typescript": "^1.22.0",
     "aws": "^0.0.3-2",
     "bootstrap": "^5.2.3",

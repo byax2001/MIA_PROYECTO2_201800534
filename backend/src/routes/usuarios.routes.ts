@@ -8,7 +8,7 @@ const validarAtributo= require('../middleware/validarAtributo');
 require('dotenv').config()
 const router = Router()
 const usuariosController = require('../controllers/usuarios.controllers.ts')
-
+const _cognito= require('../middleware/Cognito');
 
 router.get('/',(req:any,res:any)=>{
     res.json({holaaa: "wprld"})
@@ -50,6 +50,11 @@ router.post('/vLog',function(req:any,res:any){
     res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD,"verify":verify})
 })
 
+//----------------------------------------------------------------
+const singInUser =async (req:any, res:any)=>{
+    await _cognito.signInCognito(req,res);
+}
+//-----------------------------------------------------------------
 //RESERVAR AUTOS
 router.post("/rAutos",(req:any,res:any)=>{
     const user = req.body.usuario;

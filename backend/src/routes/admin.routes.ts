@@ -1,11 +1,11 @@
 // @ts-ignore    Se escribe esta linea pues ts-ignore esta dando unos problemas de duplicacion
 import Router from 'express';
-import { lutimes } from 'fs';
+const {signUpCognito} = require('../middleware/Cognito.ts');
 const fs = require('fs')
 const path = require('path')
 const readline = require('readline')
 const {check} = require('express-validator')
-const validarAtributo= require('../middleware/validarAtributo');
+const _cognito= require('../middleware/Cognito');
 require('dotenv').config()
 const router = Router()
 
@@ -38,7 +38,11 @@ router.post("/addUsers",function(req:any,res:any){
         }
         })
         if (existe===false){
+            //REGISTRO DE USUARIOS
             let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+            
+            singUpUser(req,res);
+
             Bdatos["usuarios"].push(newUser)
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             exito_pet=true  
@@ -49,10 +53,14 @@ router.post("/addUsers",function(req:any,res:any){
         
     } catch (error) {
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4) ///si truena hay que reescribir la BD sin cambios
-        console.error('Error al eliminar', error)
+        console.error('Error al Registrar', error)
     }
     res.json({"accion_exitosa":exito_pet})
 })
+const singUpUser =async (req:any, res:any)=>{
+    await _cognito.signUpCognito(req,res);
+}
+
 //ELIMINAR USUARIOS 
 router.post("/delUsers",function(req:any,res:any){
     const id:number= req.body.id;

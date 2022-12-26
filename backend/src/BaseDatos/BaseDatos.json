@@ -26,15 +26,6 @@
       "email": "jose@gmail.com",
       "password": "user",
       "verify": true
-    },
-    {
-      "nombre": "brandon",
-      "usuario": "bra",
-      "tipo_usuario": "T",
-      "email": "brandon14yax@gmail.com",
-      "foto": "safdsdf",
-      "password": "41L35yax!",
-      "verify": false
     }
   ],
   "autos": [

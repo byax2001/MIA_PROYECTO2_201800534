@@ -55,7 +55,7 @@ const singUpUser =async (req:any, res:any,pathFile:string,nombre:string,user:str
 }
 
 //ELIMINAR USUARIOS 
-router.post("/delUsers",function(req:any,res:any){
+router.post("/delUsers",async function(req:any,res:any){
     const id:number= req.body.id;
     //ELIMINO LA BASE DE DATOS ANTERIOR 
     const pathFile = path.join(__dirname,'../BaseDatos/BaseDatos.json')
@@ -63,12 +63,6 @@ router.post("/delUsers",function(req:any,res:any){
     let Bdatos = JSON.parse(texto);
     let exito_pet = false;
     
-    try {
-        fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-    }
     let lUsers=Bdatos["usuarios"]
     if(lUsers.length!=0){
         if(id<0 || id >lUsers.length){
@@ -77,6 +71,16 @@ router.post("/delUsers",function(req:any,res:any){
         }else{
             //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
             //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
+            const amazon_user = Bdatos["usuarios"][id]["usuario"]
+            const amazon_pass = Bdatos["usuarios"][id]["password"]
+            
+            const resp= await _cognito.deleteUserCognitoA(req,res,amazon_user,amazon_pass);
+            try {
+                fs.unlinkSync(pathFile)
+                console.log("Archivo eliminado")
+            } catch(err) {
+                console.error('Error al eliminar', err)
+            }
             lUsers.splice(id,1)
             console.log("remove usuario exitoso")  
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)

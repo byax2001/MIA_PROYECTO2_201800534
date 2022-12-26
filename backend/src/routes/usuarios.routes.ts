@@ -1,3 +1,5 @@
+import { Console } from "console";
+
 declare var require: any;
 const {Router} = require('express')
 const fs = require('fs')
@@ -17,7 +19,7 @@ router.get('/',(req:any,res:any)=>{
 
 
 //Verificar login correcto
-router.post('/vLog',function(req:any,res:any){
+router.post('/vLog',async function(req:any,res:any){
     const usuario:string=req.body.usuario;
     const password:string=req.body.password;
 
@@ -32,33 +34,60 @@ router.post('/vLog',function(req:any,res:any){
     console.log(`Bdatos: ${Bdatos}`)
     try{
         let usuarios:[] = Bdatos["usuarios"];
-        usuarios.forEach(async (user)=>{
+        for (let i = 0; i < usuarios.length; i++) {
+            const user = usuarios[i];
             if(user["usuario"] == usuario || user["email"]==usuario){
                 if(user["password"]===password){
-                    if(user["verify"]===true){
-                        login_correcto=true
-                        tipoUser=user['tipo_usuario']
+                    if (user["verify"] === true) {
+                        login_correcto = true
+                        tipoUser = user['tipo_usuario']
                         usuarioBD = user['usuario']
                         verify = user["verify"]
-                        return;
-                    }else{
-                        await singInUser(req,res,Bdatos["usuarios"],user["usuario"]);
+                        break;
+                    } else {
+                        //await singInUser(req,res,Bdatos["usuarios"],user["usuario"]);
+                        const resp = await _cognito.signInCognito(req, res)
+                        //{status:true message: lorem}
+                        console.log(`RESP:   ${resp}`)
+                        const data = await resp
+                        const email_verified: boolean = data["idToken"]["payload"]["email_verified"]
+                        console.log(email_verified)
+                        console.log("XDXDXDXD")
+                        let x = 0
+                        const users = Bdatos["usuarios"]
+                        if (email_verified) {
+                            for (let i = 0; i < users.length; i++) {
+                                const _user = users[i];
+                                if (_user["usuario"] === user["usuario"]) {
+                                    console.log("CONSOLE LOG VERIFICADO")
+                                    _user["verify"] = true
+                                    break;
+                                }
+                                x++;
+
+                            }
+                        }
                         if(user["verify"]===true){
                             login_correcto=true
                             tipoUser=user['tipo_usuario']
                             usuarioBD = user['usuario']
                             verify = user["verify"]
-                            return;
+                            console.log("CONFIRMADODOODODODOD")
+                            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',"\t")
+                            
+                        }else{
+                            console.log("FALTA POR CONFIRMAR VIA EMAIL")
                         }
+                        break;
                     }   
                     
                 }
             }
-        })
+        }
     }catch(e){
         console.log(e)
     }
-    
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD,"verify":verify})
 })
 
@@ -66,27 +95,26 @@ router.post('/vLog',function(req:any,res:any){
 const singInUser =async (req:any, res:any, users:any[],usuario:string)=>{
     const resp = await _cognito.signInCognito(req,res)
             //{status:true message: lorem}
-      
     console.log(`RESP:   ${resp}`)
-    const data_res=Promise.resolve(resp)
-    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
-    console.log()
-    data_res.then((value)=>{
-        console.log("JIJOJOOOO")
-        console.log(value["idToken"]["payload"]["email_verified"])
-    })
-    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
-           //true 
-    if(false){
-        console.log("AAAAAAAAAAAAAAA")
-        users.forEach((user)=>{
+    const data = await resp
+    const email_verified:boolean = data["idToken"]["payload"]["email_verified"]
+    console.log(email_verified)
+    console.log("XDXDXDXD")
+    let x =0
+    if(email_verified){
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
             if(user["usuario"]===usuario){
                 console.log("CONSOLE LOG VERIFICADO")
                 user["verify"] = true
-                return;
+                break;
             }
-        })
+            x++;
+            
+        }
     }
+    console.log(users[x]["verify"])
+    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
 }
 //-----------------------------------------------------------------
 //RESERVAR AUTOS

@@ -147,7 +147,11 @@ f. Confirmación de contraseña */
         const res = await fetch(url, config);
         const data_res = await res.json();
         console.log(data_res);
-        if(data_res["accion_exitosa"]){
+        console.log(data_res["status"])
+        //CUANDO LA ELIMINACION ES CORRECTA DEVUELVE UN {message:"Eliminacion exitosa", status:true} proveniente desde el archivo Cognito en su fucion res.json({})
+        //si es erronea la eliminacion devuelve un {accion_exitosa:false}
+        //por lo que data["status"] sera igual a undefained y el if lo toma como false
+        if(data_res["status"]){
             alert("Eliminacion de Usuario Exitosa")
         }else{
             alert("Fallo al Eliminar Usuarios")

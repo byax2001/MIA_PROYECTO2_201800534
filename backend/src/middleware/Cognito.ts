@@ -45,13 +45,15 @@ const deleteUserCognitoA = async (req:any, res:any,usuario:string,pass:string) =
 
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
         Username: username,
-        Password: hash
+        Password: password
     });
     
     const userData = {
         Username: username,
         Pool: userPool
     };
+
+    //LOS RESOLVE AYUDAN MUCHO   PARA QUE NO SE TRABE EL JAVASCRIPT AL EJECUTAR UN PROMISE
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
     console.log("ESTOY EN EL COGNITO")
     return new Promise(function (resolve, reject) {
@@ -65,6 +67,7 @@ const deleteUserCognitoA = async (req:any, res:any,usuario:string,pass:string) =
                         });
                     } else {
                         console.log("COGNITO: ELIMINADO CORRECTAMENTE")
+                        resolve(result)
                         res.status(200).json({
                             status: true,
                             message: 'Usuario eliminado correctamente',

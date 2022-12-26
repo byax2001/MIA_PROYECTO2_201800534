@@ -62,25 +62,6 @@ router.post("/addUsers",async function(req:any,res:any){
     res.json({"accion_exitosa":exito_pet})
 })
 
-const singUp =async (req:any,res:any,Bdatos:any,pathFile:any,nombre:any,user:any,tipo_usuario:any,email:any,foto:any,password:any) => {
-     //ELIMINACION DE LA BASE DE DATOS ANTERIOR
-    await _cognito.signUpCognito(req,res);
-    
-    let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
-    fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-    Bdatos["usuarios"].push(newUser)
-    fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-    //REGISTRO DE USUARIOS
-    
-    _cognito.signUpCognito(req,res).then(function(){
-        console.log("AAAAAAAAAAA------------bcd-")
-        fs.unlinkSync(pathFile)
-        let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
-        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-    }).catch({
-      
-    })
-}
 
 //ELIMINAR USUARIOS 
 router.post("/delUsers",async function(req:any,res:any){
@@ -103,18 +84,20 @@ router.post("/delUsers",async function(req:any,res:any){
             const amazon_pass = Bdatos["usuarios"][id]["password"]
             
             const resp= await _cognito.deleteUserCognitoA(req,res,amazon_user,amazon_pass);
-            try {
+            const data = await resp
+            console.log("result of delete")
+            console.log(typeof data) //ES UN STRING
+            console.log(data)
+            if(data=="SUCCESS"){
                 fs.unlinkSync(pathFile)
-                console.log("Archivo eliminado")
-            } catch(err) {
-                console.error('Error al eliminar', err)
-            }
-            lUsers.splice(id,1)
-            console.log("remove usuario exitoso")  
-            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-            exito_pet=true
+                lUsers.splice(id,1)
+                console.log("remove usuario exitoso")  
+                fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+                exito_pet=true
+            } 
         }
     }
+    console.log(exito_pet)
     res.json({"accion_exitosa":exito_pet})    
 })
 
@@ -147,7 +130,7 @@ router.post("/addVuelos",function(req:any,res:any){
         console.error('Error al eliminar Viaje', error)
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4) ///si truena hay que reescribir la BD sin cambios
     }
-    res.json({"accion_exitosa":exito_pet})
+    return res.json({"accion_exitosa":exito_pet})
 })
 //ELIMINAR VUELOS
 router.post("/delVuelos",function(req:any,res:any){

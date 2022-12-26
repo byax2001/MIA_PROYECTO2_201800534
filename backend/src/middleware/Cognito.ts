@@ -14,7 +14,6 @@ const signUpCognito = async(req:any, res:any) => {
     const usuario =req.body.usuario;
     const password = req.body.password
     const email = req.body.email;
-    console.log("UASUSUSUSUUSUSSU")
     //const { usuario, password, email } = req.body;
     // aqui pueden encriptar la contrasenia con bcrypt o algo similar
     const attributeList:any = [];
@@ -22,14 +21,13 @@ const signUpCognito = async(req:any, res:any) => {
     attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({'Name': 'email', 'Value': email}));
     const username=usuario;
     console.log(`usuario: ${username}  password: ${password}   attributeList: ${attributeList}`)
-    return new Promise(()=>{
+    return new Promise(function(resolve,reject){
         userPool.signUp(username, password, attributeList, null, async(err:any, data:any)=>{
             if(err){
-               
                 console.log(err);
                 res.status(500).send
             }else{
-                console.log(data)
+                console.log(resolve(data))
                 // res.status(200).send(data);
             }
         });

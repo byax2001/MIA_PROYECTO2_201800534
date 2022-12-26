@@ -34,16 +34,22 @@ router.post("/addUsers",async function(req:any,res:any){
         }
         })
         if (existe===false){
-            const resp = await _cognito.signUpCognito(req,res);
-           
              //ELIMINACION DE LA BASE DE DATOS ANTERIOR
-            fs.unlinkSync(pathFile)
+            //fs.unlinkSync(pathFile)
             //REGISTRO DE USUARIOS
+            //singUp(req,res,Bdatos,pathFile,nombre,user,tipo_usuario,email,foto,password)
+            const resp=await _cognito.signUpCognito(req,res);
+            const data = await resp
+            console.log(data)
+            console.log("DATAAAA")
             let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             Bdatos["usuarios"].push(newUser)
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+            console.log("AAAAAAAAAAAAAAAAAAa")
+            //fs.unlinkSync(pathFile)
+           
             exito_pet=true 
-            
         }else{
             console.log("Usuario o Email ya registrado")
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -56,6 +62,25 @@ router.post("/addUsers",async function(req:any,res:any){
     res.json({"accion_exitosa":exito_pet})
 })
 
+const singUp =async (req:any,res:any,Bdatos:any,pathFile:any,nombre:any,user:any,tipo_usuario:any,email:any,foto:any,password:any) => {
+     //ELIMINACION DE LA BASE DE DATOS ANTERIOR
+    await _cognito.signUpCognito(req,res);
+    
+    let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+    fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+    Bdatos["usuarios"].push(newUser)
+    fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+    //REGISTRO DE USUARIOS
+    
+    _cognito.signUpCognito(req,res).then(function(){
+        console.log("AAAAAAAAAAA------------bcd-")
+        fs.unlinkSync(pathFile)
+        let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+    }).catch({
+      
+    })
+}
 
 //ELIMINAR USUARIOS 
 router.post("/delUsers",async function(req:any,res:any){

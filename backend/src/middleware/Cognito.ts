@@ -17,22 +17,25 @@ const signUpCognito = async(req:any, res:any) => {
     console.log("UASUSUSUSUUSUSSU")
     //const { usuario, password, email } = req.body;
     // aqui pueden encriptar la contrasenia con bcrypt o algo similar
-    const attributeList = [];
+    const attributeList:any = [];
     // attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({'': username}));
     attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({'Name': 'email', 'Value': email}));
     const username=usuario;
     console.log(`usuario: ${username}  password: ${password}   attributeList: ${attributeList}`)
-    userPool.signUp(username, password, attributeList, null, async(err:any, data:any)=>{
-        if(err){
-           
-            console.log(err);
-            res.status(500).send
-        }else{
-            console.log(data)
-            // res.status(200).send(data);
-        }
-    });
-    console.log("------------------------------")
+    return new Promise(()=>{
+        userPool.signUp(username, password, attributeList, null, async(err:any, data:any)=>{
+            if(err){
+               
+                console.log(err);
+                res.status(500).send
+            }else{
+                console.log(data)
+                // res.status(200).send(data);
+            }
+        });
+    })
+   
+
 }
 
 
@@ -53,33 +56,32 @@ const deleteUserCognitoA = async (req:any, res:any,usuario:string,pass:string) =
     };
     var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
     console.log("ESTOY EN EL COGNITO")
-    return new Promise(function(resolve, reject) {
-    
-    cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: function (result:any) {
-            cognitoUser.deleteUser((err:any, result:any) => {
-                if (err) {
-                    res.status(400).json({
-                        status: false,
-                        message: 'Error al eliminar usuario',
-                    });
-                } else {
-                    console.log("COGNITO: ELIMINADO CORRECTAMENTE")
-                    res.status(200).json({
-                        status: true,
-                        message: 'Usuario eliminado correctamente',
-                    });
-                }
-            });
-        },
-        onFailure: function (err:any) {
-            console.log('Entra aqui con error: ' + err);
-            res.status(500).json({
-                'status': false,
-                'msg':err
+    return new Promise(function (resolve, reject) {
+        cognitoUser.authenticateUser(authenticationDetails, {
+            onSuccess: function (result: any) {
+                cognitoUser.deleteUser((err: any, result: any) => {
+                    if (err) {
+                        res.status(400).json({
+                            status: false,
+                            message: 'Error al eliminar usuario',
+                        });
+                    } else {
+                        console.log("COGNITO: ELIMINADO CORRECTAMENTE")
+                        res.status(200).json({
+                            status: true,
+                            message: 'Usuario eliminado correctamente',
+                        });
+                    }
                 });
-        }
-    })
+            },
+            onFailure: function (err: any) {
+                console.log('Entra aqui con error: ' + err);
+                res.status(500).json({
+                    'status': false,
+                    'msg': err
+                });
+            }
+        })
     })
 }
 //VERIFICAR QUE LOS USUARIOS HALLAN VERIFICADO SU CORREO

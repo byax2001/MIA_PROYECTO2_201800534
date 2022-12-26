@@ -9,7 +9,10 @@ require('dotenv').config()
 const router = Router()
 
 //AÑADIR USUARIOS
-router.post("/addUsers",function(req:any,res:any){
+router.post("/addUsers",async function(req:any,res:any){
+    //RETORNAR UN NEW PROMISE ((PAR1,PAR2)=>{}) Y EN LA OTRA PARTE DONDE SE LLAMA EL METODO
+    //CON AWAIT, FUERZA AL PROGRAMA A REALIZAR ALGO PRIMERO Y LUEGO LO OTRO 
+
     const nombre = req.body.nombre
     const user = req.body.usuario
     const tipo_usuario = req.body.tipo_usuario
@@ -31,9 +34,16 @@ router.post("/addUsers",function(req:any,res:any){
         }
         })
         if (existe===false){
-            singUpUser(req,res,pathFile,nombre,user,tipo_usuario,email,foto,password,Bdatos);
-            //ELIMINACION DE LA BASE DE DATOS ANTERIOR
+            const resp = await _cognito.signUpCognito(req,res);
+           
+             //ELIMINACION DE LA BASE DE DATOS ANTERIOR
+            fs.unlinkSync(pathFile)
+            //REGISTRO DE USUARIOS
+            let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+            Bdatos["usuarios"].push(newUser)
+            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             exito_pet=true 
+            
         }else{
             console.log("Usuario o Email ya registrado")
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -45,14 +55,7 @@ router.post("/addUsers",function(req:any,res:any){
     }
     res.json({"accion_exitosa":exito_pet})
 })
-const singUpUser =async (req:any, res:any,pathFile:string,nombre:string,user:string,tipo_usuario:string,email:string,foto:any,password:any,Bdatos:any)=>{
-    fs.unlinkSync(pathFile)
-    //REGISTRO DE USUARIOS
-    let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
-    Bdatos["usuarios"].push(newUser)
-    fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-    _cognito.signUpCognito(req,res);
-}
+
 
 //ELIMINAR USUARIOS 
 router.post("/delUsers",async function(req:any,res:any){

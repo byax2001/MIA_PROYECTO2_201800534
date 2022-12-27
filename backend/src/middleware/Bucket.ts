@@ -1,5 +1,4 @@
 const AWS = require('aws-sdk');
-const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3')
 const s3 = new AWS.S3()
 require("dotenv").config();
 
@@ -13,7 +12,6 @@ const client = new AWS.S3({
 const Upload = async function (req: any, res: any) {
     /// fil[0].ruta?
     const image = req.body.foto;
-    console.log(image)
     //const buf = Buffer.from(image, "base64");
     const buff = Buffer.from(image, "base64");
 
@@ -25,10 +23,8 @@ const Upload = async function (req: any, res: any) {
         ContentEncoding: "base64",
         ContentType: "image/jpg",
     };
-    const command = new PutObjectCommand(params);
-    await client.send(command)
     return new Promise(function (resolve, reject) {
-        client.putObject(params, function (err: any, data: any) {
+        client.putObjec(params, function (err: any, data: any) {
             if (err) {
                 reject(err)
                 res.status(400).json({

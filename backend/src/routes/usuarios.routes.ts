@@ -94,7 +94,7 @@ router.post('/vLog',async function(req:any,res:any){
 
 //----------------------------------------------------------------
 router.post("/pruebaFoto",async function(req:any,res:any){
-   /**  const storage = multer.diskStorage({
+    const storage = multer.diskStorage({
         destination:(req:any,file:any,cb:any)=>{
             cb(null,"./images")
         },

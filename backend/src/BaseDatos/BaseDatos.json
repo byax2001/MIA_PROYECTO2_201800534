@@ -1,1 +1,103 @@
-{"usuarios":[{"nombre":"Admin Jose","usuario":"admin","tipo_usuario":"A","foto":"link","email":"jose@gmail.com","password":"admin","verify":true},{"nombre":"Admin Pedro","usuario":"recep","tipo_usuario":"R","foto":"link","email":"jose@gmail.com","password":"recep","verify":true},{"nombre":"Admin Luis","usuario":"user","tipo_usuario":"T","foto":"link","email":"jose@gmail.com","password":"user","verify":true}],"autos":[{"nombre_agencia":"bam","marca":"marca","placa":"XIDFS","modelo":1234,"precio":5585,"ciudadH":"Amatitlan"}],"viajes":[{"nombre_agencia":"BAM","ciudad_origen":"guatemala","ciudad_destino":"guatemala","dias_vuelo":"dias","precio":232},{"nombre_agencia":"bamtrab","ciudad_origen":"san luis","ciudad_destino":"san jose","dias_vuelo":"61","precio":"1923"}],"renta_vuelos":[{"usuario":"user","nombre_agencia":"BAN","ciudad_origen":"guatemala","ciudad_destino":"guatemala","dias_vuelo":"122","precio":"1923","estado":"sin resolver"}],"renta_autos":[{"usuario":"user","nombre_agencia":"BAM","marca":"marca","modelo":1234,"precio":23}],"RentasR":[{"usuario":"Pedro","tipoRenta":"Vuelo","AoR":"Aceptado","fecha":"14/11/2015"},{"usuario":"breando","tipoRenta":"vuelo","AoR":"Aceptado","fecha":"Fri, 23 Dec 2022 15:45:02 GMT"},{"usuario":"recep","tipoRenta":"auto","AoR":"Aceptado","fecha":"Sat, 24 Dec 2022 04:42:16 GMT"},{"usuario":"recep","tipoRenta":"auto","AoR":"Rechazado","fecha":"Sat, 24 Dec 2022 04:42:34 GMT"}]}
+{
+  "usuarios": [
+    {
+      "nombre": "Admin Jose",
+      "usuario": "admin",
+      "tipo_usuario": "A",
+      "foto": "link",
+      "email": "jose@gmail.com",
+      "password": "admin",
+      "verify": true
+    },
+    {
+      "nombre": "Admin Pedro",
+      "usuario": "recep",
+      "tipo_usuario": "R",
+      "foto": "link",
+      "email": "jose@gmail.com",
+      "password": "recep",
+      "verify": true
+    },
+    {
+      "nombre": "Admin Luis",
+      "usuario": "user",
+      "tipo_usuario": "T",
+      "foto": "link",
+      "email": "jose@gmail.com",
+      "password": "user",
+      "verify": true
+    }
+  ],
+  "autos": [
+    {
+      "nombre_agencia": "bam",
+      "marca": "marca",
+      "placa": "XIDFS",
+      "modelo": 1234,
+      "precio": 5585,
+      "ciudadH": "Amatitlan"
+    }
+  ],
+  "viajes": [
+    {
+      "nombre_agencia": "BAM",
+      "ciudad_origen": "guatemala",
+      "ciudad_destino": "guatemala",
+      "dias_vuelo": "dias",
+      "precio": 232
+    },
+    {
+      "nombre_agencia": "bamtrab",
+      "ciudad_origen": "san luis",
+      "ciudad_destino": "san jose",
+      "dias_vuelo": "61",
+      "precio": "1923"
+    }
+  ],
+  "renta_vuelos": [
+    {
+      "usuario": "user",
+      "nombre_agencia": "BAN",
+      "ciudad_origen": "guatemala",
+      "ciudad_destino": "guatemala",
+      "dias_vuelo": "122",
+      "precio": "1923",
+      "estado": "sin resolver"
+    }
+  ],
+  "renta_autos": [
+    {
+      "usuario": "user",
+      "nombre_agencia": "BAM",
+      "marca": "marca",
+      "modelo": 1234,
+      "precio": 23
+    }
+  ],
+  "RentasR": [
+    {
+      "usuario": "Pedro",
+      "tipoRenta": "Vuelo",
+      "AoR": "Aceptado",
+      "fecha": "14/11/2015"
+    },
+    {
+      "usuario": "breando",
+      "tipoRenta": "vuelo",
+      "AoR": "Aceptado",
+      "fecha": "Fri, 23 Dec 2022 15:45:02 GMT"
+    },
+    {
+      "usuario": "recep",
+      "tipoRenta": "auto",
+      "AoR": "Aceptado",
+      "fecha": "Sat, 24 Dec 2022 04:42:16 GMT"
+    },
+    {
+      "usuario": "recep",
+      "tipoRenta": "auto",
+      "AoR": "Rechazado",
+      "fecha": "Sat, 24 Dec 2022 04:42:34 GMT"
+    }
+  ]
+}

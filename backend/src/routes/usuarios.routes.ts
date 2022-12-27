@@ -11,6 +11,8 @@ require('dotenv').config()
 const router = Router()
 const usuariosController = require('../controllers/usuarios.controllers.ts')
 const _cognito= require('../middleware/Cognito');
+const _bucket = require('../middleware/Bucket')
+const multer = require('multer')
 
 router.get('/',(req:any,res:any)=>{
     res.json({holaaa: "wprld"})
@@ -87,35 +89,27 @@ router.post('/vLog',async function(req:any,res:any){
     }catch(e){
         console.log(e)
     }
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD,"verify":verify})
 })
 
 //----------------------------------------------------------------
-const singInUser =async (req:any, res:any, users:any[],usuario:string)=>{
-    const resp = await _cognito.signInCognito(req,res)
-            //{status:true message: lorem}
-    console.log(`RESP:   ${resp}`)
-    const data = await resp
-    const email_verified:boolean = data["idToken"]["payload"]["email_verified"]
-    console.log(email_verified)
-    console.log("XDXDXDXD")
-    let x =0
-    if(email_verified){
-        for (let i = 0; i < users.length; i++) {
-            const user = users[i];
-            if(user["usuario"]===usuario){
-                console.log("CONSOLE LOG VERIFICADO")
-                user["verify"] = true
-                break;
-            }
-            x++;
-            
-        }
-    }
-    console.log(users[x]["verify"])
-    console.log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
-}
+router.post("/pruebaFoto",async function(req:any,res:any){
+   /**  const storage = multer.diskStorage({
+        destination:(req:any,file:any,cb:any)=>{
+            cb(null,"./images")
+        },
+        filename:(req:any,file:any,cb:any)=>{
+            cb(null,file.originalname)
+        },
+    })
+    const uploadStorage = multer({storage:storage}) //ACTIVA EL METODO
+    uploadStorage.array(req.foto,1000)//manda a crear el file[0]*/
+
+    const resp2 = await _bucket.Upload(req,res)
+    const data2 = await resp2
+    console.log(data2)
+})
+
 //-----------------------------------------------------------------
 //RESERVAR AUTOS
 router.post("/rAutos",(req:any,res:any)=>{

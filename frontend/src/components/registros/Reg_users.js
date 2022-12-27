@@ -20,10 +20,51 @@ f. Confirmación de contraseña */
     const [nameC, setNameC] = useState(0);
     const [user, setUser] = useState(0);
     const [foto, setFoto] = useState(0);
+    const [image_b64, setImage_b64] = useState(0)
     const [email, setEmail] = useState(0);
     const [password, setPass] = useState(0);
     const [conf_pass, setConf_pass] = useState(0);
     
+
+    
+
+
+    const pruebaFoto=async()=>{
+        const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
+        setImage_b64(ib64_i)
+        console.log(image_b64)
+        let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:image_b64,password:password,verify:false}
+        const url = "http://localhost:8080/usuarios/pruebaFoto";
+        let config = {
+            method: "POST", //ELEMENTOS A ENVIAR
+            body: JSON.stringify(newUser),
+            headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            },
+        };
+        const res = await fetch(url, config);
+        const data_res = await res.json();
+        console.log(data_res);
+    }
+    const uploadImage=async()=>{
+        const ib64 = await convertBase64(foto)
+        console.log(ib64)
+    }
+    const convertBase64= (file)=>{
+        //SI NO APLICAS EL RESOLVE O EL REJECT EN ALGUNA PARTE EL PROGRMA TRUENA
+        return new Promise((resolve,reject)=>{
+            const fileReader = new FileReader()
+            fileReader.readAsDataURL(file)
+            fileReader.onload=()=>{
+                resolve(fileReader.result)
+            }
+            fileReader.onerror=(error)=>{
+                reject(error)
+            }
+        })
+    }
+
     const RegistrarU = async () => {
         let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:foto,password:password,verify:false}
         if(password!==conf_pass){
@@ -71,7 +112,7 @@ f. Confirmación de contraseña */
                         </label>
                         <label className="row mb-1">
                             Foto: 
-                            <input onChange={(e)=>{setFoto(e.target.value)}} className="text-dark"></input>
+                            <input type="file" onChange={(e)=>{setFoto(e.target.files[0])}} className="text-white"></input>
                         </label>
                         <label className="row mb-1">
                             Email: 
@@ -87,6 +128,7 @@ f. Confirmación de contraseña */
                         </label>
                     </form>
                     <button className="btn btn-dark btnEffect" onClick={()=>{RegistrarU()}}>Registrar</button>
+                    <button className="btn btn-dark btnEffect" onClick={()=>{pruebaFoto()}}>FOTO</button>
                 </div>
             </div>
             

@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const {check} = require('express-validator')
 const _cognito= require('../middleware/Cognito');
+const bucket = require('../middleware/Bucket')
 require('dotenv').config()
 const router = Router()
 
@@ -41,6 +42,9 @@ router.post("/addUsers",async function(req:any,res:any){
             const resp=await _cognito.signUpCognito(req,res);
             const data = await resp
             console.log(data)
+            //const resp2 = await bucket.Upload(req,res)
+            //const data2 = await resp2
+            //console.log(data2)
             console.log("DATAAAA")
             let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -91,7 +95,7 @@ router.post("/delUsers",async function(req:any,res:any){
             if(data=="SUCCESS"){
                 fs.unlinkSync(pathFile)
                 lUsers.splice(id,1)
-                console.log("remove usuario exitoso")  
+                console.log("remove usuario exitoso ")  
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
                 exito_pet=true
             } 

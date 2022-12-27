@@ -4,10 +4,11 @@ const morgan = require('morgan');
 const corse = require('cors');
 
 const _app = express();
+_app.use(express.json({limit: '50mb'}));
+_app.use(express.urlencoded({ limit: "30mb", extended: true }));
 _app.use(morgan('dev'));
-_app.use(express.json());
-_app.use(express.urlencoded({extended:true}));
 _app.use(corse());
+
 //ROUTES
 _app.get('/',function(req:any,res:any){
     res.json({nombre:"Brandon Oswaldo Yax Campos",carnet:201800534, mensaje:"Hola mundo"})

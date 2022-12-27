@@ -102,6 +102,7 @@ f. Confirmación de contraseña */
     const [nameC, setNameC] = useState(0);
     const [user, setUser] = useState(0);
     const [foto, setFoto] = useState(0);
+    const [image_b64, setImage_b64] = useState(0)
     const [email, setEmail] = useState(0);
     const [password, setPass] = useState(0);
     const [conf_pass, setConf_pass] = useState(0);
@@ -110,7 +111,9 @@ f. Confirmación de contraseña */
     const [tipo_usuario,setTipo_usuario] = useState("T")
 
     const RegistrarU = async () => {
-        let newUser ={nombre:nameC,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+        const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
+        setImage_b64(ib64_i)
+        let newUser ={nombre:nameC,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:image_b64,password:password,verify:false}
         if(password!==conf_pass){
             alert("Las contraseñas deben de ser iguales")
             return
@@ -133,6 +136,7 @@ f. Confirmación de contraseña */
             alert("Fallo al Registrar Usuario")
         }
     };
+    
     const DelUser = async () => {
         let newUser ={id:id_del}
         const url = "http://localhost:8080/admin/delUsers";
@@ -180,7 +184,19 @@ f. Confirmación de contraseña */
         setDatosTabla(DataT)
     };
 
-
+    const convertBase64= (file)=>{
+        //SI NO APLICAS EL RESOLVE O EL REJECT EN ALGUNA PARTE EL PROGRMA TRUENA
+        return new Promise((resolve,reject)=>{
+            const fileReader = new FileReader()
+            fileReader.readAsDataURL(file)
+            fileReader.onload=()=>{
+                resolve(fileReader.result)
+            }
+            fileReader.onerror=(error)=>{
+                reject(error)
+            }
+        })
+    }
     useEffect(() => {
        RdatosTabla()
     },[]);

@@ -142,7 +142,7 @@ e. Precio de vuelo*/
         const data_res = await res.json();
         console.log(data_res);
         if(data_res["accion_exitosa"]){
-            alert("Registro de Usuario Exitoso")
+            alert("Registro de Viajes Exitoso")
         }
     };
     const DelViaje = async () => {
@@ -211,7 +211,7 @@ e. Precio de vuelo*/
                             <input onChange={(e)=>{setPrecio(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
-                    <button className="btn btn-dark btnEffect mb-2" onClick={()=>{RegViaje()}}>Registrar</button>
+                    <button className="btn btn-dark btnEffect mb-3" onClick={()=>{RegViaje()}}>Registrar</button>
                     <div className="row">
                         <input onChange={(e)=>{setId_del(e.target.value)}} placeholder="INGRESE AQUI ID A ELIMINAR" className="text-dark mb-1"/>
                         <button className="col-2 btn btn-dark btnEffect" onClick={()=>{DelViaje()}}>Eliminar</button>  

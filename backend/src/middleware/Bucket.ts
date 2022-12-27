@@ -36,13 +36,14 @@ const Upload = async function (req: any, res: any,name:string) {
                 reject(err)
                 res.status(400).json({
                     status: false,
-                    accion_exitosa:true,
+                    accion_exitosa:false,
                     message: 'Error al Ingresar imagen',
                 });
             } else {
                 resolve(data)
                 res.status(200).json({
                     status: true,
+                    accion_exitosa:true,
                     message: 'Imagen Ingresada correctamente',
                 });
             }

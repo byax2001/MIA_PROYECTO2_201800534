@@ -27,12 +27,7 @@ router.post("/AoR",function(req:any,res:any){
     let Bdatos = JSON.parse(texto);
     let exito_pet = false;
     
-    try {
-        fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-    }
+    
  
     if (tipoRenta=="vuelo"){
         let rVuelos=Bdatos["renta_vuelos"]
@@ -47,7 +42,12 @@ router.post("/AoR",function(req:any,res:any){
                 rVuelos.splice(id,1)
                 console.log("remove Vuelos exitoso")  
                 //INGRESAR AL ARRAY DE PETICIONES ATENDIDAS
-                
+                try {
+                    fs.unlinkSync(pathFile)
+                    console.log("Archivo eliminado")
+                } catch(err) {
+                    console.error('Error al eliminar', err)
+                }
                 const petition:object ={usuario:user,tipoRenta:tipoRenta,AoR:AoR,fecha:fecha}  
                 Bdatos["RentasR"].push(petition)
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -66,11 +66,18 @@ router.post("/AoR",function(req:any,res:any){
             }else{
                 //YA QUE LOS ARRAY COMPARTEN PUNTERO SI ELIMINO ALGO DE UNA VARIABLE A LA QUE ASIGNE
                 //DICHO ARRAY TAMBIEN SE ELIMINARA EN EL ORIGINAL
+                user = rAutos[id]["usuario"]
                 rAutos.splice(id,1)
                 console.log("remove Autos exitoso")  
-                user = rAutos[id]["usuario"]
+                
                 const petition:object ={usuario:user,tipoRenta:tipoRenta,AoR:AoR,fecha:fecha}  
                 Bdatos["RentasR"].push(petition)
+                try {
+                    fs.unlinkSync(pathFile)
+                    console.log("Archivo eliminado")
+                } catch(err) {
+                    console.error('Error al eliminar', err)
+                }
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
                 exito_pet=true  
             }

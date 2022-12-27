@@ -13,6 +13,7 @@ const usuariosController = require('../controllers/usuarios.controllers.ts')
 const _cognito= require('../middleware/Cognito');
 const _bucket = require('../middleware/Bucket')
 const multer = require('multer')
+const sharp = require('sharp')
 
 router.get('/',(req:any,res:any)=>{
     res.json({holaaa: "wprld"})
@@ -94,7 +95,7 @@ router.post('/vLog',async function(req:any,res:any){
 
 //----------------------------------------------------------------
 router.post("/pruebaFoto",async function(req:any,res:any){
-    const storage = multer.diskStorage({
+    /*const storage = multer.diskStorage({
         destination:(req:any,file:any,cb:any)=>{
             cb(null,"./images")
         },
@@ -108,6 +109,14 @@ router.post("/pruebaFoto",async function(req:any,res:any){
     const resp2 = await _bucket.Upload(req,res)
     const data2 = await resp2
     console.log(data2)
+})
+
+router.post("/pfoto2",async function(req:any,res:any) {
+    const file = req.file 
+    const fileBuffer = await sharp(file.buffer)
+      .resize({ height: 1920, width: 1080, fit: "contain" })
+      .toBuffer()
+    
 })
 
 //-----------------------------------------------------------------

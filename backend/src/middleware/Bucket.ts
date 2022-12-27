@@ -1,5 +1,9 @@
+import { buffer } from "stream/consumers";
+
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3()
+const fs = require('fs')
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3')
 require("dotenv").config();
 
 
@@ -11,10 +15,13 @@ const client = new AWS.S3({
 
 const Upload = async function (req: any, res: any) {
     /// fil[0].ruta?
-    const image = req.body.foto;
+    let image = req.body.foto;
     //const buf = Buffer.from(image, "base64");
+    image = String(image).trim()
+    image =  image.replace("data:", "").replace(/^.+,/, "");
+    console.log(String(image))
     const buff = Buffer.from(image, "base64");
-
+    fs.writeFileSync("prueba.jpg",buff)
         //fs.createReadStream("./images/"+req.photo.originalname) 
     let params = {
         Key: "lprueb.jpg", //nombre del documento en el bucket
@@ -24,7 +31,7 @@ const Upload = async function (req: any, res: any) {
         ContentType: "image/jpg",
     };
     return new Promise(function (resolve, reject) {
-        client.putObjec(params, function (err: any, data: any) {
+        client.putObject(params, function (err: any, data: any) {
             if (err) {
                 reject(err)
                 res.status(400).json({
@@ -40,6 +47,19 @@ const Upload = async function (req: any, res: any) {
             }
         })
     })
+}
+
+
+export async function uploadfile(file:any){
+    const stream = fs.createReadStream(file.tempFilePath)
+    const uploadParams = {
+        Bucket: process.env.BUCKET_NAME,
+        Key: file.name,
+        Body: stream
+    }
+    const command = new PutObjectCommand(uploadParams)
+    return await client.send(command)
+
 }
 
 module.exports={Upload}

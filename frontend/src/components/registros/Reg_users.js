@@ -66,7 +66,10 @@ f. Confirmación de contraseña */
     }
 
     const RegistrarU = async () => {
-        let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:foto,password:password,verify:false}
+        const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
+        setImage_b64(ib64_i)
+        console.log(image_b64)
+        let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:image_b64,password:password,verify:false}
         if(password!==conf_pass){
             alert("Las contraseñas deben de ser iguales")
             return

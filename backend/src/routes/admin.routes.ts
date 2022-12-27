@@ -17,7 +17,7 @@ router.post("/addUsers",async function(req:any,res:any){
     const nombre = req.body.nombre
     const user = req.body.usuario
     const tipo_usuario = req.body.tipo_usuario
-    const foto = "safdsdf"
+    const foto = req.body.foto 
     const email = req.body.email
     const password = req.body.password
 
@@ -42,15 +42,21 @@ router.post("/addUsers",async function(req:any,res:any){
             const resp=await _cognito.signUpCognito(req,res);
             const data = await resp
             console.log(data)
-            //const resp2 = await bucket.Upload(req,res)
-            //const data2 = await resp2
-            //console.log(data2)
+            //SUBIR FOTO DE USUARIOS ==============================
+            const resp2 = await bucket.Upload(req,res,user)
+            const data2 = await resp2
+                    //probar en otra ocasion si se puede obtener el nombre del archivo y extension
+                    //para hacer mas variable el link resultante
+            const link_foto=`https://appweb-201800534-p2.s3.amazonaws.com/${user}.jpg`
+            console.log(data2)
             console.log("DATAAAA")
-            let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:foto,password:password,verify:false}
+            //======================================================
+            let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,
+                foto:link_foto,password:password,verify:false}
+                
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             Bdatos["usuarios"].push(newUser)
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-            console.log("AAAAAAAAAAAAAAAAAAa")
             //fs.unlinkSync(pathFile)
            
             exito_pet=true 

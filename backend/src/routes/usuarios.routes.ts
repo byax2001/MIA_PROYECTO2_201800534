@@ -55,7 +55,6 @@ router.post('/vLog',async function(req:any,res:any){
                         const data = await resp
                         const email_verified: boolean = data["idToken"]["payload"]["email_verified"]
                         console.log(email_verified)
-                        console.log("XDXDXDXD")
                         let x = 0
                         const users = Bdatos["usuarios"]
                         if (email_verified) {
@@ -109,14 +108,6 @@ router.post("/pruebaFoto",async function(req:any,res:any){
     const resp2 = await _bucket.Upload(req,res)
     const data2 = await resp2
     console.log(data2)
-})
-
-router.post("/pfoto2",async function(req:any,res:any) {
-    const file = req.file 
-    const fileBuffer = await sharp(file.buffer)
-      .resize({ height: 1920, width: 1080, fit: "contain" })
-      .toBuffer()
-    
 })
 
 //-----------------------------------------------------------------

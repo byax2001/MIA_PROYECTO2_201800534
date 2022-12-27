@@ -13,18 +13,18 @@ const client = new AWS.S3({
   },
 });
 
-const Upload = async function (req: any, res: any) {
+const Upload = async function (req: any, res: any,name:string) {
     /// fil[0].ruta?
     let image = req.body.foto;
     //const buf = Buffer.from(image, "base64");
     image = String(image).trim()
     image =  image.replace("data:", "").replace(/^.+,/, "");
+    //LIMPIAR LOS CARACTERES ANTERIORES EN EL STRING BASE64 O LA IMAGEN DARA ERRORES
     console.log(String(image))
     const buff = Buffer.from(image, "base64");
-    fs.writeFileSync("prueba.jpg",buff)
         //fs.createReadStream("./images/"+req.photo.originalname) 
     let params = {
-        Key: "lprueb.jpg", //nombre del documento en el bucket
+        Key: `${name}.jpg`, //nombre del documento en el bucket
         Body: buff, //contenido del archivo (base64 en el caso sea una imagen, dicho metodo se uso en el frontend como convertBase64())
         Bucket: process.env.BUCKET_NAME,
         ContentEncoding: "base64",

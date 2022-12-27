@@ -39,21 +39,17 @@ router.post("/addUsers",async function(req:any,res:any){
             //fs.unlinkSync(pathFile)
             //REGISTRO DE USUARIOS
             //singUp(req,res,Bdatos,pathFile,nombre,user,tipo_usuario,email,foto,password)
-            const resp=await _cognito.signUpCognito(req,res);
-            const data = await resp
-            console.log(data)
+            await _cognito.signUpCognito(req,res);
             //SUBIR FOTO DE USUARIOS ==============================
-            const resp2 = await bucket.Upload(req,res,user)
-            const data2 = await resp2
+            await bucket.Upload(req,res,user)
+        
                     //probar en otra ocasion si se puede obtener el nombre del archivo y extension
                     //para hacer mas variable el link resultante
             const link_foto=`https://appweb-201800534-p2.s3.amazonaws.com/${user}.jpg`
-            console.log(data2)
-            console.log("DATAAAA")
             //======================================================
             let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,
                 foto:link_foto,password:password,verify:false}
-                
+
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             Bdatos["usuarios"].push(newUser)
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -69,7 +65,7 @@ router.post("/addUsers",async function(req:any,res:any){
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4) ///si truena hay que reescribir la BD sin cambios
         console.error('Error al Registrar', error)
     }
-    res.json({"accion_exitosa":exito_pet})
+    return res.json({"accion_exitosa":exito_pet})
 })
 
 

@@ -20,7 +20,7 @@ const Upload = async function (req: any, res: any,name:string) {
     image = String(image).trim()
     image =  image.replace("data:", "").replace(/^.+,/, "");
     //LIMPIAR LOS CARACTERES ANTERIORES EN EL STRING BASE64 O LA IMAGEN DARA ERRORES
-    console.log(String(image))
+    //console.log(String(image))
     const buff = Buffer.from(image, "base64");
         //fs.createReadStream("./images/"+req.photo.originalname) 
     let params = {
@@ -36,6 +36,7 @@ const Upload = async function (req: any, res: any,name:string) {
                 reject(err)
                 res.status(400).json({
                     status: false,
+                    accion_exitosa:true,
                     message: 'Error al Ingresar imagen',
                 });
             } else {

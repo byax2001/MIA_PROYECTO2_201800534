@@ -85,7 +85,11 @@ f. Confirmación de contraseña */
         };
         const res = await fetch(url, config);
         const data_res = await res.json();
+        console.log("data ressssss")
         console.log(data_res);
+        //POR EL RETURN DEL AWAIT BUCKET IMAGES ME RETORNA UN OBJETO:
+        /*{ message:"Imagen Ingresada correctamente", status: true, accion_exitosa:true} */
+        //por lo que se toma este res y no el del puerto que se consulta que seria : {accion_exitosa:true} nomas
         if(data_res["accion_exitosa"]){
             alert("Registro de Usuario Exitoso")
         }else{

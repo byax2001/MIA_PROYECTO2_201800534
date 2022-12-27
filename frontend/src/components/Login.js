@@ -29,12 +29,13 @@ function Login (props){
         if(loginC){
             const tipo_user = data_res["tipo_usuario"]
             const usuarioBD=data_res["usuario"]
+            const foto = data_res["foto"]
             if(tipo_user=="A"){
-                navigate("/initA",{state:{user:usuarioBD,PageSol:"login"}})
+                navigate("/initA",{state:{user:usuarioBD,foto:foto,PageSol:"login"}})
             }else if (tipo_user=="R"){
-                navigate("/initR",{state:{user:usuarioBD,PageSol:"login"}})
+                navigate("/initR",{state:{user:usuarioBD,foto:foto,PageSol:"login"}})
             }else{
-                navigate("/initT",{state:{user:usuarioBD,PageSol:"login"}})
+                navigate("/initT",{state:{user:usuarioBD,foto:foto,PageSol:"login"}})
             }   
         } else{
             let error = "Contraseña o Usuario Incorrectos o Usuario no verificado"

@@ -121,7 +121,7 @@ function Inicio_recep (props){
     const [usuario,setUsuario]=useState("user")
     const [Id_pet,setId_pet]=useState(0)
     const [t_pet, setT_pet] = useState("")
-
+    const [foto,setFoto]=useState("https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg")
     
 
     const [dataVuelos,setDataVuelos] = useState([]);
@@ -214,13 +214,24 @@ function Inicio_recep (props){
     useEffect(() => {
         if (pLogin!=null){
             setUsuario(pLogin.user)
+            setFoto(pLogin.foto)
         }
         RdatosTabla()
     },[]);
     
     return(
         <React.Fragment>
-        <header align="center"><h1>Inicio Recepcionista:</h1></header>
+        <header align="center" className="mb-5">
+            <h1 className="d-flex justify-content-center">Inicio Recepcionista:</h1>
+            <div className="container col-1 mb-5" id="photo_Data">
+                <div className="row">
+                    <img src={foto} width="80px" height="100px"/> 
+                </div>
+                <div className="row">
+                    <h5>{usuario}</h5>
+                </div>
+            </div>
+        </header>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
         <div className="container">
             <div className="row">
@@ -261,10 +272,10 @@ function Inicio_recep (props){
                     </div>
                 </div>
             </div>
-            <div className="mb-2"></div>
+            <div className="mb-3"></div>
         </div>
         <div className="container">
-        <div className="row">
+    
                 <DataTable 
                 columns={colum_vuelos}
                 data={dataVuelos}
@@ -274,9 +285,9 @@ function Inicio_recep (props){
                 customStyles={customStyles}
                 fixedHeader
                 fixedHeaderScrollHeight="600px"/> 
-            </div>
+           
             <div className="mb-2"></div>
-            <div className="row">
+         
                 <DataTable 
                 columns={colum_autos}
                 data={dataAutos}
@@ -286,7 +297,6 @@ function Inicio_recep (props){
                 customStyles={customStyles}
                 fixedHeader
                 fixedHeaderScrollHeight="600px"/> 
-            </div>
         </div>
         </React.Fragment>
     );

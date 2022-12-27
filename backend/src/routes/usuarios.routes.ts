@@ -31,6 +31,7 @@ router.post('/vLog',async function(req:any,res:any){
     let Bdatos = JSON.parse(texto);
     let tipoUser:string = "null"
     let usuarioBD:string =""
+    let foto = "https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg"
     let login_correcto:boolean= false
     let verify:boolean=false
     console.log(`usuario: ${usuario}  contra: ${password} pathFile: ${pathFile}`)
@@ -46,6 +47,7 @@ router.post('/vLog',async function(req:any,res:any){
                         tipoUser = user['tipo_usuario']
                         usuarioBD = user['usuario']
                         verify = user["verify"]
+                        foto = user["foto"]
                         break;
                     } else {
                         //await singInUser(req,res,Bdatos["usuarios"],user["usuario"]);
@@ -74,6 +76,7 @@ router.post('/vLog',async function(req:any,res:any){
                             tipoUser=user['tipo_usuario']
                             usuarioBD = user['usuario']
                             verify = user["verify"]
+                            foto = user["foto"]
                             console.log("CONFIRMADODOODODODOD")
                             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',"\t")
                             
@@ -89,7 +92,7 @@ router.post('/vLog',async function(req:any,res:any){
     }catch(e){
         console.log(e)
     }
-    res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD,"verify":verify})
+    res.json({"tipo_usuario":tipoUser,"login_correcto":login_correcto,"usuario":usuarioBD,"verify":verify,"foto":foto})
 })
 
 //----------------------------------------------------------------

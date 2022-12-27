@@ -28,13 +28,13 @@
       "verify": true
     },
     {
-      "nombre": "bra",
-      "usuario": "bra1",
+      "nombre": "Brandon",
+      "usuario": "brandon",
       "tipo_usuario": "T",
       "email": "brandon14yax@gmail.com",
-      "foto": "https://appweb-201800534-p2.s3.amazonaws.com/bra1.jpg",
+      "foto": "https://appweb-201800534-p2.s3.amazonaws.com/brandon.jpg",
       "password": "41L35yax!",
-      "verify": false
+      "verify": true
     }
   ],
   "autos": [

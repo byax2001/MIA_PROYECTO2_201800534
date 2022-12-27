@@ -79,7 +79,7 @@ const colum_nameUser=[
 function Inicio_admin (props){
     const navigate=useNavigate()
     const pLogin = useLocation().state
-    const [lista,setLista]=useState(0)
+    const [foto,setFoto]=useState("https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg")
     const [datosTabla,setDatosTabla] = useState([])
                                         //lo que esta adentro de este parentesis es su valor incial
     const [usuario,setUsuario]=useState("user")
@@ -110,13 +110,24 @@ function Inicio_admin (props){
     useEffect(() => {
         if (pLogin!==null){
             setUsuario(pLogin.user)
+            setFoto(pLogin.foto)
         }
         RdatosTabla()
         //EL CORCHETE HACE QUE ESTE COMANDO SE EJECUTE UNA SOLA VEZ AL INICIO DEL PROGRAMA
     },[]);
     return(
         <React.Fragment>
-        <header align="center" className="mb-3"><h1>Inicio Admin: {usuario}</h1></header>
+        <header align="center" className="mb-5">
+            <h1 className="d-flex justify-content-center">Inicio Admin:</h1>
+            <div className="container col-1 mb-5" id="photo_Data">
+                <div className="row">
+                    <img src={foto} width="80px" height="100px"/> 
+                </div>
+                <div className="row">
+                    <h5>{usuario}</h5>
+                </div>
+            </div>
+        </header>
         <Link id="BtnHome" to="/" className="btn btn-dark btnEffect">Home</Link>
         <div className="content">
             <div className="row mb-2">

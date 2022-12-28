@@ -133,6 +133,7 @@ router.post("/rAutos",(req:any,res:any)=>{
         console.log("Archivo eliminado")
     } catch(err) {
         console.error('Error al eliminar', err)
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
     }
    
       

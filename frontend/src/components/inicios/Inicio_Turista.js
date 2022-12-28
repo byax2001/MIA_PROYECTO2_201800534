@@ -113,10 +113,11 @@ function Inicio_turista (props){
     };
     //SE EJECUTA AL INICIO DE INICIAR LA PAGINA
     useEffect(() => {
-        if (pLogin!=null){
+        if (pLogin!=null && pLogin.foto != undefined){
             setUsuario(pLogin.user)
             setFoto(pLogin.foto)
             console.log(`FOTO DE USUARIO : ${Login.foto}`)
+            
         }
         RdatosTabla()
     },[]);

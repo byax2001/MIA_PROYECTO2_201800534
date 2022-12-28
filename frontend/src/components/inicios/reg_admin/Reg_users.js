@@ -111,8 +111,10 @@ f. Confirmación de contraseña */
     const [tipo_usuario,setTipo_usuario] = useState("T")
 
     const RegistrarU = async () => {
-        const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
-        setImage_b64(ib64_i)
+        //const ib64_i=///CONVERTIR IMAGEN A BASE 64
+        setImage_b64(await convertBase64(foto))
+        console.log("AAAAAAAAAAAAAAAaa")
+        console.log(image_b64)
         let newUser ={nombre:nameC,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:image_b64,password:password,verify:false}
         if(password!==conf_pass){
             alert("Las contraseñas deben de ser iguales")
@@ -129,6 +131,7 @@ f. Confirmación de contraseña */
         };
         const res = await fetch(url, config);
         const data_res = await res.json();
+        console.log("data ressssss")
         console.log(data_res);
         if(data_res["accion_exitosa"]){
             alert("Registro de Usuario Exitoso")
@@ -232,7 +235,7 @@ f. Confirmación de contraseña */
                         </label>
                         <label className="row mb-1">
                             Foto: 
-                            <input onChange={(e)=>{setFoto(e.target.value)}} className="text-dark"></input>
+                            <input type="file" onChange={(e)=>{setFoto(e.target.files[0])}} className="text-white"></input>
                         </label>
                         <label className="row mb-1">
                             Email: 

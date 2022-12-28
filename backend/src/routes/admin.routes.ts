@@ -123,11 +123,6 @@ router.post("/addVuelos",function(req:any,res:any){
     
     try {
         fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-    }
-    try {
         let newViaje:object ={nombre_agencia:nameAgen,ciudad_origen:ciudad_origen,ciudad_destino:ciudad_destino,dias_vuelo:dias_vuelo,precio:precio}
         Bdatos["viajes"].push(newViaje)
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -152,6 +147,7 @@ router.post("/delVuelos",function(req:any,res:any){
         console.log("Archivo eliminado")
     } catch(err) {
         console.error('Error al eliminar', err)
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
     }
 
     let lviajes=Bdatos["viajes"]
@@ -189,6 +185,7 @@ router.post("/addAutos",function(req:any,res:any){
         console.log("Archivo eliminado")
     } catch(err) {
         console.error('Error al eliminar', err)
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
     }
     try {
         let newAuto:object ={nombre_agencia:nameAgen,marca:marca,placa:placa,modelo:modelo,precio:precio,ciudadH:ciudadH}
@@ -216,6 +213,7 @@ router.post("/delAutos",function(req:any,res:any){
         console.log("Archivo eliminado")
     } catch(err) {
         console.error('Error al eliminar', err)
+        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
     }
 
     let lAutos=Bdatos["autos"]

@@ -30,8 +30,8 @@ f. Confirmación de contraseña */
 
 
     const pruebaFoto=async()=>{
-        const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
-        setImage_b64(ib64_i)
+        //const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
+        setImage_b64(await convertBase64(foto))
         console.log(image_b64)
         let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:image_b64,password:password,verify:false}
         const url = "http://localhost:8080/usuarios/pruebaFoto";
@@ -66,9 +66,9 @@ f. Confirmación de contraseña */
     }
 
     const RegistrarU = async () => {
-        const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
-        setImage_b64(ib64_i)
-        console.log(image_b64)
+        //const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
+        setImage_b64(await convertBase64(foto))
+       
         let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:image_b64,password:password,verify:false}
         if(password!==conf_pass){
             alert("Las contraseñas deben de ser iguales")
@@ -127,11 +127,11 @@ f. Confirmación de contraseña */
                         </label>
                         <label className="row mb-1">
                             Contraseña:
-                            <input onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
+                            <input type="password" onChange={(e)=>{setPass(e.target.value)}} className="text-dark"></input>
                         </label>
                         <label className="row mb-4">
                             Confirmar Contraseña
-                            <input onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
+                            <input type="password" onChange={(e)=>{setConf_pass(e.target.value)}} className="text-dark"></input>
                         </label>
                     </form>
                     <button className="btn btn-dark btnEffect" onClick={()=>{RegistrarU()}}>Registrar</button>

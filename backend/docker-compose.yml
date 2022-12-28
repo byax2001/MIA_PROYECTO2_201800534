@@ -1,0 +1,15 @@
+version: '3'
+services:
+  backend:
+    image: 'moonbyte/backend-mia'
+    container_name: 'backend-NodeJS'
+    environment:
+      USUARIO: 'admin'
+      PASSWORD: 'admin'
+      EMAIL: 'email-p@gmail.com'
+      PORT: '3000'
+    ports:
+      - '3000:3000'
+    restart: always
+
+#docker compose up -d

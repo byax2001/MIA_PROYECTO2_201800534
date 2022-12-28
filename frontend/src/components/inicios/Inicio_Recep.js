@@ -121,7 +121,7 @@ function Inicio_recep (props){
     const [usuario,setUsuario]=useState("user")
     const [Id_pet,setId_pet]=useState(0)
     const [t_pet, setT_pet] = useState("")
-    const [foto,setFoto]=useState("https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg")
+    const [foto,setFoto]=useState("https://appweb-201800534-p2.s3.amazonaws.com/recep.jpg")
     
 
     const [dataVuelos,setDataVuelos] = useState([]);

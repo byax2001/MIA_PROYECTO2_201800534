@@ -33,7 +33,9 @@ Crear un par de llaves y guardar el archivo que se descargara:
 ![image](https://user-images.githubusercontent.com/63923585/209847906-6cb0e839-2175-4884-8888-ee3bd8c3723f.png)
 
 Seguir con la configuración:
+
 ![image](https://user-images.githubusercontent.com/63923585/209847915-486035cb-feb3-4ca3-9d67-cf94da691fe7.png)
+
 Configurar un tamaño menor a 30 GIB (en este caso 20) para que siga siendo gratuito el servicio y luego lanzar instancia
 ![image](https://user-images.githubusercontent.com/63923585/209847926-a11a2de3-ce45-4b0f-a6ef-ad2f4ed818fc.png)
 Esperar a que cargue para poder usar la instancia.

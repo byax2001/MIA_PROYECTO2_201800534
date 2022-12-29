@@ -49,11 +49,12 @@ router.post("/addUsers",async function(req:any,res:any){
             let newUser:object ={nombre:nombre,usuario:user,tipo_usuario:tipo_usuario,email:email,
                 foto:link_foto,password:password,verify:false}
 
-            fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
+            //fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             Bdatos["usuarios"].push(newUser)
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
            
             exito_pet=true 
+            return;
         }else{
             console.log("Usuario o Email ya registrado")
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -88,15 +89,16 @@ router.post("/delUsers",async function(req:any,res:any){
             const amazon_pass = Bdatos["usuarios"][id]["password"]
             
             const resp= await _cognito.deleteUserCognitoA(req,res,amazon_user,amazon_pass);
-            const data = await resp
-            console.log("result of delete")
-            console.log(typeof data) //ES UN STRING
-            console.log(data)
-            if(data=="SUCCESS"){
+            //const data = await resp
+            //console.log("result of delete")
+            //console.log(typeof data) //ES UN STRING
+            //console.log(data)
+            if(resp=="SUCCESS"){
                 lUsers.splice(id,1)
                 console.log("remove usuario exitoso ")  
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
                 exito_pet=true
+                return;
             } 
         }
     }

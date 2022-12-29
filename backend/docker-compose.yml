@@ -1,15 +1,15 @@
 version: '3'
 services:
   backend:
-    image: 'moonbyte/backend-mia'
+    image: 'moonbyte/backend-miap2'
     container_name: 'backend-NodeJS'
     environment:
       USUARIO: 'admin'
       PASSWORD: 'admin'
-      EMAIL: 'email-p@gmail.com'
-      PORT: '3000'
+      EMAIL: 'brandon14yax@gmail.com'
+      PORT: '8080'
     ports:
-      - '3000:3000'
+      - '3000:8080'
     restart: always
 
 #docker compose up -d

@@ -9,6 +9,32 @@ const cognito = {
 }
 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(cognito);
+
+const signUpAdminCognito = async(req:any, res:any) => {
+    const usuario =req.body.usuario;
+    const password = req.body.password
+    const email = req.body.email;
+    //const { usuario, password, email } = req.body;
+    // aqui pueden encriptar la contrasenia con bcrypt o algo similar
+    const attributeList:any = [];
+    // attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({'': username}));
+    attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute({'Name': 'email', 'Value': email}));
+    const username=usuario;
+    console.log(`usuario: ${username}  password: ${password}   attributeList: ${attributeList}`)
+    return new Promise(function(resolve,reject){
+        userPool.signUp(username, password, attributeList, null, async(err:any, data:any)=>{
+            if(err){
+                console.log(err);
+                //res.status(500).send
+            }else{
+                console.log(resolve(data))
+                // res.status(200).send(data);
+            }
+        });
+    })
+}
+
+
 //REGISTRAR USUARIOS
 const signUpCognito = async(req:any, res:any) => {
     const usuario =req.body.usuario;
@@ -32,16 +58,12 @@ const signUpCognito = async(req:any, res:any) => {
             }
         });
     })
-   
-
 }
 
 
 const deleteUserCognitoA = async (req:any, res:any,usuario:string,pass:string) => {
     const username = usuario
     const password = pass
-
-    const hash = _crypto.createHash('sha256').update(password).digest('hex') + "D**";
 
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
         Username: username,
@@ -114,5 +136,6 @@ const signInCognito = async(req:any, res:any) => {
 module.exports = {
     signUpCognito,
     signInCognito,
-    deleteUserCognitoA
+    deleteUserCognitoA,
+    signUpAdminCognito
 }

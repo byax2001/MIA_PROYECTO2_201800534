@@ -30,10 +30,10 @@ const customStyles = {
         //style fila 1
         //stripedstyle fila2
         style: {
-            backgroundColor:"#a3a3a3",
+            backgroundColor:"#9b9b9b",
         },
         stripedStyle: {
-			backgroundColor: "#bbbbbb",
+			backgroundColor: "#646464",
 		},
     },
     headCells: {

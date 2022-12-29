@@ -29,10 +29,10 @@ const customStyles = {
         //style fila 1
         //stripedstyle fila2
         style: {
-            backgroundColor:"#a3a3a3",
+            backgroundColor:"#9b9b9b",
         },
         stripedStyle: {
-			backgroundColor: "#bbbbbb",
+			backgroundColor: "#646464",
 		},
     },
     headCells: {
@@ -111,10 +111,16 @@ f. Confirmación de contraseña */
     const [tipo_usuario,setTipo_usuario] = useState("T")
 
     const RegistrarU = async () => {
-        //const ib64_i=///CONVERTIR IMAGEN A BASE 64
-        setImage_b64(await convertBase64(foto))
-        console.log("AAAAAAAAAAAAAAAaa")
+        const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
+        const foto1 = await ib64_i
+        setImage_b64(foto1)
+        console.log("Imagen renderizada")
         console.log(image_b64)
+        if(ib64_i==0 || image_b64==0 || image_b64==undefined){
+            alert("Problemas con el renderizado de la Imagen, por favor intente de Nuevo")
+            return
+        }
+
         let newUser ={nombre:nameC,usuario:user,tipo_usuario:tipo_usuario,email:email,foto:image_b64,password:password,verify:false}
         if(password!==conf_pass){
             alert("Las contraseñas deben de ser iguales")

@@ -49,6 +49,31 @@ Eliminar todas
 ![image](https://user-images.githubusercontent.com/63923585/209847958-fb8ceb15-1d98-4ce7-af5e-15e6c4a5126f.png)
 Agregar nueva regla y guardar reglas.
 ![image](https://user-images.githubusercontent.com/63923585/209847965-70f10097-981a-4bc9-b186-9769707eab26.png)
+## Conectar EC2 con Termius
+Presionar el boton add y luego en new Host
+![image](https://user-images.githubusercontent.com/63923585/209896342-b85813a7-51a1-4344-bd86-92143e9081c7.png)
+Seleccionar la instancia deseada (en este caso backend)
+![image](https://user-images.githubusercontent.com/63923585/209896346-5333f19c-aac9-4d26-af41-dbc9c68dd169.png)
+ 
+ Presionar en el boton conectar
+
+![image](https://user-images.githubusercontent.com/63923585/209896353-3cf59e7d-7873-4bfe-94bc-e9d48bd81276.png)
+ Copiar la dirección publica  y pegarla en el apartado Address ademas de colocarle un nombre a la instancia en Termius, asi como un nombre de usuario simple (en este caso ubuntu) sin necesidad de contraseña
+![image](https://user-images.githubusercontent.com/63923585/209896378-c5bd83b7-ab62-45ca-8cd8-bd1bb2bfde25.png)
+Presionar en el boton set Key y buscar el archivo key que se genero al crear la instacia, posteriormente presionar en el boton new .
+![image](https://user-images.githubusercontent.com/63923585/209896375-3fa3f527-b38b-4d3e-b641-910cc22dde15.png)
+Arrastrar el archivo key a este apartado.
+![image](https://user-images.githubusercontent.com/63923585/209896398-ac49545b-a027-4688-89a4-de2517a1b037.png)
+Presionar en save
+![image](https://user-images.githubusercontent.com/63923585/209896406-dc3cef95-94e2-425a-852b-35179501d445.png)
+Presionamos el boton de la flecha en la esquina superior derecha 
+![image](https://user-images.githubusercontent.com/63923585/209896428-89861c78-e111-445c-ae2b-32c37dc0c6d2.png)
+Al simbolo generado en el inicio con el nombre indicado dar doble clik posteriormente aparecera esto 
+![image](https://user-images.githubusercontent.com/63923585/209896439-cc2e5906-9748-4ada-bae6-36be193c3b0a.png)
+Darle click en add y continue, luego de la conexión aparecera la consola de la maquina virtual a la cual sera posible actualizar las librerias y correr programas como contenedores de docker
+![image](https://user-images.githubusercontent.com/63923585/209896446-597b7cc8-4a4b-483d-ad6b-6af736906931.png)
+
+
 ## Cognito
 Crear grupo de Usuarios:  
 ![image](https://user-images.githubusercontent.com/63923585/209850212-f067dd5b-28df-4314-b41d-f17ac0be7516.png)

@@ -28,8 +28,8 @@ CMD [ "npm","start" ]
 ### password:
 ###sudo docker tag brandon/backend-mia moonbyte/docker-repo:brandon/backend-mia
 ###sudo docker push moonbyte/docker-repo:brandon/backend-miap2
-
-###docker login -u moonbyte -p 41L35yax! docker.io
+###Sustituir password por la contraseña del usuario
+###docker login -u moonbyte -p PASSWORD docker.io
 
 ### sudo docker push moonbyte/backend-miap2
                     ##debe de ser con el nickname del dockerhub/ nombre de la imagen ya echa con build

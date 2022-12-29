@@ -42,12 +42,6 @@ router.post("/AoR",function(req:any,res:any){
                 rVuelos.splice(id,1)
                 console.log("remove Vuelos exitoso")  
                 //INGRESAR AL ARRAY DE PETICIONES ATENDIDAS
-                try {
-                    fs.unlinkSync(pathFile)
-                    console.log("Archivo eliminado")
-                } catch(err) {
-                    console.error('Error al eliminar', err)
-                }
                 const petition:object ={usuario:user,tipoRenta:tipoRenta,AoR:AoR,fecha:fecha}  
                 Bdatos["RentasR"].push(petition)
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -72,12 +66,6 @@ router.post("/AoR",function(req:any,res:any){
                 
                 const petition:object ={usuario:user,tipoRenta:tipoRenta,AoR:AoR,fecha:fecha}  
                 Bdatos["RentasR"].push(petition)
-                try {
-                    fs.unlinkSync(pathFile)
-                    console.log("Archivo eliminado")
-                } catch(err) {
-                    console.error('Error al eliminar', err)
-                }
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
                 exito_pet=true  
             }

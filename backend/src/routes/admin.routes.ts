@@ -36,7 +36,6 @@ router.post("/addUsers",async function(req:any,res:any){
         })
         if (existe===false){
              //ELIMINACION DE LA BASE DE DATOS ANTERIOR
-            //fs.unlinkSync(pathFile)
             //REGISTRO DE USUARIOS
             //singUp(req,res,Bdatos,pathFile,nombre,user,tipo_usuario,email,foto,password)
             await _cognito.signUpCognito(req,res);
@@ -53,7 +52,6 @@ router.post("/addUsers",async function(req:any,res:any){
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
             Bdatos["usuarios"].push(newUser)
             fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-            //fs.unlinkSync(pathFile)
            
             exito_pet=true 
         }else{
@@ -95,7 +93,6 @@ router.post("/delUsers",async function(req:any,res:any){
             console.log(typeof data) //ES UN STRING
             console.log(data)
             if(data=="SUCCESS"){
-                fs.unlinkSync(pathFile)
                 lUsers.splice(id,1)
                 console.log("remove usuario exitoso ")  
                 fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -122,7 +119,6 @@ router.post("/addVuelos",function(req:any,res:any){
     let exito_pet = false;
     
     try {
-        fs.unlinkSync(pathFile)
         let newViaje:object ={nombre_agencia:nameAgen,ciudad_origen:ciudad_origen,ciudad_destino:ciudad_destino,dias_vuelo:dias_vuelo,precio:precio}
         Bdatos["viajes"].push(newViaje)
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -141,14 +137,6 @@ router.post("/delVuelos",function(req:any,res:any){
     const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
     let Bdatos = JSON.parse(texto);
     let exito_pet = false;
-    
-    try {
-        fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-    }
 
     let lviajes=Bdatos["viajes"]
     if(lviajes.length!=0){
@@ -181,13 +169,6 @@ router.post("/addAutos",function(req:any,res:any){
     let exito_pet = false;
     
     try {
-        fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-    }
-    try {
         let newAuto:object ={nombre_agencia:nameAgen,marca:marca,placa:placa,modelo:modelo,precio:precio,ciudadH:ciudadH}
         Bdatos["autos"].push(newAuto)
         fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
@@ -208,13 +189,6 @@ router.post("/delAutos",function(req:any,res:any){
     let Bdatos = JSON.parse(texto);
     let exito_pet = false;
     
-    try {
-        fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-    }
 
     let lAutos=Bdatos["autos"]
     if(lAutos.length!=0){

@@ -128,13 +128,6 @@ router.post("/rAutos",(req:any,res:any)=>{
     console.log(`usuario:${user} nameAgen:${nameAgen} marca:${marca} modelo:${modelo} precio: ${precio} estado: ${estado} texto:${texto}`)
     let Bdatos = JSON.parse(texto);
     let exito_pet = false;
-    try {
-        fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-        fs.writeFileSync(pathFile,JSON.stringify(Bdatos),'utf-8',4)
-    }
    
       
     try{
@@ -166,12 +159,6 @@ router.post("/rVuelos",(req:any,res:any)=>{
     const texto:string = String(fs.readFileSync(pathFile,'utf-8'))
     let Bdatos = JSON.parse(texto);
     let exito_pet = false;
-    try {
-        fs.unlinkSync(pathFile)
-        console.log("Archivo eliminado")
-    } catch(err) {
-        console.error('Error al eliminar', err)
-    }
       
     try{
         let newPetiton:object={usuario:user,nombre_agencia:nombre_agencia,ciudad_origen:ciudad_origen,ciudad_destino:ciudad_destino,dias_vuelo:dias_vuelo,precio:precio,estado:estado}

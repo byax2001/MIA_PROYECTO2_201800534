@@ -1,1 +1,51 @@
-{"usuarios":[{"nombre":"admin","usuario":"admin","tipo_usuario":"A","foto":"https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg","email":"admin12_a@gmail.com","password":"admin","verify":true},{"nombre":"brandon","usuario":"brandon","tipo_usuario":"T","email":"brandon14yax@gmail.com","foto":"https://appweb-201800534-p2.s3.amazonaws.com/brandon.jpg","password":"41L35yax!","verify":true}],"autos":[{"nombre_agencia":"toyota","marca":"sdf","placa":"554MX","modelo":"2006","precio":"4006","ciudadH":"guatemala"}],"viajes":[{"nombre_agencia":"BAM","ciudad_origen":"guatemala","ciudad_destino":"mexico df","dias_vuelo":"12","precio":"351"}],"renta_vuelos":[],"renta_autos":[],"RentasR":[]}
+{
+  "usuarios": [
+    {
+      "nombre": "admin",
+      "usuario": "admin",
+      "tipo_usuario": "A",
+      "foto": "https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg",
+      "email": "admin12_a@gmail.com",
+      "password": "admin",
+      "verify": true
+    },
+    {
+      "nombre": "brandon",
+      "usuario": "brandon",
+      "tipo_usuario": "T",
+      "email": "brandon14yax@gmail.com",
+      "foto": "https://appweb-201800534-p2.s3.amazonaws.com/brandon.jpg",
+      "password": "41L35yax!",
+      "verify": true
+    }
+  ],
+  "autos": [
+    {
+      "nombre_agencia": "toyota",
+      "marca": "sdf",
+      "placa": "554MX",
+      "modelo": "2006",
+      "precio": "4006",
+      "ciudadH": "guatemala"
+    }
+  ],
+  "viajes": [
+    {
+      "nombre_agencia": "BAM",
+      "ciudad_origen": "guatemala",
+      "ciudad_destino": "mexico df",
+      "dias_vuelo": "12",
+      "precio": "351"
+    },
+    {
+      "nombre_agencia": "BI",
+      "ciudad_origen": "San Lorenzo",
+      "ciudad_destino": "San Jose",
+      "dias_vuelo": "13",
+      "precio": "6512"
+    }
+  ],
+  "renta_vuelos": [],
+  "renta_autos": [],
+  "RentasR": []
+}

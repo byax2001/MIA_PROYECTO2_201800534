@@ -105,7 +105,7 @@ e. Precio*/
 
 
     const Rentar = async () => {
-        const url = "http://localhost:8080/usuarios/rAutos";
+        const url = `${process.env.API_CONSUME}/usuarios/rAutos`;
         let renta={usuario:user,nameAgen:nameAgen,marca:marca,modelo:modelo,precio:precio}
         let config = {
         method: "POST", //ELEMENTOS A ENVIAR
@@ -123,7 +123,7 @@ e. Precio*/
         }
     };
     const RdatosTabla = async () => {
-        const url = "http://localhost:8080/usuarios/getAutos";
+        const url = `${process.env.API_CONSUME}/usuarios/getAutos`;
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {

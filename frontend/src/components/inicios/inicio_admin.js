@@ -88,7 +88,7 @@ function Inicio_admin (props){
     const [dataVuelos,setDatoVuelos] = useState([]);
     
     const RdatosTabla = async () => {
-        const url = "http://localhost:8080/usuarios/getHistorial";
+        const url = `${process.env.API_CONSUME}/usuarios/getHistorial`;
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {

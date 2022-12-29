@@ -129,7 +129,7 @@ function Inicio_recep (props){
     //SE EJECUTA AL INICIO DE INICIAR LA PAGINA
     
     const RdatosTabla = async () => {
-        const url = "http://localhost:8080/usuarios/Pr_vuelos";
+        const url = `${process.env.API_CONSUME}/usuarios/Pr_vuelos`;
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {
@@ -149,7 +149,7 @@ function Inicio_recep (props){
         setDataVuelos(DataT)
 
         //URL 2 
-        const url2 = "http://localhost:8080/usuarios/Pr_autos";
+        const url2 = `${process.env.API_CONSUME}/usuarios/Pr_autos`;
         const res2 = await fetch(url2, config);
         const data_res2 = await res2.json();
         console.log(data_res2);
@@ -164,7 +164,7 @@ function Inicio_recep (props){
     };
     //ACEPTAR PETICION
     const A_peticion=async()=>{
-        const url = "http://localhost:8080/recep/AoR";
+        const url = `${process.env.API_CONSUME}/recep/AoR`;
         if(isNaN(Id_pet)|| t_pet==""){//si es true id_pet es un string que no se puede pasar a int
             alert("ID incorrecto o no se ha seleccionado el tipo de peticion que es" )
             return
@@ -188,7 +188,7 @@ function Inicio_recep (props){
     }
     //RECHAZAR PETICION
     const R_peticion=async()=>{
-        const url = "http://localhost:8080/recep/AoR";
+        const url = `${process.env.API_CONSUME}/recep/AoR`;
         if(isNaN(Id_pet) || t_pet==""){//si es true id_pet es un string que no se puede pasar a int
             alert("ID incorrecto o no se ha selecciondo tipo de peticion")
             return

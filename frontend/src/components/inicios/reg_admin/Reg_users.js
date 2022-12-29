@@ -126,7 +126,7 @@ f. Confirmación de contraseña */
             alert("Las contraseñas deben de ser iguales")
             return
         }
-        const url = "http://localhost:8080/admin/addUsers";
+        const url = `${process.env.API_CONSUME}/admin/addUsers`;
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
             body: JSON.stringify(newUser),
@@ -148,7 +148,7 @@ f. Confirmación de contraseña */
     
     const DelUser = async () => {
         let newUser ={id:id_del}
-        const url = "http://localhost:8080/admin/delUsers";
+        const url = `${process.env.API_CONSUME}/admin/delUsers`;
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
             body: JSON.stringify(newUser),
@@ -173,7 +173,7 @@ f. Confirmación de contraseña */
     
 
     const RdatosTabla = async () => {
-        const url = "http://localhost:8080/usuarios/getUsers";
+        const url = `${process.env.API_CONSUME}/usuarios/getUsers`;
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {

@@ -92,7 +92,7 @@ function Inicio_turista (props){
     const [datosTabla,setDatosTabla] = useState([])
     const [foto,setFoto]=useState("https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg")
     const RdatosTabla = async () => {
-        const url = `${process.env.API_CONSUME}/usuarios/getViajes`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/usuarios/getViajes`;
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {

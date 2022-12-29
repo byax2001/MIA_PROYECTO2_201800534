@@ -34,7 +34,7 @@ f. Confirmación de contraseña */
         setImage_b64(await convertBase64(foto))
         console.log(image_b64)
         let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:image_b64,password:password,verify:false}
-        const url = `${process.env.API_CONSUME}/usuarios/pruebaFoto`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/usuarios/pruebaFoto`;
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
             body: JSON.stringify(newUser),
@@ -74,7 +74,7 @@ f. Confirmación de contraseña */
             alert("Las contraseñas deben de ser iguales")
             return
         }
-        const url = `${process.env.API_CONSUME}/admin/addUsers`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/admin/addUsers`;
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
             body: JSON.stringify(newUser),

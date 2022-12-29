@@ -12,8 +12,8 @@ function Login (props){
     //-------------------------------------------
 
     const LogM=async(user,password)=>{
-        
-        const url="http://localhost:8080/usuarios/vLog"
+        console.log(`${process.env.REACT_APP_API_CONSUME}/usuarios/vLog`)
+        const url=`${process.env.REACT_APP_API_CONSUME}/usuarios/vLog`
          let config={
             method:'POST', 
             body:JSON.stringify({usuario:user,password:password}),      //ELEMENTOS A ENVIAR

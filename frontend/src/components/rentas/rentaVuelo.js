@@ -105,7 +105,7 @@ e. Precio de vuelo*/
 
 
     const Rentar = async () => {
-        const url = `${process.env.API_CONSUME}/usuarios/rVuelos`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/usuarios/rVuelos`;
         let renta={usuario:user,nameAgen:nameAgen,ciudad_origen:cityOrigen,ciudad_destino:cityDestino,dias_vuelo:diasvuelo,precio:precio}
         let config = {
         method: "POST", //ELEMENTOS A ENVIAR
@@ -123,7 +123,7 @@ e. Precio de vuelo*/
         }
     };
     const RdatosTabla = async () => {
-        const url = `${process.env.API_CONSUME}/usuarios/getViajes`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/usuarios/getViajes`;
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {

@@ -107,7 +107,7 @@ f. Ciudad en la que se encuentra el vehículo*/
   
 
     const RdatosTabla = async () => {
-        const url = `${process.env.API_CONSUME}/usuarios/getAutos`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/usuarios/getAutos`;
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {
@@ -129,7 +129,7 @@ f. Ciudad en la que se encuentra el vehículo*/
     const RegAuto = async () => {
         let newUser ={nameAgen:nameAgen,marca:marca,placa:placa,modelo:modelo,precio:precio,ciudadH:ciudad}
     
-        const url = `${process.env.API_CONSUME}/admin/addAutos`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/admin/addAutos`;
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
             body: JSON.stringify(newUser),
@@ -149,7 +149,7 @@ f. Ciudad en la que se encuentra el vehículo*/
     };
     const DelAuto = async () => {
         let AutoId ={id:id_del}
-        const url = `${process.env.API_CONSUME}/admin/delAutos`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/admin/delAutos`;
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
             body: JSON.stringify(AutoId),

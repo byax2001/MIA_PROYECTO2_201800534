@@ -102,7 +102,7 @@ e. Precio de vuelo*/
     
 
     const RdatosTabla = async () => {
-        const url = `${process.env.API_CONSUME}/usuarios/getViajes`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/usuarios/getViajes`;
         let config = {
             method: "GET", //ELEMENTOS A ENVIAR
             headers: {
@@ -129,7 +129,7 @@ e. Precio de vuelo*/
     const RegViaje = async () => {
         let newUser ={nameAgen:nameAgen,ciudad_origen:cityOrigen,ciudad_destino:cityDestino,dias_vuelo:diasvuelo,precio:precio}
     
-        const url = `${process.env.API_CONSUME}/admin/addVuelos`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/admin/addVuelos`;
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
             body: JSON.stringify(newUser),
@@ -147,7 +147,7 @@ e. Precio de vuelo*/
     };
     const DelViaje = async () => {
         let AutoId ={id:id_del}
-        const url = `${process.env.API_CONSUME}/admin/delVuelos`;
+        const url = `${process.env.REACT_APP_API_CONSUME}/admin/delVuelos`;
         let config = {
             method: "POST", //ELEMENTOS A ENVIAR
             body: JSON.stringify(AutoId),

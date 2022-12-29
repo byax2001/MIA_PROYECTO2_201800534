@@ -62,15 +62,25 @@ Seleccionar la instancia deseada (en este caso backend)
 ![image](https://user-images.githubusercontent.com/63923585/209896378-c5bd83b7-ab62-45ca-8cd8-bd1bb2bfde25.png)
 Presionar en el boton set Key y buscar el archivo key que se genero al crear la instacia, posteriormente presionar en el boton new .
 ![image](https://user-images.githubusercontent.com/63923585/209896375-3fa3f527-b38b-4d3e-b641-910cc22dde15.png)
+
 Arrastrar el archivo key a este apartado.
+
 ![image](https://user-images.githubusercontent.com/63923585/209896398-ac49545b-a027-4688-89a4-de2517a1b037.png)
-Presionar en save
+
+Presionar en Save.
+
 ![image](https://user-images.githubusercontent.com/63923585/209896406-dc3cef95-94e2-425a-852b-35179501d445.png)
+
 Presionamos el boton de la flecha en la esquina superior derecha 
+
 ![image](https://user-images.githubusercontent.com/63923585/209896428-89861c78-e111-445c-ae2b-32c37dc0c6d2.png)
-Al simbolo generado en el inicio con el nombre indicado dar doble clik posteriormente aparecera esto 
+
+Al simbolo generado en el inicio con el nombre indicado dar doble clik posteriormente aparecera esto:
+
 ![image](https://user-images.githubusercontent.com/63923585/209896439-cc2e5906-9748-4ada-bae6-36be193c3b0a.png)
-Darle click en add y continue, luego de la conexión aparecera la consola de la maquina virtual a la cual sera posible actualizar las librerias y correr programas como contenedores de docker
+
+Darle click en add y continue, luego de la conexión aparecera la consola de la maquina virtual a la cual sera posible actualizar las librerias y correr programas como contenedores de docker.
+
 ![image](https://user-images.githubusercontent.com/63923585/209896446-597b7cc8-4a4b-483d-ad6b-6af736906931.png)
 
 

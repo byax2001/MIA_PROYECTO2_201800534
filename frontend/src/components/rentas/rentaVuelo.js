@@ -100,6 +100,11 @@ e. Precio de vuelo*/
     const [precio, setPrecio] = useState(0);
     const [datosTabla,setDatosTabla] = useState([])
     const [user,setUser] = useState(0)
+    const [foto,setFoto]=useState("https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg")
+    
+    const goInitT= ()=>{
+        navigate("/initT",{state:{user:user, foto:foto}})
+    }
 
     const userR=useLocation().state
 
@@ -147,13 +152,14 @@ e. Precio de vuelo*/
         RdatosTabla()
         if(userR!=null){
             setUser(userR.user)
+            setFoto(userR.foto)
         }
     },[]);
 
     return(
         <React.Fragment>
         <header align="center"><h1>Rentar Vuelos</h1></header>
-        <Link id="BtnHome" to="/initT" className="btn btn-dark btnEffect">Regresar</Link>
+        <button id="BtnHome" onClick={()=>{goInitT()}} className="btn btn-dark btnEffect">Regresar</button>
         <div className="container">
             <div className="row">
                 <div className="col-7">

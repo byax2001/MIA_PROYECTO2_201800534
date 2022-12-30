@@ -66,9 +66,12 @@ f. Confirmación de contraseña */
     }
 
     const RegistrarU = async () => {
-        //const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
+        const ib64_i=await convertBase64(foto)///CONVERTIR IMAGEN A BASE 64
         setImage_b64(await convertBase64(foto))
-       
+        if(ib64_i==0 || image_b64==0 || image_b64==undefined){
+            alert("Problemas con el renderizado de la Imagen, por favor intente de Nuevo")
+            return
+        }
         let newUser ={nombre:nameC,usuario:user,tipo_usuario:"T",email:email,foto:image_b64,password:password,verify:false}
         if(password!==conf_pass){
             alert("Las contraseñas deben de ser iguales")
@@ -135,7 +138,7 @@ f. Confirmación de contraseña */
                         </label>
                     </form>
                     <button className="btn btn-dark btnEffect" onClick={()=>{RegistrarU()}}>Registrar</button>
-                    <button className="btn btn-dark btnEffect" onClick={()=>{pruebaFoto()}}>FOTO</button>
+                    {/*<button className="btn btn-dark btnEffect" onClick={()=>{pruebaFoto()}}>FOTO</button>*/}
                 </div>
             </div>
             

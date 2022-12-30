@@ -115,18 +115,16 @@ function Inicio_turista (props){
     useEffect(() => {
         if (pLogin!=null && pLogin.foto != undefined){
             setUsuario(pLogin.user)
-            setFoto(pLogin.foto)
-            console.log(`FOTO DE USUARIO : ${Login.foto}`)
-            
+            setFoto(pLogin.foto)  
         }
         RdatosTabla()
     },[]);
     //modificar el array usestate
     const goRautos= ()=>{
-        navigate("/rentaAutos",{state:{user:usuario}})
+        navigate("/rentaAutos",{state:{user:usuario, foto:foto}})
     }
     const goRvuelos= ()=>{
-        navigate("/rentaVuelos",{state:{user:usuario}})
+        navigate("/rentaVuelos",{state:{user:usuario, foto:foto}})
     }
     return(
         <React.Fragment>

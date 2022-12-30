@@ -102,8 +102,11 @@ e. Precio*/
     const [datosTabla,setDatosTabla] = useState([])
     const [user,setUser] = useState(0)
     const userR = useLocation().state
-
-
+    const [foto,setFoto]=useState("https://appweb-201800534-p2.s3.amazonaws.com/emp.jpg")
+    
+    const goInitT= ()=>{
+        navigate("/initT",{state:{user:user, foto:foto}})
+    }
     const Rentar = async () => {
         const url = `${process.env.REACT_APP_API_CONSUME}/usuarios/rAutos`;
         let renta={usuario:user,nameAgen:nameAgen,marca:marca,modelo:modelo,precio:precio}
@@ -146,13 +149,14 @@ e. Precio*/
         RdatosTabla()
         if(userR!=null){
             setUser(userR.user)
+            setFoto(userR.foto)
         }
     },[]);
 
     return(
         <React.Fragment>
         <header align="center"><h1>Renta de Autos </h1></header>
-        <Link id="BtnHome" to="/initT" className="btn btn-dark btnEffect">Regresar</Link>
+        <button id="BtnHome" onClick={()=>{goInitT()}} className="btn btn-dark btnEffect">Regresar</button>
         <div className="container">
             <div className="row">
                 <div className="col-7 p-4">

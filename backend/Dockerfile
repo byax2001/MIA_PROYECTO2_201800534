@@ -90,3 +90,5 @@ CMD [ "npm","start" ]
 #  echo "Stopping container - $a"
 #  docker stop $a
 #done
+
+

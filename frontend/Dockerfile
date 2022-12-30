@@ -25,10 +25,16 @@ CMD ["npm", "start"]
 ####systemctl start docker
 
 #Para ver las imagenes presentes:
-#docker images
+#sudo docker images
 
-#Para eliminar:
-#docker rmi ID  (3 letras principales del id de las imagenes)
+#Para ver los contenedores presentes:
+#sudo docker ps
+
+#Para eliminar imagenes:
+#sudo docker rmi ID  (3 letras principales del id de las imagenes)
+
+#Para eliminar contenedores:
+# sudo docker rm ID (3 letras principales del id del contendor)
 
 #Para hacer Build:
 #       Cada vez que se hace un build se debe de eliminar la anterior version con : docker rmi (3 caracteres del id de la imagen a eliminar)

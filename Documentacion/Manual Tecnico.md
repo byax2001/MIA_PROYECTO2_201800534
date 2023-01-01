@@ -126,3 +126,9 @@ BUCKET_NAME = 'appweb-201800534-p2'     //nombre que se escogió para el reposit
 - Bucket a pesar de ser una herramienta limitada permite lo necesario para poder guardar los datos de paginas con registros.
 - Es necesario de un buen uso de las funciones asíncronas, los promise y los await para poder dominar los servicios Amazon usados en este proyecto de forma correcta.
 
+### Nota:
+- Para formatear la base de datos es necesario cambiar el nombre de usuario o contraseña del administrador entre las variables de ambiente declaradas en los comandos de docker o en el docker-compose.
+
+
+
+
